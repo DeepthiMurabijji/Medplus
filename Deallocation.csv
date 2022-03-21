@@ -1,0 +1,6 @@
+vehicle Number,Type of vehicle,Block,InTime,OutTime,Cost
+b1,bike,A,9:00,19:00,70
+vehicle Number,Type of vehicle,Block,InTime,OutTime,Cost
+b1,bike,A,9:00,16:00,55
+vehicle Number,Type of vehicle,Block,InTime,OutTime,Cost
+b01,bike,A,9:00,23:42,95

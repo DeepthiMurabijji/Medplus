@@ -1,0 +1,11 @@
+<div class="topnav">
+    <a class="active" href="{% url 'home' %}">Home</a>
+    
+    <div class="search-container">
+      <form action="{% url 'find' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Search.." aria-label="Search"  name="searched">
+        <a href="#" class="w3-bar-item w3-button"><i class="fa fa-search"></i></a>
+      </form>
+    </div>
+  </div> 

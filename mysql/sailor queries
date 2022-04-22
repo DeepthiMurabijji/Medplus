@@ -1,0 +1,127 @@
+#1 "⛵️Get the list of saliors details which should include their name,department and rating ⛵️"
+
+mysql> select s.sname, d.dept_name, r.rating 
+    -> from sailors s
+    -> join department d on (d.dept_id = s.dept_id)
+    -> join rating r on (s.sid = r.sid);
++--------+------------+--------+
+| sname  | dept_name  | rating |
++--------+------------+--------+
+| Dustin | Captain    |      7 |
+| Brutus | Navigators |      1 |
+| Lubber | Navigators |      8 |
+| Andy   | Deck Hands |      8 |
+| Rusty  | Cabnets    |      6 |
+| Jack   | Captain    |     10 |
+| Zorba  | Navigators |      9 |
+| Art    | Deck Hands |      3 |
+| Bob    | Cabnets    |      4 |
++--------+------------+--------+
+9 rows in set (0.00 sec)
+
+
+#2 "⛵️ find the ages of youngest sailors for eaching rating level ⛵️"
+mysql> select r.rating , MIN(r.age) as Minage
+    -> from rating r
+    -> group by r.rating;
++--------+--------+
+| rating | Minage |
++--------+--------+
+|      7 |     45 |
+|      1 |     23 |
+|      8 |     25 |
+|      6 |     35 |
+|     10 |     16 |
+|      9 |     26 |
+|      3 |     63 |
+|      4 |     38 |
++--------+--------+
+8 rows in set (0.00 sec)
+
+
+#3 "⛵️find the names, age, of the sailors with rating above 6 and reservation date after 2022-08-20 ⛵️"
+
+select s.sname, r.age 
+from sailors s
+join rating r on(s.sid = r.sid)
+join reservation r1 on (s.sid = r1.sid)
+where rating >6 
+and day >'2022-08-20';
+
++--------+------+
+| sname  | age  |
++--------+------+
+| Dustin |   45 |
+| Dustin |   45 |
+| Jack   |   16 |
++--------+------+
+3 rows in set (0.00 sec)
+
+
+
+
+#4 "⛵️find the names of sailors who have reserved all boats ⛵️"
+mysql> select s.sname 
+    -> from sailors s
+    -> where 
+    -> NOT EXISTS ( select b.bid from boats b
+    -> where not exists (select r.bid from reservation r 
+    -> where r.sid = s.sid and r.bid = b.bid) );
++--------+
+| sname  |
++--------+
+| Dustin |
++--------+
+1 row in set (0.00 sec)
+
+
+#5 "⛵️ find the names of the sailors who has reserved boat 103 and having rating above 6⛵️"
+mysql> select s.sname 
+    -> from sailors s
+    -> join rating r on(s.sid = r.sid)
+    -> join reservation r1 on (s.sid = r1.sid)
+    -> where rating >6 
+    -> and r1.bid=103;
++--------+
+| sname  |
++--------+
+| Dustin |
+| Jack   |
++--------+
+2 rows in set (0.00 sec)
+
+
+#6 " ⛵️find the colour of boat reserved by "jack" ⛵️"
+
+mysql> select b.colour
+    -> from boats b
+    -> join reservation r on (r.bid = b.bid)
+    -> join sailors s on(s.sid = r.sid)
+    -> where s.sname='Jack';
++--------+
+| colour |
++--------+
+| orange |
+| green  |
+| black  |
+| black  |
++--------+
+4 rows in set (0.00 sec)
+
+#7 "⛵️find the age and rating of saliors whose names begins with B and ends with S and has atleast "3" characters ⛵️"
+mysql> select
+    ->   s.sname,
+    ->   r.age
+    -> from
+    ->   sailors s
+    ->   join rating r on (r.sid = s.sid)
+    -> where
+    ->   s.sname like 'B_%s';
++--------+------+
+| sname  | age  |
++--------+------+
+| Brutus |   23 |
++--------+------+
+1 row in set (0.00 sec)
+
+

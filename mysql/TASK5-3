@@ -1,0 +1,177 @@
+#1" 🍀️Get the list of employee details which should include their name,department and name of the insurance type🍀️ "
+
+
+mysql> select e.Name,d.dept_name,n.insurance_name
+    -> from Employee e
+    -> join department_table d using(dept_id)
+    -> join insurance_table n using(insurance_id);
++--------+---------------------+----------------------+
+| Name   | dept_name           | insurance_name       |
++--------+---------------------+----------------------+
+| Jones  | Accounting          | Replacement Policy   |
+| Smith  | Research            | Consequential Policy |
+| Clark  | Research            | Valued Policy        |
+| Allen  | Sales               | Specific Policy      |
+| Martin | Software Department | Specific Policy      |
+| Kevin  | Software Department | Valued Policy        |
+| James  | Software Department | Floating Policy      |
+| Scott  | HR Department       | Floating Policy      |
++--------+---------------------+----------------------+
+8 rows in set (0.00 sec)
+
+#2 "🍀️Get the list of departments of employees working at particular place(e.g: Madhapur) 🍀️"
+
+select e.Name,d.dept_name,o.place 
+from Employee e 
+join department_table d using(dept_id) 
+join employee_office_table eo using(emp_id) 
+join office_table o on o.office_id=eo.office_id 
+where o.place='Madhapur';
++--------+---------------------+----------+
+| Name   | dept_name           | place    |
++--------+---------------------+----------+
+| Allen  | Sales               | Madhapur |
+| Martin | Software Department | Madhapur |
+| Kevin  | Software Department | Madhapur |
++--------+---------------------+----------+
+
+#3 " 🍀️Get the count of employees working in each location🍀️"
+
+mysql> SELECT o.place,
+    -> COUNT(*)
+    -> FROM office_table o
+    -> INNER JOIN employee_office_table e ON e.office_id=o.office_id
+    -> GROUP BY
+    -> o.place
+    -> ORDER BY
+    -> COUNT(*) DESC;
++-------------+----------+
+| place       | COUNT(*) |
++-------------+----------+
+| HITECH CITY |        3 |
+| Madhapur    |        3 |
+| Kukatpally  |        2 |
++-------------+----------+
+
+#4 "🍀️Get the third highest salaried employee name, insurance name and salary(Joins) 🍀️"
+
+mysql> SELECT e.Name, i.insurance_name,e1.salary FROM Employee e, insurance_table i,employee_info_table e1
+    -> WHERE 
+    -> 3-1=(SELECT COUNT(DISTINCT salary)from employee_info_table e2 WHERE e2.salary >e1.salary)
+    -> AND e1.id=e.employee_info
+    -> AND e.insurance_id = i.insurance_id;
+    
++-------+----------------+----------+
+| Name  | insurance_name | salary   |
++-------+----------------+----------+
+| Allen | HDFC           | 30000.00 |
+| James | LIC            | 30000.00 |
++-------+----------------+----------+
+
+#5 "🍀️ Get the Average salary of employees from each department for a particular location 🍀️"
+
+mysql> select dept_id ,place,avg(salary) from Employee e
+    -> join employee_info_table ei on ei.id = e.employee_info
+    -> join employee_office_table e1 on e1.id =e.employee_info
+    -> join office_table ef on ef.office_id = e1.office_id
+    -> group by e.dept_id,ef.office_id
+    -> order by e.dept_id;
++---------+-------------+--------------+
+| dept_id | place       | avg(salary)  |
++---------+-------------+--------------+
+|      10 | HITECH CITY | 12500.000000 |
+|      20 | HITECH CITY | 15500.000000 |
+|      30 | Madhapur    | 30000.000000 |
+|      40 | Madhapur    | 45000.000000 |
+|      40 | Kukatpally  | 30000.000000 |
+|      50 | Kukatpally  | 50000.000000 |
++---------+-------------+--------------+
+6 rows in set (0.00 sec)
+
+#6 "🍀️Get the sum of salaries of the employees joined after 02-01-2022 working in ‘Madhapur’ 🍀️" 
+mysql> select SUM(salary) from employee_info_table where DoJ > '2022-01-02';
++-------------+
+| SUM(salary) |
++-------------+
+|   135000.00 |
++-------------+
+1 row in set (0.00 sec)
+
+#7 " 🍀️Get name, department, salary of employees who joined after 20-02-2022 and  salary is greater than 20000 and has insurance either in lic or icici or both and whose work location is madhapur.🍀️"
+mysql> select e.Name, d.dept_name, s.salary
+    -> from Employee e
+    -> join employee_office_table eo on e.emp_id = eo.emp_id
+    -> join employee_info_table s on s.id = e.employee_info
+    -> join office_table o on o.office_id = eo.office_id
+    -> join department_table d on e.dept_id = d.dept_id
+    -> join insurance_table i on i.insurance_id = e.insurance_id
+    -> where s.DoJ > '2022-02-20' and s.salary >20000
+    -> and (i.insurance_name='LIC' or i.insurance_name='ICIC')
+    -> and o.place='Madhapur';
++--------+---------------------+----------+
+| Name   | dept_name           | salary   |
++--------+---------------------+----------+
+| Allen  | Sales               | 30000.00 |
+| Martin | Software Department | 40000.00 |
++--------+---------------------+----------+
+2 rows in set (0.00 sec)
+
+#8 "🍀️ Get the list of employee names and their respective immediate head name🍀️"
+mysql> select e.Name 'Employee', m.Name 'Immediate Head'
+    -> from Employee e
+    -> join Employee m
+    -> on(e.immediate_head_id = m.emp_id);
++----------+----------------+
+| Employee | Immediate Head |
++----------+----------------+
+| Smith    | Allen          |
+| Jones    | Allen          |
+| Allen    | James          |
+| Martin   | James          |
+| Kevin    | James          |
+| James    | Scott          |
+| Clark    | Smith          |
++----------+----------------+
+7 rows in set (0.00 sec)
+
+#9 "🍀️Get the list of employee names and their respective immediate head name with  their respective department names.
+Eg: emp name | emp department name | immediate head name | immediate head department name 🍀️"
+
+mysql> select e.Name 'Employee' ,d.dept_name , m.Name 'Immediate head',dm.dept_name
+    -> from Employee e
+    -> join department_table d on (e.dept_id = d.dept_id)
+    -> join Employee m on (e.immediate_head_id = m.emp_id)
+    -> join department_table dm on (m.dept_id= dm.dept_id);
++----------+---------------------+----------------+---------------------+
+| Employee | dept_name           | Immediate head | dept_name           |
++----------+---------------------+----------------+---------------------+
+| Jones    | Accounting          | Allen          | Sales               |
+| Smith    | Research            | Allen          | Sales               |
+| Clark    | Research            | Smith          | Research            |
+| Allen    | Sales               | James          | Software Department |
+| Martin   | Software Department | James          | Software Department |
+| Kevin    | Software Department | James          | Software Department |
+| James    | Software Department | Scott          | HR Department       |
++----------+---------------------+----------------+---------------------+
+7 rows in set (0.00 sec)
+
+#10 "🍀️ Get the list of employees whose immediate head working in location ‘madhapur’ and whose salary is less than twice the salary of their respective immediate heads. 🍀️"
+
+mysql> select e.Name 'Employee', s.salary ,m.Name 'ImmediateHead' ,sm.salary
+    -> from Employee e
+    -> join employee_info_table s on(s.id = e.employee_info)
+    -> join Employee m on (e.immediate_head_id = m.emp_id)
+    -> join employee_info_table sm on (sm.emp_id = e.immediate_head_id)
+    -> join employee_office_table h1 on (e.immediate_head_id = h1.emp_id)
+    -> join office_table h2 on (h1.office_id = h2.office_id)
+    -> where s.salary < sm.salary*2
+    -> and h2.place='Madhapur';
++----------+----------+---------------+----------+
+| Employee | salary   | ImmediateHead | salary   |
++----------+----------+---------------+----------+
+| Smith    | 16000.00 | Allen         | 30000.00 |
+| Jones    | 12500.00 | Allen         | 30000.00 |
++----------+----------+---------------+----------+
+
+
+

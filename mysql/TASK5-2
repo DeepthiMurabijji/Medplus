@@ -1,0 +1,654 @@
+deepthi@deepthi-medplus:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.28-0ubuntu0.20.04.3 (Ubuntu)
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use task5;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++-----------------------+
+| Tables_in_task5       |
++-----------------------+
+| Employee              |
+| department_table      |
+| employee_info_table   |
+| employee_office_table |
+| insurance_table       |
+| office_table          |
++-----------------------+
+6 rows in set (0.00 sec)
+
+mysql> DESCRIBE Employee;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| emp_id            | int         | NO   | PRI | NULL    |       |
+| Name              | varchar(45) | NO   |     | NULL    |       |
+| immediate_head_id | int         | YES  |     | NULL    |       |
+| dept_id           | int         | YES  | MUL | NULL    |       |
+| insurance_id      | int         | YES  |     | NULL    |       |
+| employee_info     | int         | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table Employee
+    -> add foreign key(insurance_id) references insurance_table(insurance_id) ON DELETE CASCADE;
+Query OK, 8 rows affected (0.16 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Employee
+    -> add foregin key(employee_info) references employee_info_table (id) ON DELETE CASCADE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key(employee_info) references employee_info_table (id) ON DELETE CASCADE' at line 2
+mysql> 
+
+mysql> alter table Employee
+    -> add foreign key(employee_info) references employee_info_table(id) on delete cascade;
+Query OK, 8 rows affected (0.16 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> SHOW COLUMNS FROM Employee;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| emp_id            | int         | NO   | PRI | NULL    |       |
+| Name              | varchar(45) | NO   |     | NULL    |       |
+| immediate_head_id | int         | YES  |     | NULL    |       |
+| dept_id           | int         | YES  | MUL | NULL    |       |
+| insurance_id      | int         | YES  | MUL | NULL    |       |
+| employee_info     | int         | YES  | MUL | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+
+
+
+deepthi@deepthi-medplus:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.28-0ubuntu0.20.04.3 (Ubuntu)
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use task5;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> insert into Employee(immediate_head_id)
+    -> values(733),
+    -> (733)
+    -> (736
+    -> 
+    -> 
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(736' at line 4
+mysql> insert into Employee(immediate_head_id)
+    -> values(733),
+    -> (733)
+    -> (736)
+    -> (736)
+    -> exit
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(736)
+(736)
+exit' at line 4
+mysql> insert into Employee(immediate_head_id)
+    -> values(733),
+    -> (733),
+    -> (736),
+    -> (736),
+    -> (736),
+    -> (737),
+    -> 
+    -> (731);
+ERROR 1364 (HY000): Field 'emp_id' doesn't have a default value
+mysql> insert into Employee(immediate_head_id) values(733), (733), (736), (736), (736), (737),(null),  (731);
+ERROR 1364 (HY000): Field 'emp_id' doesn't have a default value
+mysql> insert into Employee(immediate_head_id) values(733), (733), (736), (736), (736), (737),(0), (731);
+ERROR 1364 (HY000): Field 'emp_id' doesn't have a default value
+mysql> insert into Employee(immediate_head_id)
+    -> values(733),
+    -> (733),
+    -> (736),
+    -> (736),
+    -> (736),
+    -> (737),
+    -> (0),
+    -> (731);
+ERROR 1364 (HY000): Field 'emp_id' doesn't have a default value
+mysql> describe Employee;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| emp_id            | int         | NO   | PRI | NULL    |       |
+| Name              | varchar(45) | NO   |     | NULL    |       |
+| immediate_head_id | int         | YES  |     | NULL    |       |
+| dept_id           | int         | YES  | MUL | NULL    |       |
+| insurance_id      | int         | YES  | MUL | NULL    |       |
+| employee_info     | int         | YES  | MUL | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> INSERT INTO Employee(immediate_head_id,dept_id,insurance_id,employee_info)
+    -> VALUES(733,20,5,31);
+ERROR 1364 (HY000): Field 'emp_id' doesn't have a default value
+mysql> UPDATE Employee
+    -> SET immediate_head_id=733,dept_id=20, insurance_id=5, employee_info=31
+    -> WHERE emp_id=731;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Employee SET immediate_head_id=733,dept_id=10, insurance_id=4, employee_info=32 WHERE emp_id=732;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Employee SET immediate_head_id=736,dept_id=30, insurance_id=2, employee_info=33 WHERE emp_id=733;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Employee SET immediate_head_id=736,dept_id=40, insurance_id=2, employee_info=34 WHERE emp_id=734;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Employee SET immediate_head_id=736,dept_id=40, insurance_id=1, employee_info=35 WHERE emp_id=735;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Employee SET immediate_head_id=737,dept_id=40, insurance_id=3, employee_info=36 WHERE emp_id=736;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Employee SET dept_id=50, insurance_id=3, employee_info=37 WHERE emp_id=737;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Employee SET immediate_head_id=731,dept_id=20, insurance_id=1, employee_info=38 WHERE emp_id=738;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM Employee;
++--------+--------+-------------------+---------+--------------+---------------+
+| emp_id | Name   | immediate_head_id | dept_id | insurance_id | employee_info |
++--------+--------+-------------------+---------+--------------+---------------+
+|    731 | Smith  |               733 |      20 |            5 |            31 |
+|    732 | Jones  |               733 |      10 |            4 |            32 |
+|    733 | Allen  |               736 |      30 |            2 |            33 |
+|    734 | Martin |               736 |      40 |            2 |            34 |
+|    735 | Kevin  |               736 |      40 |            1 |            35 |
+|    736 | James  |               737 |      40 |            3 |            36 |
+|    737 | Scott  |              NULL |      50 |            3 |            37 |
+|    738 | Clark  |               731 |      20 |            1 |            38 |
++--------+--------+-------------------+---------+--------------+---------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT * FROM department_table;
++---------+---------------------+
+| dept_id | dept_name           |
++---------+---------------------+
+|      10 | Accounting          |
+|      20 | Research            |
+|      30 | Sales               |
+|      40 | Software Department |
+|      50 | HR Department       |
++---------+---------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM insurance_table;
++--------------+----------------------+
+| insurance_id | insurance_name       |
++--------------+----------------------+
+|            1 | Valued Policy        |
+|            2 | Specific Policy      |
+|            3 | Floating Policy      |
+|            4 | Replacement Policy   |
+|            5 | Consequential Policy |
++--------------+----------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM office_table;
++-----------+-------------+-----------+
+| office_id | office_name | place     |
++-----------+-------------+-----------+
+|       123 | IT Serives  | Dallas    |
+|       498 | optival     | Hyderabad |
+|       505 | Main Branch | New York  |
++-----------+-------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employee_office_table;
++----+--------+-----------+
+| id | emp_id | office_id |
++----+--------+-----------+
+| 31 |    731 |       123 |
+| 32 |    732 |       123 |
+| 33 |    733 |       498 |
+| 34 |    734 |       498 |
+| 35 |    735 |       498 |
+| 36 |    736 |       505 |
+| 37 |    737 |       505 |
+| 38 |    738 |       123 |
++----+--------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employee_info_table;
++----+------------+-----------+
+| id | DoJ        | salary    |
++----+------------+-----------+
+| 31 | 1998-12-05 |  16000.00 |
+| 32 | 1997-06-11 |  12500.00 |
+| 33 | 1996-03-05 | 300000.00 |
+| 34 | 1996-08-15 | 400000.00 |
+| 35 | 1997-06-09 | 500000.00 |
+| 36 | 1995-10-13 | 300000.00 |
+| 37 | 1993-06-13 | 800000.00 |
+| 38 | 1999-06-23 |  15000.00 |
++----+------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> 
+ for finding nth highest salary
+SELECT *
+FROM Employee Emp1
+WHERE (N-1) = (
+               SELECT COUNT(DISTINCT(Emp2.Salary))
+               FROM Employee Emp2
+               WHERE Emp2.Salary > Emp1.Salary
+               )
+
+
+deepthi@deepthi-medplus:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.28-0ubuntu0.20.04.3 (Ubuntu)
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use task5;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select e.Name, d.dept_name, s.salary 
+    -> from Employee e
+    -> join employee_office_table eo on e.emp_id = eo.emp_id
+    -> join employee_info_table s on s.id = e.employee_info
+    -> join office_table o on o.office_id = eo.office_id
+    -> join department_table d on e.dept_id = d.dept_id
+    -> join insurance_table i using (insurance_id)
+    -> where s.DoJ > '2022-02-20' and s.salary >20000
+    -> and (i.insurance_name='LIC' or i.insurance_name='ICIC')
+    -> and o.place='Madhapur';
+Empty set (0.00 sec)
+
+mysql> UPDATE Employee
+    -> SET insurance_id=3 
+    -> WHERE emp_id=733
+    -> ;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Employee SET insurance_id=4  WHERE emp_id=734;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select e.Name, d.dept_name, s.salary
+    -> from Employee e
+    -> join employee_office_table eo on e.emp_id = eo.emp_id
+    -> join employee_info_table s on s.id = e.employee_info
+    -> join office_table o on o.office_id = eo.office_id
+    -> join department_table d on e.dept_id = d.dept_id
+    -> join insurance_table i using (insurance_id)
+    -> where s.DoJ > '2022-02-20' and s.salary >20000
+    -> and (i.insurance_name='LIC' or i.insurance_name='ICIC')
+    -> and o.place='Madhapur';
++--------+---------------------+----------+
+| Name   | dept_name           | salary   |
++--------+---------------------+----------+
+| Allen  | Sales               | 30000.00 |
+| Martin | Software Department | 40000.00 |
++--------+---------------------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select e.Name 'Employee', m.Name 'Immediate Head'
+    -> from Employee e
+    -> from employee m
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from employee m' at line 3
+mysql> select e.Name 'Employee', m.Name 'Immediate Head'
+    -> from Employee e
+    -> join Employee m
+    -> on(e.immediate_head_id = m.emp_id);
++----------+----------------+
+| Employee | Immediate Head |
++----------+----------------+
+| Smith    | Allen          |
+| Jones    | Allen          |
+| Allen    | James          |
+| Martin   | James          |
+| Kevin    | James          |
+| James    | Scott          |
+| Clark    | Smith          |
++----------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> select e.Name 'Employee' ,d.dept_name , m.Name 'Immediate head',dm.dept_name
+    -> from Employee e
+    -> join department_table d on (e.dept_id = d.dept_id)
+    -> join Employee m on (e.immediate_head_id = m.emp_id)
+    -> join department_table dm on (m.dept_id= dm.dept_id);
++----------+---------------------+----------------+---------------------+
+| Employee | dept_name           | Immediate head | dept_name           |
++----------+---------------------+----------------+---------------------+
+| Jones    | Accounting          | Allen          | Sales               |
+| Smith    | Research            | Allen          | Sales               |
+| Clark    | Research            | Smith          | Research            |
+| Allen    | Sales               | James          | Software Department |
+| Martin   | Software Department | James          | Software Department |
+| Kevin    | Software Department | James          | Software Department |
+| James    | Software Department | Scott          | HR Department       |
++----------+---------------------+----------------+---------------------+
+7 rows in set (0.00 sec)
+
+mysql> ALTER TABLE employee_info_table
+    -> ADD (emp_id)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 2
+mysql> ALTER TABLE employee_info_table
+    -> ADD emp_id int;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update employee_info_table
+    -> set emp_id=731 
+    -> where id=31;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_info_table set emp_id=732  where id=32;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_info_table set emp_id=733  where id=33;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_info_table set emp_id=734  where id=34;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_info_table set emp_id=735  where id=35;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_info_table set emp_id=736  where id=36;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_info_table set emp_id=737  where id=37;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_info_table set emp_id=738  where id=38;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select e.Name 'Employee', s.salary ,m.Name 'ImmediateHead' ,sm.salary
+    -> from Employee e
+    -> join employee_info_table s on(s.id = e.employee_info)
+    -> join Employee m on (e.immediate_head_id = m.emp_id)
+    -> join employee_info_table sm on (sm.emp_id = e.immediate_head_id)
+    -> join employee_office_table h1 on (e.immediate_head_id = h1.emp_id)
+    -> join office_table h2 on (h1.office_id = h2.office_id)
+    -> where s.salary < sm.salary*2
+    -> and h2.place='Madhapur';
++----------+----------+---------------+----------+
+| Employee | salary   | ImmediateHead | salary   |
++----------+----------+---------------+----------+
+| Smith    | 16000.00 | Allen         | 30000.00 |
+| Jones    | 12500.00 | Allen         | 30000.00 |
++----------+----------+---------------+----------+
+2 rows in set (0.00 sec)
+
+mysql> DROP TABLE "rating";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '"rating"' at line 1
+mysql> DROP TABLE rating;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from department;
+Empty set (0.00 sec)
+
+mysql> insert into department values 
+    -> (1,'Captain'),
+    -> (2,'Navigators'),
+    -> (3,'Deck Hands'),
+    -> (4,'Cabnets');
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from department;
++---------+------------+
+| dept_id | dept_name  |
++---------+------------+
+|       1 | Captain    |
+|       2 | Navigators |
+|       3 | Deck Hands |
+|       4 | Cabnets    |
++---------+------------+
+4 rows in set (0.00 sec)
+
+mysql> update sailors 
+    -> set captain_id=32 ,dept_id=1
+    -> where sid=22;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update sailors  set captain_id=22 ,dept_id=2 where sid=29;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update sailors  set captain_id=58 ,dept_id=2 where sid=31;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update sailors  set captain_id=29 ,dept_id=3 where sid=32;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update sailors  set captain_id=31 ,dept_id=4 where sid=58;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update sailors  set dept_id=1 where sid=64;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update sailors  set captain_id=64 ,dept_id=2 where sid=71;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update sailors  set captain_id=71 ,dept_id=3 where sid=85;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update sailors  set captain_id=85 ,dept_id=4 where sid=95;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from sailors;
++-----+--------+------------+---------+
+| sid | sname  | captain_id | dept_id |
++-----+--------+------------+---------+
+|  22 | Dustin |         32 |       1 |
+|  29 | Brutus |         22 |       2 |
+|  31 | Lubber |         58 |       2 |
+|  32 | Andy   |         29 |       3 |
+|  58 | Rusty  |         31 |       4 |
+|  64 | Jack   |       NULL |       1 |
+|  71 | Zorba  |         64 |       2 |
+|  85 | Art    |         71 |       3 |
+|  95 | Bob    |         85 |       4 |
++-----+--------+------------+---------+
+9 rows in set (0.00 sec)
+
+mysql> create table rating(
+    -> sid int,
+    -> rating int,
+    -> age int,
+    -> foreign key (sid) references sailors (sid));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into rating values
+    -> (22,7,45),
+    -> (29,1,23),
+    -> (31,8,55),
+    -> (32,8,25),
+    -> (58,6,35),
+    -> (64,10,16),
+    -> (71,9,26),
+    -> (85,3,63),
+    -> (95,4,38);
+Query OK, 9 rows affected (0.02 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+mysql> select * from rating;
++------+--------+------+
+| sid  | rating | age  |
++------+--------+------+
+|   22 |      7 |   45 |
+|   29 |      1 |   23 |
+|   31 |      8 |   55 |
+|   32 |      8 |   25 |
+|   58 |      6 |   35 |
+|   64 |     10 |   16 |
+|   71 |      9 |   26 |
+|   85 |      3 |   63 |
+|   95 |      4 |   38 |
++------+--------+------+
+9 rows in set (0.00 sec)
+
+mysql> create table boards(
+    -> bid int primary key,
+    -> bname varchar(45),
+    -> colour varchar(45));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into boards values
+    -> (101,'Interlake','blue')
+    -> (102,'caspain','orange'),
+    -> (103,'cupper','green'),
+    -> (104,'Black Perl','black');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(102,'caspain','orange'),
+(103,'cupper','green'),
+(104,'Black Perl','black')' at line 3
+mysql> insert into boards values (101,'Interlake','blue'), (102,'vespa','orange'
+), (103,'cupper','green'), (104,'Black Perl','black');
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> create table reservation(
+    -> sid int ,
+    -> bid int,
+    -> day date,
+    -> foreign key (sid) references sailors(sid),
+    -> foregin key(bid) references boards (bib));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'key(bid) references boards (bib))' at line 6
+mysql> create table reservation( sid int , bid int, day date, foreign key (sid)
+references sailors(sid), foreign key(bid) references boards (bid));
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> insert into reservation values
+    -> (22,101,1998-10-10),
+    -> (22,102,1998-10-10),
+    -> (22,103,2022-08-10),
+    -> (22,103,2022-08-10);,
+ERROR 1292 (22007): Incorrect date value: '1978' for column 'day' at row 1
+    -> insert into reservation values (22,101,1998-10-10), (22,102,1998-10-10),
+(22,103,2022-08-10), (22,103,2022-08-10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+insert into reservation values (22,101,1998-10-10), (22,102,1998-10-10), (22,1' at line 1
+mysql> insert into reservation values
+    -> (22,101,2022-10-10),
+    -> (22,102,2022-10-10),
+    -> (22,103,2022-08-10),
+    -> (22,104,2022-07-10),
+    -> (64,102,2022-10-11),
+    -> (64,103,2022-06-11),
+    -> (64,104,2022-05-09),
+    -> (64,104,2022-08-09),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 9
+mysql> insert into reservation values (22,101,2022-10-10), (22,102,2022-10-10),
+(22,103,2022-08-10), (22,104,2022-07-10), (64,102,2022-10-11), (64,103,2022-06-11), (64,104,2022-05-09), (64,104,2022-08-09);
+ERROR 1292 (22007): Incorrect date value: '2002' for column 'day' at row 1
+mysql> insert into reservation values (22,101,'2022-10-10'), (22,102,'2022-10-10'), (22,103,'2022-08-10'), (22,104,'2022-07-10'), (64,102,'2022-10-11'), (64,103,'2022-
+Query OK, 8 rows affected (0.02 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select * from reservation;
++------+------+------------+
+| sid  | bid  | day        |
++------+------+------------+
+|   22 |  101 | 2022-10-10 |
+|   22 |  102 | 2022-10-10 |
+|   22 |  103 | 2022-08-10 |
+|   22 |  104 | 2022-07-10 |
+|   64 |  102 | 2022-10-11 |
+|   64 |  103 | 2022-06-11 |
+|   64 |  104 | 2022-05-09 |
+|   64 |  104 | 2022-08-09 |
++------+------+------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from boards;
++-----+------------+--------+
+| bid | bname      | colour |
++-----+------------+--------+
+| 101 | Interlake  | blue   |
+| 102 | vespa      | orange |
+| 103 | cupper     | green  |
+| 104 | Black Perl | black  |
++-----+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> alter table boards
+    -> rename to boats;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> select * from boats;
++-----+------------+--------+
+| bid | bname      | colour |
++-----+------------+--------+
+| 101 | Interlake  | blue   |
+| 102 | vespa      | orange |
+| 103 | cupper     | green  |
+| 104 | Black Perl | black  |
++-----+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> 
+
+

@@ -1,0 +1,193 @@
+deepthi@deepthi-medplus:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 21
+Server version: 8.0.28-0ubuntu0.20.04.3 (Ubuntu)
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| task5              |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use task5;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select * from employee;
+ERROR 1146 (42S02): Table 'task5.employee' doesn't exist
+mysql> select * from Employee;
+Empty set (0.00 sec)
+
+mysql> INSERT INTO Employee(emp_id,name)
+    -> VALUES(731,'Smith')
+    -> (732,'Jones')
+    -> (733,'Allen')
+    -> (734,'Martin')
+    -> (735,'Kevin')
+    -> (736,'James')
+    -> (737,'Scott')
+    -> (738,'Clark');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(732,'Jones')
+(733,'Allen')
+(734,'Martin')
+(735,'Kevin')
+(736,'James')
+(737,'Sco' at line 3
+mysql> INSERT INTO Employee(emp_id,name) VALUES(731,'Smith'), (732,'Jones'), (733,'Allen'), (734,'Martin'), (735,'Kevin'), (736,'James'), (737,'Scott'), (738,'Clark');
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select * from Employee;
++--------+--------+---------+--------------+---------------+
+| emp_id | Name   | dept_id | insurance_id | employee_info |
++--------+--------+---------+--------------+---------------+
+|    731 | Smith  |    NULL |         NULL |          NULL |
+|    732 | Jones  |    NULL |         NULL |          NULL |
+|    733 | Allen  |    NULL |         NULL |          NULL |
+|    734 | Martin |    NULL |         NULL |          NULL |
+|    735 | Kevin  |    NULL |         NULL |          NULL |
+|    736 | James  |    NULL |         NULL |          NULL |
+|    737 | Scott  |    NULL |         NULL |          NULL |
+|    738 | Clark  |    NULL |         NULL |          NULL |
++--------+--------+---------+--------------+---------------+
+8 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Employee
+    -> ADD immediate_head_id int
+    -> AFTER Name
+    -> ;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from Employee;
++--------+--------+-------------------+---------+--------------+---------------+
+| emp_id | Name   | immediate_head_id | dept_id | insurance_id | employee_info |
++--------+--------+-------------------+---------+--------------+---------------+
+|    731 | Smith  |              NULL |    NULL |         NULL |          NULL |
+|    732 | Jones  |              NULL |    NULL |         NULL |          NULL |
+|    733 | Allen  |              NULL |    NULL |         NULL |          NULL |
+|    734 | Martin |              NULL |    NULL |         NULL |          NULL |
+|    735 | Kevin  |              NULL |    NULL |         NULL |          NULL |
+|    736 | James  |              NULL |    NULL |         NULL |          NULL |
+|    737 | Scott  |              NULL |    NULL |         NULL |          NULL |
+|    738 | Clark  |              NULL |    NULL |         NULL |          NULL |
++--------+--------+-------------------+---------+--------------+---------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from department_table;
+ERROR 1146 (42S02): Table 'task5.department_table' doesn't exist
+mysql> select * from Department_table;
+ERROR 1146 (42S02): Table 'task5.Department_table' doesn't exist
+mysql> CREATE TABLE department_table(
+    -> dept_id int primary key,
+    -> dept_name varchar(45));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO department_table(dept_id,dept_name)
+    -> VALUES (10,'Accounting')
+    ->  (20,'Research'),
+    ->  (30,'Sales'),
+    ->  (40,'Software Department'),
+    ->  (50,'HR Department');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(20,'Research'),
+ (30,'Sales'),
+ (40,'Software Department'),
+ (50,'HR Department' at line 3
+mysql> INSERT INTO department_table(dept_id,dept_name) VALUES (10,'Accounting'), (20,'Research'),  (30,'Sales'),  (40,'Software Department'),  (50,'HR Department');
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from Department_table;
+ERROR 1146 (42S02): Table 'task5.Department_table' doesn't exist
+mysql> select * from department_table;
++---------+---------------------+
+| dept_id | dept_name           |
++---------+---------------------+
+|      10 | Accounting          |
+|      20 | Research            |
+|      30 | Sales               |
+|      40 | Software Department |
+|      50 | HR Department       |
++---------+---------------------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE insurance_table(
+    -> insurance_id int primary key,
+    -> insurance_name varchar(45));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO insurance_table VALUES
+    -> (1,'Valued Policy'),
+    -> (2,'Specific Policy'),
+    -> (3,'Floating Policy'),
+    -> (4,'Replacement Policy'),
+    -> (5,'Consequential Policy');
+Query OK, 5 rows affected (0.02 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM insurance_table;
++--------------+----------------------+
+| insurance_id | insurance_name       |
++--------------+----------------------+
+|            1 | Valued Policy        |
+|            2 | Specific Policy      |
+|            3 | Floating Policy      |
+|            4 | Replacement Policy   |
+|            5 | Consequential Policy |
++--------------+----------------------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE office_table(
+    -> office_id int primary key,
+    -> office_name varchar(45),
+    -> place varchar(45));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> INSERT INTO office_table VALUES
+    -> (123,'IT Serives','Dallas'),
+    -> (505,'Main Branch',New York),
+    -> (498,'optival','Hyderabad');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'York),
+(498,'optival','Hyderabad')' at line 3
+mysql> INSERT INTO office_table VALUES (123,'IT Serives','Dallas'), (505,'Main Branch','New York'), (498,'optival','Hyderabad');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM office_table;
++-----------+-------------+-----------+
+| office_id | office_name | place     |
++-----------+-------------+-----------+
+|       123 | IT Serives  | Dallas    |
+|       498 | optival     | Hyderabad |
+|       505 | Main Branch | New York  |
++-----------+-------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE employee_office_table(
+    -> id int primary key,
+    -> emp_id int ,
+    -> office_id int,
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+mysql> EXIT
+Bye
+deepthi@deepthi-medplus:~$ 
+

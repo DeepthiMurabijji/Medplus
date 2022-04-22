@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks</title>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+        th, td {
+            padding-top: 10px;
+            padding-bottom: 20px;
+            padding-left: 30px;
+            padding-right: 40px;
+        }
+        table.center {
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 5%;
+       }
+       img {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .center {
+          top: 0;
+          margin: auto;
+          width: 75%;
+          padding: 100px;
+        } 
+        .button {
+          border-radius: 2px;
+          background-color:rebeccapurple;
+          border: none;
+          color: white;
+          padding: 15px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 15px;
+          margin: 4px 2px;
+          cursor: pointer;     
+        }
+        .button:hover {
+          background-color:plum; /* Green */
+          color: white;
+        }
+       
+    </style>
+</head>
+<body>
+    
+    {% if res %} 
+    
+    <table class="center">
+        <caption style="text-align: center ;">Student Semester Marks</caption>
+        <tr>
+            <th>Semesters</th>
+            <th>Marks</th>
+        </tr>
+        {% for i in res %} 
+        <tr>
+            <th>SEM-1</th>
+            <td>{{i.sem1}}</td>
+        </tr>
+        <tr>
+            <th>SEM-2</th>
+            <td>{{i.sem2}}</td>
+        </tr>
+        <tr>
+            <th>SEM-3</th>
+            <td>{{i.sem3}}</td>
+        </tr>
+        <tr>
+            <th>SEM-4</th>
+            <td>{{i.sem4}}</td>
+        </tr>
+        <tr>
+            <th>SEM-5</th>
+            <td>{{i.sem5}}</td>
+        </tr>
+        <tr>
+            <th>SEM-6</th>
+            <td>{{i.sem6}}</td>
+        </tr>
+        <tr>
+            <th>SEM-7</th>
+            <td>{{i.sem7}}</td>
+        </tr>
+        <tr>
+            <th>SEM-8</th>
+            <td>{{i.sem8}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %} 
+       <h1 style="text-align: center; font-size: 500%;">The Student has no result</h1>
+       <img src="{% static 'images/noresult.gif' %}" alt="Computer man" >
+       <div class="center">
+        <button class="button"  onclick="history.back()">Go Back</button>
+       </div>
+
+    {% endif %} 
+    
+</body>
+</html>

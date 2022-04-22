@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="istyle.css"/>
+
+    <style>
+
+      body {
+        background-image: url('bg.jpg');
+      }
+        /* div {
+        width: 320px;
+        padding: 10px;
+        
+        margin: 0;
+        position: relative;
+
+      }  
+      .center {
+        margin: auto;
+        width: 40%;
+        padding: 10px;
+      } 
+      input[type=text], input[type=email],input[type=date]{
+        border: none;
+        border-bottom: 1px solid royalblue;
+      } */
+      input[type=text], input[type=number], input[type=email],select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: none;
+        color: aliceblue;
+        /* border-radius: 4px; */
+        box-sizing: border-box;
+        background: rgba(37, 21, 21, 0);
+        border-bottom: 1px solid rgba(65, 105, 225, 0.705);
+      }
+
+      input[type=submit] {
+        width: 100%;
+        background-color: #4c7faf;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      input[type=submit]:hover {
+        background-color: #a0459b;
+      }
+
+      div {
+        border-radius: 5px;
+        /* background-color: #f2f2f2; */
+        padding: 20px;
+        
+      }
+    </style>
+
+
+
+</head>
+<body>
+    <!-- <h2 class="w3-xxxlarge w3-animate-top", style="text-align:center;">fill your details for Registration </h2>
+    <div class="center">
+        <form action="/action_page.php">
+          <fieldset>
+           <legend><h4>Registration:</h4></legend>
+           <label for="fname">First name:</label>
+           <input type="text" id="fname" name="fname"><br><br>
+           <label for="lname">Last name:</label>
+           <input type="text" id="lname" name="lname"><br><br>
+           <label for="email">Email:</label>
+           <input type="email" id="email" name="email"><br><br>
+           <label for="birthday">Birthday:</label>
+           <input type="date" id="birthday" name="birthday"><br><br>
+           <input type="submit" value="Submit">
+          </fieldset>
+         </form>
+    </div> -->
+  <div>
+    <form action="/action_page.php">
+      <label for="fname">First Name</label>
+      <input type="text" id="fname" name="firstname" placeholder="Your first name">
+
+      <label for="lname">Last Name</label>
+      <input type="text" id="lname" name="lastname" placeholder="Your last name">
+
+      <label for="idno">StudentID</label>
+      <input type="number" id="idno" name="idno" >
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" >
+
+      <label for="phone">Phone</label>
+      <input type="number" id="phone" name="phone" >
+
+      <p>Branch:</p>
+      
+      <input type="radio" id="cse" name="branch" value="cse" required>
+      <label for="cse">CSE</label><br>
+
+      <input type="radio" id="ece" name="branch" value="ece" required>
+      <label for="ece">ECE</label><br>
+
+      <input type="radio" id="it" name="branch" value="it" required >
+      <label for="it">IT</label><br>
+
+      <label for="section">Section:</label> 
+      <select name="section" id="section" required>
+        <option value=" ">None</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+      </select>
+      <br><br>
+      <input type="submit" value="submit">
+    </form>
+  </div>  
+</body>
+</html>

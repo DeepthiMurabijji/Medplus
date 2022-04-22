@@ -1,2 +1,0 @@
-# Medplus
-Assignments

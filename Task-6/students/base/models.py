@@ -40,7 +40,7 @@ def validate_interval(value):
 
 class Marks(models.Model):
     rollno = models.OneToOneField(st_details, on_delete = models.CASCADE)
-    sem1 = models.FloatField ( null=True, blank=True ,validators=[validate_interval])
+    sem1 = models.FloatField (null=True, blank=True ,validators=[validate_interval])
     sem2 = models.FloatField (null=True, blank=True , validators=[validate_interval] )
     sem3 = models.FloatField (null=True, blank=True  , validators=[validate_interval])
     sem4 = models.FloatField (null=True, blank=True , validators=[validate_interval])

@@ -75,7 +75,11 @@
         .btn:hover {
           opacity: 1;
         }
-
+        img {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
         
 
       </style>
@@ -87,7 +91,10 @@
       <a href="{% url 'people' %}" class="w3-bar-item w3-button">USER</a>
       <a href="./signup.html" class="w3-bar-item w3-button">SIGNUP</a>
     </div>
-    <div class="center"><h1 class= "w3-animate-top", style="text-align:center; font-size: 70px;">Welcome to <br> Hogwarts university </h1><br></div>
+    <div class="center">
+      <h1 class= "w3-animate-top", style="text-align:center; font-size: 70px;"><b>Welcome to <br> Hogwarts university </b></h1><br>
+      <img class= "w3-animate-top", src="{% static 'images/lo.gif'%}" alt="No Logo" width="200" height="200">
+    </div>
     
     
 

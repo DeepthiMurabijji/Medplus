@@ -10,9 +10,12 @@ choice_value = [('CSE','CSE'),('ECE','ECE'),('IT','IT')]
 sec_value = [('A','A'),('B','B'),('C','C')]
 year_value = [('1','1'),('2','2'),('3','3'),('4','4')]
 class st_details(models.Model):
-    FirstName = models.CharField(max_length=45,blank="")
-    LastName = models.CharField(max_length=45,blank="")
-    rollno = models.CharField(max_length=4,help_text="Enter 4 digit roll number",blank="", unique= True)
+    name_validators = RegexValidator(regex='^[a-zA-Z]*$',message='Name must be Alphabets only',code='invalid_username')
+    FirstName = models.CharField(validators = [name_validators], max_length=45,blank="")
+    LastName = models.CharField(validators = [name_validators], max_length=45,blank="")
+
+
+    rollno = models.CharField(validators=[RegexValidator('^[0-9]*$', message='Roll.no must be Numeric only'), ],max_length=4,help_text="Enter 4 digit roll number",blank="", unique= True)
     profilepic = models.ImageField(null=True ,blank=True ,upload_to ='uploads/', default="uploads/unknown.jpg")
     email = models.EmailField( max_length=265, unique=True,blank="")
 
@@ -37,7 +40,7 @@ def validate_interval(value):
 
 class Marks(models.Model):
     rollno = models.OneToOneField(st_details, on_delete = models.CASCADE)
-    sem1 = models.FloatField (null=True, blank=True , validators=[validate_interval])
+    sem1 = models.FloatField ( null=True, blank=True ,validators=[validate_interval])
     sem2 = models.FloatField (null=True, blank=True , validators=[validate_interval] )
     sem3 = models.FloatField (null=True, blank=True  , validators=[validate_interval])
     sem4 = models.FloatField (null=True, blank=True , validators=[validate_interval])

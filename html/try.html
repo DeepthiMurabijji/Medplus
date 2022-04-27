@@ -53,7 +53,7 @@ body {
 <h1>Card Flip with Text</h1>
 <h3>Hover over the image below:</h3>
 
-<div class="flip-card">
+<!-- <div class="flip-card">
   <div class="flip-card-inner">
     <div class="flip-card-front">
       <img src="boy.jpeg" style="width:300px;height:300px;">
@@ -64,33 +64,35 @@ body {
       <p>We love that guy</p>
     </div>
   </div>
-</div>
+</div> -->
+
+
+<table>
+  <tr>
+    <td rowspan="3">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front"><img src="girl.jpeg" alt="No Image" style="width:300px;height:300px;"></div>
+          <div class="flip-card-back">
+            <h1>John Doe</h1> 
+           <p>Architect & Engineer</p> 
+           <p>We love that guy</p>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>jvbbvgberigb</td>
+  </tr>
+  <tr>
+    <td>jvbhfbigr</td>
+  </tr>
+</table>
+    
 
 </body>
 </html>
 
 
-<h1>Flip the card for student information</h1>
-    
 
-    <div class="flip-card">
-    <div class="flip-card-inner">
-        <div class="flip-card-front">
-        <img src="{{i.profilepic.url }}" style="width:300px;height:300px;">
-        </div>
-        <div class="flip-card-back">
-            {% for i in details %}
-            <ul>
-                <li>{{i.FirstName}}</li>
-                <li>{{i.LastName}}</li>
-                <li>{{i.rollno}}</li>
-                <li>{{i.email}}</li>
-                <li>{{i.phoneno}}</li>
-                <li>{{i.Year}}</li>
-                <li>{{i.Branch}}</li>
-                <li>{{i.Section}}</li>
-            </ul>
-            {% endfor %}
-        </div>
-    </div>
-    </div>

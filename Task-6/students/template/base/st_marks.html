@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Marks</title>
     <style>
+        body {
+         margin: 0px;
+        }
         table, th, td {
           border: 1px solid black;
           border-collapse: collapse;
@@ -31,7 +34,7 @@
           top: 0;
           margin: auto;
           width: 75%;
-          padding: 100px;
+          padding: 70px;
         } 
         .button {
           border-radius: 2px;
@@ -56,14 +59,23 @@
 <body>
     
     {% if res %} 
+    <div class="w3-bar w3-border" style="background-color: mediumpurple;padding: 5px;" >
+        <h1 class="w3-xxxlarge" , style="text-align: center; color:azure; font-size:200%;">Student Marks Sheet </h1><br>
+    </div>
     
     <table class="center">
-        <caption style="text-align: center ;">Student Semester Marks</caption>
+        {% for i in res %} 
+        <tr>
+            
+            <td rowspan="10"><img src="{{i.rollno.profilepic.url}}" alt="no image"  ></td>
+            
+        </tr>
+       
         <tr>
             <th>Semesters</th>
             <th>Marks</th>
         </tr>
-        {% for i in res %} 
+        
         <tr>
             <th>SEM-1</th>
             <td>{{i.sem1}}</td>
@@ -96,8 +108,12 @@
             <th>SEM-8</th>
             <td>{{i.sem8}}</td>
         </tr>
+       
         {% endfor %}
     </table>
+    <div class="center">
+        <button class="button"  onclick="history.back()">Go Back</button>
+    </div>
     {% else %} 
        <h1 style="text-align: center; font-size: 500%;">The Student has no result</h1>
        <img src="{% static 'images/noresult.gif' %}" alt="Computer man" >

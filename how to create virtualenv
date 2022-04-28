@@ -1,0 +1,170 @@
+deepthi@deepthi-medplus:~/Medplus$ sudo apt install virtualenv
+[sudo] password for deepthi: 
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+virtualenv is already the newest version (20.0.17-1ubuntu0.4).
+0 upgraded, 0 newly installed, 0 to remove and 9 not upgraded.
+deepthi@deepthi-medplus:~/Medplus$ pip install virtualenv
+Requirement already satisfied: virtualenv in /home/deepthi/.local/lib/python3.8/site-packages (20.14.0)
+Requirement already satisfied: filelock<4,>=3.2 in /home/deepthi/.local/lib/python3.8/site-packages (from virtualenv) (3.6.0)
+Requirement already satisfied: six<2,>=1.9.0 in /usr/lib/python3/dist-packages (from virtualenv) (1.14.0)
+Requirement already satisfied: distlib<1,>=0.3.1 in /home/deepthi/.local/lib/python3.8/site-packages (from virtualenv) (0.3.4)
+Requirement already satisfied: platformdirs<3,>=2 in /home/deepthi/.local/lib/python3.8/site-packages (from virtualenv) (2.5.1)
+deepthi@deepthi-medplus:~/Medplus$ ls
+ 3DynamicWhileLoopTrial.py      Meeting.csv
+ Allocation.csv                 meetings
+ Allo.csv                       MeetingsTimeline.csv
+ ass3.py                        mysite
+ Assessment5_Sequel-master      mysql
+ assign2.py                     MY-SQL.docx
+ code                           Object.py
+ Deallocation.csv               Parking.csv
+ Dello.csv                      play.html
+ DJANGO.pdf                     __pycache__
+ employeeDailyData.csv          PYTHON.docx
+ Employee_details.csv           sample.py
+ EmployeeMeetingScheduler.csv   scheduledMet.csv
+ EmployeeMeetingScheduler.py    SunflowerSchool-Django-master
+ Foreign-Key-Basic-master       Task-2
+ hello.py                       Task-3
+ help.py                        Task-6
+ hi.py                          task7
+ hit.py                         tryingO.py
+ html                           tryingout.py
+ java                           vehicle.py
+'Meeting Arranged.csv'
+deepthi@deepthi-medplus:~/Medplus$ cd task7
+deepthi@deepthi-medplus:~/Medplus/task7$ ls
+deepthi@deepthi-medplus:~/Medplus/task7$ virtualenv Env
+ModuleNotFoundError: No module named 'virtualenv.seed.via_app_data'
+deepthi@deepthi-medplus:~/Medplus/task7$ sudo pip install virtualenv
+Requirement already satisfied: virtualenv in /usr/lib/python3/dist-packages (20.0.17)
+deepthi@deepthi-medplus:~/Medplus/task7$ virtualenv Env
+ModuleNotFoundError: No module named 'virtualenv.seed.via_app_data'
+deepthi@deepthi-medplus:~/Medplus/task7$ sudo pip uninstall virtualenv
+Found existing installation: virtualenv 20.0.17
+Not uninstalling virtualenv at /usr/lib/python3/dist-packages, outside environment /usr
+Can't uninstall 'virtualenv'. No files were found to uninstall.
+deepthi@deepthi-medplus:~/Medplus/task7$ cd ..
+deepthi@deepthi-medplus:~/Medplus$ sudo pip uninstall virtualenv
+Found existing installation: virtualenv 20.0.17
+Not uninstalling virtualenv at /usr/lib/python3/dist-packages, outside environment /usr
+Can't uninstall 'virtualenv'. No files were found to uninstall.
+deepthi@deepthi-medplus:~/Medplus$ sudo pip uninstall virtualenv=20.0.17
+ERROR: Invalid requirement: 'virtualenv=20.0.17'
+Hint: = is not a valid operator. Did you mean == ?
+deepthi@deepthi-medplus:~/Medplus$ sudo pip uninstall virtualenv==20.0.17
+Found existing installation: virtualenv 20.0.17
+Not uninstalling virtualenv at /usr/lib/python3/dist-packages, outside environment /usr
+Can't uninstall 'virtualenv'. No files were found to uninstall.
+deepthi@deepthi-medplus:~/Medplus$ sudo apt uninstall virtualenv
+E: Invalid operation uninstall
+deepthi@deepthi-medplus:~/Medplus$ apt uninstall virtualenv
+E: Invalid operation uninstall
+deepthi@deepthi-medplus:~/Medplus$ virtualenv --version
+virtualenv 20.14.0 from /home/deepthi/.local/lib/python3.8/site-packages/virtualenv/__init__.py
+deepthi@deepthi-medplus:~/Medplus$ cd task7
+deepthi@deepthi-medplus:~/Medplus/task7$ virtualenv Env
+ModuleNotFoundError: No module named 'virtualenv.seed.via_app_data'
+deepthi@deepthi-medplus:~/Medplus/task7$ apt remove python3-virtualenv
+E: Could not open lock file /var/lib/dpkg/lock-frontend - open (13: Permission denied)
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), are you root?
+deepthi@deepthi-medplus:~/Medplus/task7$ sudo apt remove python3-virtualenv
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  python3-appdirs python3-distlib python3-filelock python3-importlib-metadata
+  python3-more-itertools python3-zipp
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  python3-virtualenv virtualenv
+0 upgraded, 0 newly installed, 2 to remove and 9 not upgraded.
+After this operation, 387 kB disk space will be freed.
+Do you want to continue? [Y/n] y
+(Reading database ... 190037 files and directories currently installed.)
+Removing virtualenv (20.0.17-1ubuntu0.4) ...
+Removing python3-virtualenv (20.0.17-1ubuntu0.4) ...
+Processing triggers for man-db (2.9.1-1) ...
+deepthi@deepthi-medplus:~/Medplus/task7$ virtualenv --version
+virtualenv 20.14.0 from /home/deepthi/.local/lib/python3.8/site-packages/virtualenv/__init__.py
+deepthi@deepthi-medplus:~/Medplus/task7$ virtualenv Env
+created virtual environment CPython3.8.10.final.0-64 in 193ms
+  creator CPython3Posix(dest=/home/deepthi/Medplus/task7/Env, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/home/deepthi/.local/share/virtualenv)
+    added seed packages: pip==22.0.4, setuptools==61.2.0, wheel==0.37.1
+  activators BashActivator,CShellActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
+deepthi@deepthi-medplus:~/Medplus/task7$ browse .
+deepthi@deepthi-medplus:~/Medplus/task7$ ls
+Env
+deepthi@deepthi-medplus:~/Medplus/task7$ cd Env
+deepthi@deepthi-medplus:~/Medplus/task7/Env$ ls
+bin  lib  pyvenv.cfg
+deepthi@deepthi-medplus:~/Medplus/task7/Env$ cd bin
+deepthi@deepthi-medplus:~/Medplus/task7/Env/bin$ ls
+activate       activate.nu       deactivate.nu  pip-3.8  python3    wheel3
+activate.csh   activate.ps1      pip            pip3.8   python3.8  wheel-3.8
+activate.fish  activate_this.py  pip3           python   wheel      wheel3.8
+deepthi@deepthi-medplus:~/Medplus/task7/Env/bin$ source activate
+(Env) deepthi@deepthi-medplus:~/Medplus/task7/Env/bin$ 
+(Env) deepthi@deepthi-medplus:~/Medplus/task7/Env/bin$ cd ..
+(Env) deepthi@deepthi-medplus:~/Medplus/task7/Env$ cd ..
+(Env) deepthi@deepthi-medplus:~/Medplus/task7$ ls
+Env
+(Env) deepthi@deepthi-medplus:~/Medplus/task7$ python3 install django
+python3: can't open file 'install': [Errno 2] No such file or directory
+(Env) deepthi@deepthi-medplus:~/Medplus/task7$ apt install python
+E: Could not open lock file /var/lib/dpkg/lock-frontend - open (13: Permission denied)
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), are you root?
+(Env) deepthi@deepthi-medplus:~/Medplus/task7$ sudo apt install python
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Note, selecting 'python-is-python2' instead of 'python'
+The following packages were automatically installed and are no longer required:
+  python3-appdirs python3-distlib python3-filelock python3-importlib-metadata
+  python3-more-itertools python3-zipp
+Use 'sudo apt autoremove' to remove them.
+The following NEW packages will be installed:
+  python-is-python2
+0 upgraded, 1 newly installed, 0 to remove and 9 not upgraded.
+Need to get 2,496 B of archives.
+After this operation, 10.2 kB of additional disk space will be used.
+Get:1 http://in.archive.ubuntu.com/ubuntu focal/universe amd64 python-is-python2 all 2.7.17-4 [2,496 B]
+Fetched 2,496 B in 0s (16.9 kB/s)             
+Selecting previously unselected package python-is-python2.
+(Reading database ... 189893 files and directories currently installed.)
+Preparing to unpack .../python-is-python2_2.7.17-4_all.deb ...
+Unpacking python-is-python2 (2.7.17-4) ...
+Setting up python-is-python2 (2.7.17-4) ...
+(Env) deepthi@deepthi-medplus:~/Medplus/task7$ python install django
+python: can't open file 'install': [Errno 2] No such file or directory
+(Env) deepthi@deepthi-medplus:~/Medplus/task7$ python install python-django
+python: can't open file 'install': [Errno 2] No such file or directory
+(Env) deepthi@deepthi-medplus:~/Medplus/task7$ python3 install django
+python3: can't open file 'install': [Errno 2] No such file or directory
+(Env) deepthi@deepthi-medplus:~/Medplus/task7$ python2 install django
+python2: can't open file 'install': [Errno 2] No such file or directory
+(Env) deepthi@deepthi-medplus:~/Medplus/task7$ pip install django
+Collecting django
+  Downloading Django-4.0.4-py3-none-any.whl (8.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.0/8.0 MB 51.5 MB/s eta 0:00:00
+Collecting backports.zoneinfo
+  Using cached backports.zoneinfo-0.2.1-cp38-cp38-manylinux1_x86_64.whl (74 kB)
+Collecting sqlparse>=0.2.2
+  Using cached sqlparse-0.4.2-py3-none-any.whl (42 kB)
+Collecting asgiref<4,>=3.4.1
+  Using cached asgiref-3.5.0-py3-none-any.whl (22 kB)
+Installing collected packages: sqlparse, backports.zoneinfo, asgiref, django
+Successfully installed asgiref-3.5.0 backports.zoneinfo-0.2.1 django-4.0.4 sqlparse-0.4.2
+(Env) deepthi@deepthi-medplus:~/Medplus/task7$ django-admin startproject Delivery
+(Env) deepthi@deepthi-medplus:~/Medplus/task7$ cd Delivery
+(Env) deepthi@deepthi-medplus:~/Medplus/task7/Delivery$ ls
+Delivery  manage.py
+(Env) deepthi@deepthi-medplus:~/Medplus/task7/Delivery$ django-admin startapp supply
+(Env) deepthi@deepthi-medplus:~/Medplus/task7/Delivery$ ls
+Delivery  manage.py  supply
+(Env) deepthi@deepthi-medplus:~/Medplus/task7/Delivery$ browse .
+(Env) deepthi@deepthi-medplus:~/Medplus/task7/Delivery$ 
+

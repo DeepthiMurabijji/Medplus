@@ -17,18 +17,7 @@ def index(request):
 def myform(request):
      
 
-    # form = newuser()
-    # if request.method =='POST':
-    #     form = newuser(request.POST,request.FILES)
-
-    #     if form.is_vaild():
-    #         form.save(commit=True)
-    #         print("your response recored")
-    #         return HttpResponse("form sucessfully submitted")
-
-    #     else:
-    #         print("Error!")
-    #         return HttpResponse("Error! ocucured")
+    
     print(request.GET)
 
     return render(request,'polls/form.html')

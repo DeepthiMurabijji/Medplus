@@ -1,6 +1,61 @@
-{% extends "supply/home.html" %} 
-{% block body %} 
-<div class="center">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <style>
+    div {
+      width: 320px;
+      padding: 10px;
+      margin: 0;
+      position: relative;
+    } 
+    .center {
+      top: 0;
+      margin: auto;
+      width: 75%;
+      padding: 100px;
+    }  
+    input[type=text], input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    input[type=text]:focus, input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+    .btn {
+      background-color: #6d04aa;
+      color: white;
+      padding: 16px 20px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+    }
+
+    .btn:hover {
+      opacity: 1;
+    }
+    .signin {
+    background-color: #f1f1f1;
+    text-align: center;
+    }
+  
+  </style>
+</head>
+
+<body>
+  
+  <div class="center">
     <form action="/action_page.php" class="container">
       <h1>Login</h1>
   
@@ -13,8 +68,9 @@
       <button type="submit" class="btn">Login</button>
 
       <div class="container signin">
-        <p>Don't have an account? <a href="{% url 'register' %}">Sign Up</a>.</p>
+        <p>Already have an account? <a href="{% url 'register' %}">Sign in</a>.</p>
       </div>
     </form>
-</div>
-{% endblock %} 
+  </div>
+</body>
+</html>    

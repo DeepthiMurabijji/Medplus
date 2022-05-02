@@ -8,12 +8,19 @@
 from django.db import models
 
 
-class user(models.Model):
-    name = models.CharField(max_length=255)
-    phone_number = models.IntegerField(blank=True, null=True)
-    email_id = models.CharField(max_length=255)
+
+
+class SupplyUser(models.Model):
+    user_id = models.AutoField(primary_key=True)
+    first_name = models.CharField(db_column='First_name', max_length=255)  # Field name made lowercase.
+    last_name = models.CharField(db_column='Last_name', max_length=255)  # Field name made lowercase.
+    email = models.CharField(max_length=255)
+    phone = models.CharField(max_length=255)
+    gender = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
     user_name = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
+    rpassword = models.CharField(max_length=255)
 
     class Meta:
         managed = False

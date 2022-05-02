@@ -20,4 +20,6 @@ from supply import views
 urlpatterns = [
     path('',views.home,name='home'),
     path('admin/', admin.site.urls),
+    path('login/',views.userlogin, name='login'),
+    path('register/',views.register, name='register')
 ]

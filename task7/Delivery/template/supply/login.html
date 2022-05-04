@@ -1,31 +1,43 @@
 
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Login Page</title>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <style>
+    body {
+      background-image: url("{% static 'images/bor.png'%}");
+      background-repeat: no-repeat;
+      
+      background-attachment: fixed;  
+      background-size:cover;
+      
+   }
+
     div {
       width: 320px;
       padding: 10px;
       margin: 0;
       position: relative;
+      
     } 
     .center {
-      top: 0;
+      top: 70px;
       margin: auto;
       width: 75%;
       padding: 100px;
+      
     }  
     input[type=text], input[type=password] {
       width: 100%;
       padding: 15px;
       margin: 5px 0 22px 0;
       border: none;
-      background: #f1f1f1;
+      background: #f5f4f4;
     }
 
     input[type=text]:focus, input[type=password]:focus {
@@ -46,29 +58,46 @@
       opacity: 1;
     }
     .signin {
-    background-color: #f1f1f1;
+    background-color: #f1f1f100;
     text-align: center;
+    width: 100%;
     }
+    /* #borderimg { 
+      border: 20px solid ;
+      padding: 10px;
+      border-image-source: url("{% static 'images/bor.png' %}");
+      border-image-repeat: ; 
+      border-image-outset: 10px; 
+      border-image-slice: 30;
+      
+    } */
   
   </style>
 </head>
 
 <body>
   
-  <div class="center">
-    <form action="/action_page.php" class="container">
-      <h1>Login</h1>
+  <div class="center" >
+    <form class="container" method="POST">
+      {% csrf_token %}
+      <h1 style="text-align: center;">Login</h1>
   
-      <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="email" required>
+      <label for="usr"><b>User Name</b></label>
+      <input type="text" placeholder="Enter User Name" name="usr" required>
   
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required>
   
+      {% if role ==  "manager" %}
+      <input type="hidden" name="role" value="manager">
+      {% else %}
+      <input type="hidden" name="role" value="user">
+      {% endif %}
+
       <button type="submit" class="btn">Login</button>
 
       <div class="container signin">
-        <p>Already have an account? <a href="{% url 'register' %}">Sign in</a>.</p>
+        <p>Already have an account? <a href="{% url 'register' role %}">Sign in</a>.</p>
       </div>
     </form>
   </div>

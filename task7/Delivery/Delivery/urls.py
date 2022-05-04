@@ -20,6 +20,8 @@ from supply import views
 urlpatterns = [
     path('',views.home,name='home'),
     path('admin/', admin.site.urls),
-    path('login/',views.userlogin, name='login'),
-    path('register/',views.register, name='register')
+    path('login/?P<str:role>/',views.userlogin, name='login'),
+    path('register/?P<str:role>/',views.register, name='register'),
+    path('products/', views.products, name='products'),
+
 ]

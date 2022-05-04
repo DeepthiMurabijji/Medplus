@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+    <link src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <link href="style/normalize.css" rel="stylesheet" type="text/css">
+    <link href="style/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="style/main.css" rel="stylesheet" type="text/css">
+<!-- 
+TODO: Import these links before use icons in html  -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>User Dashboard</title>
+    <style>
+        .sidebar {
+        height: 100%;
+        width: 160px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: rgba(222, 15, 15, 0.794);
+        overflow-x: hidden;
+        padding-top: 16px;
+        }
+
+        .sidebar a {
+        padding: 16px 16px 16px 16px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #000000;
+        display: block;
+        }
+
+        .sidebar a:hover {
+        color: #f1f1f1;
+        }
+
+        .main {
+        margin-left: 160px; /* Same as the width of the sidenav */
+        padding: 0px 10px;
+        }
+        @media screen and (max-height: 450px) {
+        .sidebar {padding-top: 15px;}
+        .sidebar a {font-size: 18px;}
+        }
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="#home" style="padding: 10px;"><i class='far fa-user-circle' style='font-size:48px;padding: 10px;'></i> <br>My Profile </a>
+        <hr>
+        <a href="#services"><i class="fas fa-pills"></i> Products</a>
+        <a href="#clients"><i class="fas fa-shopping-cart"></i> My Cart </a>
+        <a href="{% url 'home' %}"><i class="fas fa-power-off"></i> Logout</a>
+    </div>
+
+    <div class="main">
+        <h1>{{ user }}, Welcome to Dashboard</h1>
+    </div>
+
+    
+</body>
+</html>

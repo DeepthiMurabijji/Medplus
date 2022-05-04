@@ -1,17 +1,27 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register Here </title>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
     <style>
-        
+        body {
+          background-image: url("{% static 'images/pink2.png'%}");
+          background-repeat: no-repeat;
+          background-attachment: fixed;  
+          background-size:1500px 800px ;
+        }
         .center {
           margin: auto;
-          width: 75%;
-          padding: 50px;
+          width: 75%; 
         }
         input[type=text], input[type=password],input[type=email], input[type=number] {
         width: 100%;
@@ -47,16 +57,24 @@
         opacity: 1;
         }
         .signin {
-        background-color: #f1f1f1;
-        text-align: center;
+        padding: 0;
+        text-align: right;
         }
+      
 
     </style>
 </head>
 <body>
-    <form >
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="container signin">
+            
+            
+            <p style="text-align: right;"><a href="{% url 'login' role %}"><img src="{% static 'images/log.gif' %}" alt="HTML tutorial" style="width:120px;height:120px; margin-bottom: 0px;"></a><br> Click <i class="far fa-hand-point-up"> to Signin </i></p>
+        </div>
         <div class="center">
-            <h2 style="text-align: center;">Registration Form</h2>
+            <h1 style="text-align: center;">Registration Form</h1>
             <hr>
             <label for="fname">First Name</label>
             <input type="text" id="fname" name="firstname" placeholder="Your first name">
@@ -78,7 +96,7 @@
             <br>
 
             <label for="add">Address: </label><br>
-            <textarea rows="4" cols="50" name="add" placeholder="Enter your address..."></textarea><br>
+            <textarea rows="4" cols="50" name="address" placeholder="Enter your address..."></textarea><br>
   
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username" required><br>
@@ -89,12 +107,16 @@
             <label for="psw-repeat">Repeat Password</label>
             <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
 
+            {% if role ==  "manager" %}
+            <input type="hidden" name="role" value="manager">
+            {% else %}
+            <input type="hidden" name="role" value="user">
+            {% endif %}
+
             <button type="submit" class="btn">Register</button>
                  
         </div>
-        <div class="container signin">
-            <p>Already have an account? <a href="{% url 'login' %}">Sign in</a>.</p>
-        </div>
+       
     </form>
 </body>
 </html>

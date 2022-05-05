@@ -62,8 +62,17 @@ def register(request,role):
     else:
         return render(request, 'supply/register.html',{'role':role})
 
-def products(request):
-    return render(request, 'products.html')
+def productsadd(request):
+    return render(request, "supply/productsadd.html")
 
 def managerprofile(request):
-    return render (request, "managerprofile.html")
+    return render (request, "supply/managerprofile.html")
+
+def dashboardman(request):
+    return render(request,'supply/dashboardman.html')
+
+def dashboarduser(request):
+    return render(request, 'supply/dashboarduser.html')
+
+def userprofile(request):
+    return render(request, 'supply/userprofile.html')

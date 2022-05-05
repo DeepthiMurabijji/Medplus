@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -26,7 +27,9 @@ TODO: Import these links before use icons in html  -->
         z-index: 1;
         top: 0;
         left: 0;
-        background-color: rgba(222, 15, 15, 0.794);
+        background-image: url("{% static 'images/updated-background-2.jpg'%}");
+        background-repeat: no-repeat;
+        background-size: 160px 100%;
         overflow-x: hidden;
         padding-top: 16px;
         }
@@ -35,12 +38,12 @@ TODO: Import these links before use icons in html  -->
         padding: 16px 16px 16px 16px;
         text-decoration: none;
         font-size: 20px;
-        color: #000000;
+        color: whitesmoke;
         display: block;
         }
 
         .sidebar a:hover {
-        color: #f1f1f1;
+        color:chartreuse;
         }
 
         .main {
@@ -56,7 +59,7 @@ TODO: Import these links before use icons in html  -->
 </head>
 <body>
     <div class="sidebar">
-        <a href="#home" style="padding: 10px;"><i class='far fa-user-circle' style='font-size:48px;padding: 10px;'></i> <br>My Profile </a>
+        <a href="#home" style="padding: 10px;"><i class='far fa-user-circle' style='font-size:48px;padding-left: 40px;'></i> <br>....My Profile..... </a>
         <hr>
         <a href="#services"><i class="fas fa-pills"></i> Products</a>
         <a href="#clients"><i class="fas fa-shopping-cart"></i> My Cart </a>

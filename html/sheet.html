@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .center {
+          margin: auto;
+          width: 70%;
+          padding: 50px;
+        }
+        input[type=text], input[type=password],input[type=email], input[type=number] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        border-bottom: 1px solid red;
+        background: #f5f0f000;
+        }
+
+        input[type=text]:focus, input[type=password]:focus {
+        background-color: rgb(246, 243, 243);
+        outline: none;
+        }
+        textarea{
+        margin-top: 30px;
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        border-bottom: 1px solid red;
+        background: #f1f1f100;
+        }
+        .btn {
+        background-color: #6d04aa;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+        }
+
+        .btn:hover {
+        opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <form  method="post">
+        <div class="center">
+            <h1>Product From</h1>
+            <hr>
+            <br>
+            <label for="pname"><b>Product Name</b></label>
+            <input type="text" id="pname" name="pname" placeholder="Product name"><br>
+
+            <label for="cost"><b>Product Cost</b></label>
+            <input type="text" id="cost" name="cost" placeholder="product cost"><br>
+
+            <label for="quantity"> <b>Quantity</b></label>
+            <input type="number" id="quantity" name="quantity" placeholder="Eg:10"><br>
+
+            <label for="image"><b>Product Image:</b> </label>
+            <input type="file" id="image" name="image"><br>
+
+            <br>
+
+            <label for="desc"><b>Description</b></label>
+            <textarea rows="4" cols="30" name="desc" placeholder="Description..."></textarea><br>
+
+            <button type="submit" class="btn">Submit</button>
+        </div>
+    </form>
+</body>
+</html>

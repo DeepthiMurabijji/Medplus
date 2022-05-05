@@ -62,15 +62,10 @@
     text-align: center;
     width: 100%;
     }
-    /* #borderimg { 
-      border: 20px solid ;
-      padding: 10px;
-      border-image-source: url("{% static 'images/bor.png' %}");
-      border-image-repeat: ; 
-      border-image-outset: 10px; 
-      border-image-slice: 30;
-      
-    } */
+    .signin a{
+      color:yellowgreen;
+    }
+  
   
   </style>
 </head>
@@ -97,7 +92,7 @@
       <button type="submit" class="btn">Login</button>
 
       <div class="container signin">
-        <p>Already have an account? <a href="{% url 'register' role %}">Sign in</a>.</p>
+        <h3>Already have an account? <a href="{% url 'register' role %}">Sign in</a>.</h3>
       </div>
     </form>
   </div>

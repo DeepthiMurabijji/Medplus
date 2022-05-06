@@ -15,11 +15,11 @@ class st_details(models.Model):
     LastName = models.CharField(validators = [name_validators], max_length=45,blank="")
 
 
-    rollno = models.CharField(validators=[RegexValidator('^[0-9]*$', message='Roll.no must be Numeric only'), ],max_length=4,help_text="Enter 4 digit roll number",blank="", unique= True)
+    rollno = models.CharField(validators=[RegexValidator('^[0-9]*$', message='Roll.no must be Numbers only'), ],max_length=4,help_text="Enter 4 digit roll number",blank="", unique= True)
     profilepic = models.ImageField(null=True ,blank=True ,upload_to ='uploads/', default="uploads/unknown.jpg")
     email = models.EmailField( max_length=265, unique=True,blank="")
 
-    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 10 digits allowed.")
     phoneno = models.CharField(validators=[phone_regex], max_length=10, blank=True) # Validators should be a list
     #phoneno =models.IntegerField(blank="",validators=[validators.MaxLengthValidator(10)])
 

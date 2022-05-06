@@ -27,32 +27,82 @@ TODO: Import these links before use icons in html  -->
         z-index: 1;
         top: 0;
         left: 0;
-        background-image: url("{% static 'images/updated-background-2.jpg'%}");
-        background-repeat: no-repeat;
-        background-size: 170px 100%;
+        background-image: url("{% static 'images/side.jpg'%}");
+        /* background-repeat: no-repeat; */
+        /* background-size: 1000px 100%; */
         overflow-x: hidden;
         padding-top: 16px;
+        
         }
 
         .sidebar a {
         padding: 16px 16px 16px 16px;
         text-decoration: none;
         font-size: 20px;
-        color:whitesmoke;
+        color:black;
         display: block;
         }
 
         .sidebar a:hover {
-        color:chartreuse;
+        color: darkgray;
         }
 
         .main {
         margin-left: 170px; /* Same as the width of the sidenav */
-        padding: 0px 10px;
+       
         }
         @media screen and (max-height: 450px) {
         .sidebar {padding-top: 15px;}
         .sidebar a {font-size: 18px;}
+        }
+
+        .back{
+            background-image: url("{% static 'images/note.jpg' %}");
+            background-repeat: no-repeat;
+            margin-right: 10px;
+        }
+        .center {
+          margin: auto;
+          width: 70%;
+          padding: 50px;
+          margin-right: 60px;
+          background-color: #f1f1f151;
+       }
+
+        input[type=text], input[type=password],input[type=email], input[type=number] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        border-bottom: 1px solid red;
+        background: #f5f0f000;
+        }
+
+        input[type=text]:focus, input[type=password]:focus {
+        background-color: rgb(246, 243, 243);
+        outline: none;
+        }
+        textarea{
+        margin-top: 30px;
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        border-bottom: 1px solid rgba(255, 0, 0, 0.855);
+        background: #f1f1f100;
+        }
+        .btn {
+        background-color: #aa0404;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+        }
+
+        .btn:hover {
+        opacity: 5;
         }
 
     </style>
@@ -75,8 +125,14 @@ TODO: Import these links before use icons in html  -->
 
         <br>
 
-        {% block content %}
-        {% endblock %}
+
+        <div class="back">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+
+        
     </div>
 
     

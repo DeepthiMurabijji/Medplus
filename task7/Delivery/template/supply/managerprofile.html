@@ -1,2 +1,27 @@
-{% includes 'dashboardman.html' %}
+{% extends 'supply/dashboardman.html' %}
 
+{% block content %} 
+{% if res %}
+<div class="profile" >
+    <h1>Profile: </h1>
+    <ul style="list-style-type: none;">
+        <li><pre>First Name:  {{res.first_name}}</pre></li>
+        <li><pre>Last Name:   {{res.last_name}}</pre></li>
+        <li><pre>Email:       {{res.email}}</pre></li>
+        <li><pre>Phone:       {{res.phone}}</pre></li>
+        <li><pre>Gender:      {{res.gender}}</pre></li>
+        <li><pre>Address:     {{res.address}}</pre></li>
+        <li><pre>User Name:   {{res.user_name}}</pre></li>
+        <li><pre>Password:    {{res.password}}</pre></li>
+    </ul>
+</div>
+
+{% else %}
+
+<h1> Doesn't Exists!</h1>
+
+{% endif %}
+
+
+
+{% endblock %}

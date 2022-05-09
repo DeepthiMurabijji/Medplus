@@ -31,9 +31,10 @@ class st_details(models.Model):
     def __str__(self) -> str:
         return self.rollno
 
+
 def validate_interval(value):
         if value < 0.0 or value > 10.0:
-            raise ValidationError(('%(value)s must be in the range [0.0, 10.0]'), params={'value': value},)
+            raise ValidationError(('Enter the CGPA and %(value)s must be in the range [0.0, 10.0]'), params={'value': value},)
 
 
 

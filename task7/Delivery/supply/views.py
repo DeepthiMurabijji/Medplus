@@ -20,7 +20,10 @@ def userlogin(request,role):
                 return HttpResponse("Invalid user name or password")
             else:
                 print("Successful Manager Login")
-                return render(request,'supply/dashboardman.html',{'user':request.POST['usr']})
+                O=obj[0]
+                print(obj[0].user_name)
+                
+                return render(request,'supply/dhome.html',{'user':obj[0].manager_id, 'username':obj[0].user_name })
         elif request.POST['role']=='user':
             obj = SupplyUser.objects.filter(user_name=request.POST['usr']).filter(password=request.POST['psw'])
             print(obj,len(obj))
@@ -65,11 +68,13 @@ def register(request,role):
 def productsadd(request):
     return render(request, "supply/productsadd.html")
 
-def managerprofile(request):
-    return render (request, "supply/managerprofile.html")
+def managerprofile(request,manager_id):
+    res = Manager.objects.get(manager_id=manager_id)
+    return render (request, "supply/managerprofile.html",{'res':res,'user':res.manager_id})
 
-def dashboardman(request):
-    return render(request,'supply/dashboardman.html')
+def dashboardmanhome(request):
+   
+    return render(request,'supply/dhome.html')
 
 def dashboarduser(request):
     return render(request, 'supply/dashboarduser.html')

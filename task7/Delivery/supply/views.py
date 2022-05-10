@@ -81,3 +81,6 @@ def dashboarduser(request):
 
 def userprofile(request):
     return render(request, 'supply/userprofile.html')
+
+def listofuser(request):
+    return render(request,'supply/userlist.html')

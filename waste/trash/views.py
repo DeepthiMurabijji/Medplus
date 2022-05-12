@@ -5,14 +5,13 @@ from trash.forms import *
 from trash import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
 
 # Create your views here.
 
-
-
-
 # def home(request):
 #     return HttpResponse("<h1>Hellow world ! your at Trash site....</h1>")
+
 
 def home (request):
     return render(request, 'trash/home.html')
@@ -40,6 +39,7 @@ def registeration(request):
 
     return render(request, 'trash/register.html', {'reg_form': reg_form})
 
+# @permission_required('request.user.is_staff')
 def signin(request):
 
     if request.method == 'POST':
@@ -48,9 +48,16 @@ def signin(request):
         user = authenticate(request, username=username,password = password)
         if user is not None:
             login(request, user)
-            return HttpResponse("sucessfull login ")
+            # return HttpResponse("sucessfull login ")
+            return render(request, 'trash/admin.html')
         else:
             messages.success(request,("There was a problem login "))
             return render (request,'trash/login.html',{'message':'There was a problem login'})
     else:
         return render(request,'trash/login.html' )
+
+          
+@login_required
+def signout(request):
+    logout(request)
+    return redirect('home')

@@ -33,3 +33,10 @@ class Manager(models.Model):
     password = models.CharField(max_length=255)
     rpassword = models.CharField(max_length=255)
 
+class Product(models.Model):
+    product_id = models.AutoField(primary_key=True)
+    product_name = models.CharField(max_length=255)
+    product_image = models.ImageField(upload_to='media/')
+    product_description = models.TextField(max_length=255)
+    product_cost = models.FloatField()
+    product_quantity = models.PositiveIntegerField()

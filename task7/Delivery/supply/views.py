@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
+from django.contrib import messages
+from django.core.files.storage import FileSystemStorage
 from .models import *
 from django.db.models import Q
 
@@ -66,6 +68,23 @@ def register(request,role):
         return render(request, 'supply/register.html',{'role':role})
 
 def productsadd(request):
+    if request.method == 'POST' and request.FILES['image']:
+        image = request.FILES['image']
+        fss = FileSystemStorage()
+        file = fss.save(image.name, image)
+        file_url = fss.url(file)
+        product = Product( 
+            product_name = request.POST['pname'], 
+            product_image = file_url,
+            product_description = request.POST['desc'],
+            product_cost = request.POST['cost'],
+            product_quantity = request.POST['quantity'],
+        )
+        try:
+            product.save()
+            return HttpResponse("<h1> Successfully Product as been added </h1>")
+        except:
+            return HttpResponse("Invalid Product !")
     return render(request, "supply/productsadd.html")
 
 def managerprofile(request,manager_id):

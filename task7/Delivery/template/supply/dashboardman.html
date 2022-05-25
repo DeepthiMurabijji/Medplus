@@ -121,14 +121,14 @@ TODO: Import these links before use icons in html  -->
     
     <div class="sidebar">
         
-        <a href="{% url 'manprofile' manager_id=user  %}" style="padding: 10px;"><i class='	fas fa-user-tie' style='font-size:48px;padding: 10px;'></i> <br>My Profile </a>
+        <a href="{% url 'supply:manprofile' manager_id=user  %}" style="padding: 10px;"><i class='	fas fa-user-tie' style='font-size:48px;padding: 10px;'></i> <br>My Profile </a>
         <hr>
-        <a href="{% url 'dhome' %}"><i class="far fa-hospital"></i> Home</a>
+        <a href="{% url 'supply:dhome' %}"><i class="far fa-hospital"></i> Home</a>
         <a href="#"><i class="fas fa-pills"></i> Products</a>
-        <a href="{% url 'productsadd' %}"><i class="fas fa-cart-plus"></i> Add Products </a>
+        <a href="{% url 'supply:productsadd' %}"><i class="fas fa-cart-plus"></i> Add Products </a>
         <a href="#clients"><i class="fas fa-notes-medical"></i> User List </a>
         <a href="#clients"><i class="fas fa-user-check"></i> Approvals </a>
-        <a href="{% url 'home' %}"><i class="fas fa-power-off"></i> Logout</a>
+        <a href="{% url 'supply:home' %}"><i class="fas fa-power-off"></i> Logout</a>
     </div>
 
     <div class="main">

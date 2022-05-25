@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<form  method="post">
-
+<form  method="post" enctype="multipart/form-data">
+    {% csrf_token %}
     <div class="back">
         <div class="center">
             <h1>Product From</h1>

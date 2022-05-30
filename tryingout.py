@@ -55,10 +55,10 @@ def hrToMinString(str):
     minutes = int(strSplit[1])
 
     retMinutes = hours * 60 + minutes
-
+    print (type(retMinutes))
     return int(retMinutes)
 
-#print(hrToMinString('9:45'))
+print(hrToMinString('9:45'))
 def hrToMinInteger(inte):
 
     inteStr = inte.split(".")

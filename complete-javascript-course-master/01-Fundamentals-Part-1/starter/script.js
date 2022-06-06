@@ -136,14 +136,95 @@ console.log(` String
    with a 
         new line `);
 
-*/
+
 
 const age = 19;
 const isOldEnough = age >= 18;
 
 if (isOldEnough)
 {
-    console.log('Sarah can start driving ')
+    console.log('Sarah can start driving 🚗')
 }
+
+if else statement.
+
+if {
+    ...
+} else {
+    .... 
+}
+
+
+
+const age = 15;
+ 
+
+if (age >= 18)
+{
+    console.log('Sarah can start driving 🚗')
+}
+else 
+{
+    const yearsLeft = 18 - age;
+    console.log(`Sarah is too young to start driving
+    Please wait for another ${yearsLeft} year 🚳`)
+}
+
+const birthYear = 1991;
+if (birthYear <= 2000)
+{
+    let century =20;
+}
+else 
+{
+    let century = 21;
+}
+
+console.log(century);           // if century is defined inside the block then you will get an error
+                                     Thus see the below code
+
+
+const birthYear = 2012;               //const birthYear = 1991;
+let century ;
+if (birthYear <= 2000)
+{
+     century =20;
+}
+else 
+{
+     century = 21;
+}
+
+console.log(century);
+
+
+Type conversion is when we manually convert from one type to another
+Type coercion is when JavaScript automatically converts types behind the scenes for us 
+
+
+// Type conversions
+const inputYear = '1991';
+console.log(inputYear + 18);
+console.log(Number(inputYear), inputYear);
+console.log(Number(inputYear) + 18);
+console.log(Number('jonas'));    // output : NaN        as it is trying to convert a string to a number
+console.log(typeof NaN);         // NaN  means an invalid number 
+console.log(String(23) , 23 );       
+
+// Type coercion
+console.log(`I'am `+ 23 + 'Years old');       // here + actually converted number to a string
+console.log('23' - '10' - 3);           // output : 10   and - converted string to a number
+console.log('23' + '10' + 3);           // output : 23103
+console.log('23' * '2');               // output : 46        now they are converted to numbers
+
+
+let n = '1' + 1;
+n = n - 1;
+console.log(n);      // output :10
+
+console.log(2+3+4+ '5');     // output :"95"
+console.log('10' - '4'-'3'-2+'5');  // output : "1
+*/
+
 
 

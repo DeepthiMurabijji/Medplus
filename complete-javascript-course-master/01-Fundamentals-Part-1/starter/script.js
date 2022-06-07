@@ -224,7 +224,190 @@ console.log(n);      // output :10
 
 console.log(2+3+4+ '5');     // output :"95"
 console.log('10' - '4'-'3'-2+'5');  // output : "1
+
+
+// Truthy and Falsy Values...........................
+// 5 falsy values: 0, '', undefined, null, NaN
+
+console.log(Boolean(0));         // output : false 
+console.log(Boolean(undefined));   // output : false
+console.log(Boolean('Jonas'));     // output : true
+console.log(Boolean({}));         // output : true
+console.log(Boolean(''));       // output : false
+
+// so conversion to boolean is always implicit not explicit or in other words it always type coercion 
+// when does JS convert to boolean??
+
+// two scenarios :  1) logical operator   2) logical context 
+// eg: if else statement
+
+
+
+// equality operator 
+const age = 18;
+if (age === 18 )  console.log('adult ');  // if statement if we have only one line in the block 
+// no need of parathesis
+// it is strict has it does not perform type coercion
+
+// whereas ==
+
+'18' == 18;    // output : true  as it performs type coercion
+// this is called loose equality operator
+'18' === 18 ; // output : false as it does not  performs type coercion
+18 == 18    // output : true 
+
+
+
+// prompt function
+
+const favourite = prompt("what's your favourite number?");
+console.log(favourite);
+console.log(typeof favourite);
+
+
+if (favourite == 23)
+{
+    console.log('23 is a number // type coercion ')
+}
+if (favourite === 23){
+    console.log("23 is a string ");
+}
+
+
+// converted to number 
+const favourite = Number(prompt("what's your favourite number?"));
+console.log(favourite);
+console.log(typeof favourite);
+
+
+if (favourite == 23)
+{
+    console.log('23 is a number // type coercion ')
+}
+if (favourite === 23){
+    console.log("23 is a string ");    // it is valid after it  is converted to Number
+}
+else if (favourite === 7)
+{
+    console.log('number is 7');
+}
+else 
+{
+    console.log('number is different ' );
+}
+
+
+// strict version of operator
+if (favourite !== 23) console.log('Why not 23 // strict version');
+
+
+// loose version of operator
+
+if (favourite != 23) console.log('Why not 23 // loose version');
+
+
+
+const hasDriversLicense = true;
+const hasGoodVision = false;
+
+console.log(hasDriversLicense && hasGoodVision);
+console.log(hasDriversLicense || hasGoodVision);
+console.log(!hasDriversLicense);
+
+const isTired = true;
+
+console.log(hasDriversLicense && hasGoodVision || isTired);      // output : false 
+//          true                  false           false
+
+console.log(hasDriversLicense && hasGoodVision || isTired); // output : true 
+//           true                 false            true 
+
+console.log(hasDriversLicense && hasGoodVision && !isTired); // output : false
+//          true                    false           false
+
+
+
+// switch case 
+
+const day = 'wednesday';
+
+switch (day) {
+    case 'monday':         // day === 'monday'
+        console.log('plan course structure');
+        break;
+    case 'tuesday':
+        console.log('tuesday');
+        break;
+    case 'wednesday':                           //  day = 'wednesday'     output: thrusday 
+        // console.log('wednesday');
+        // break;                    // herer wednesday and thursday are condition of  'OR' any one of the days 
+    case 'thursday':                             //  day ='thursday'      output: thursday 
+        console.log('thursday');
+        break;
+    case 'friday':
+        console.log('friday');
+        break;
+    case 'saturday':
+        // console.log('saturday');
+        // break;
+    case 'sunday':
+        console.log('sunday');
+        break;
+    default:
+        console.log('Not valid day');
+
+}
+
+// switch case is nothing but else if statements 
+
+// if don't put break the code simply continues to excute till the end 
+
+// above code in if else statement 
+
+
+if (day === 'monday')
+{
+    console.log('monday');
+}
+else if (day === 'tuesday')
+{
+    console.log('tuesday');
+}
+else if (day === 'wednesday' || day === 'thursday')
+{
+    console.log('wednesday or thursday');
+}
+else if (day ==='friday')
+{
+    console.log('friday');
+}
+else if (day === 'saturday' || day === 'sunday')
+{
+    console.log('weekend');
+}
+else 
+{
+    console.log('Not a valid day');
+}
+
+
+
+// expressions produce values 
+// statements doesnot produce values
+
+// Ternary operator...
+
+const age = 22;
+age >= 18 ? console.log('I would like wine 🍷') : console.log('I would like water 💧');
+//condition               if/true                     else /false
+
+const drink = age >= 18 ? 'wine 🥂' : 'water💧';
+console.log(drink);
+
+console.log(`I would like to drink ${age >= 18 ? 'wine 🍾':'water 💧'}`);
 */
 
-
-
+const bill = 275;
+const tip = bill <= 300 && bill >= 50 ? bill * 0.15 : bill * 0.2;
+//              condition               true             false  
+console.log(`the bill is ${bill}, the tip is ${tip} and the total value is ${bill + tip}`); 

@@ -269,3 +269,8 @@ console.log(jonas.getSummary());
 // iteration : for loop 🔄
 
 
+
+for(let rep = 1; rep <=10; rep++) 
+{
+    console.log(`lifting weight ${rep} 🏋️‍♀️`);
+}

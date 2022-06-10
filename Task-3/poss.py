@@ -46,11 +46,18 @@ def hrToMinInteger(inte):
 
     #print(inteTotal)
     return (inteTotal)
+def timeformat(inp):
+    if inp < 10:
+        return '0'+str(inp)
+    else:
+        return inp
 
 def minutesToHours(inte):
-    varMin = (inte % 60)/60
+    varMin = (inte % 60)
     varHours = inte//60
-    varTotal = varMin + varHours
+    varMin=timeformat(varMin)
+    varHours=timeformat(varHours) 
+    varTotal =str(varHours)+':'+ str(varMin) 
 
     return varTotal
 
@@ -112,7 +119,7 @@ for x in range(len(inOutList)):
     temp.append(temp2)
     emp.append(temp)
 # print("The meeting timeline Intial:")
-# print(emp)
+print(emp)
 
 print("The Employee Details: ")
 for i in range(len(id)):
@@ -120,7 +127,7 @@ for i in range(len(id)):
 print("--------------------------")
     
 
-FIXME: TODO:
+#FIXME: TODO:
 
 while (True):
     
@@ -151,13 +158,15 @@ while (True):
     
     outMax = []
     inMax=[]
-    for d in inOutList:
-        inMax.append(d[0])
+    for id, d in enumerate( inOutList):
+        if id+1 in l:
+            inMax.append(d[0])
     maxintime=max(inMax)
         #print(inMax)
         #print(a)
-    for x in inOutList:
-        outMax.append(x[1])
+    for id, x in enumerate(inOutList):
+        if id+1 in l:
+            outMax.append(x[1])
     maxouttime = max(outMax)
 
 
@@ -166,7 +175,8 @@ while (True):
     while (True):
  
         count=0
-        for i in range(len(l)):
+        for i in l:
+            i-=1
             for j in range(len(emp[i])-1):
                 if(j==0):
                     if(emp[i][j][0] <= maxintime and emp[i][j+1][0] >= maxintime + duration):
@@ -177,7 +187,8 @@ while (True):
         
         c=0
         if(count == len(l)):
-            for i in range(len(l)):
+            for i in l:
+                i-=1
                 temp=[]
                 for j in range(1):
                     temp.append(maxintime)
@@ -196,7 +207,7 @@ while (True):
                 c+=1
             break
         else:
-            maxintime += duration
+            maxintime += 5
         
         if(maxintime >= maxouttime):
             print("Meeting Not Possible!!!")

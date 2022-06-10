@@ -264,13 +264,65 @@ console.log(jonas.age);
 
 console.log(jonas.getSummary());
 
-*/
+
 
 // iteration : for loop 🔄
-
-
 
 for(let rep = 1; rep <=10; rep++) 
 {
     console.log(`lifting weight ${rep} 🏋️‍♀️`);
+}
+
+
+const jonasArray = [
+    'Jonas',
+    'Schmedtmann',
+    2037-1991,
+    'teacher',
+    ['Michael', 'Peter', 'Steven'],
+    true
+];
+const types = [];
+
+for (let i = 0; i < jonasArray.length; i++)
+{
+    console.log(jonasArray[i] , typeof jonasArray[i]);
+
+   // types [i] = typeof jonasArray[i];
+   types.push(typeof jonasArray[i]);
+}
+
+console.log(types);
+
+console.log(('---only strings---'));
+for (let i = 0; i < jonasArray.length; i++)
+{
+    if(typeof jonasArray[i] !== 'string')
+    {
+        continue;                // it skips the below statements 
+    }
+    console.log(jonasArray[i], typeof jonasArray[i]);
+}
+console.log("---break with number---");
+for(let i= 0; i < jonasArray.length; i++)
+{
+    if (typeof jonasArray[i] === 'number')
+    {
+        break;         // stops the loop
+    }
+
+    console.log(jonasArray[i],typeof jonasArray[i]);
+}
+*/
+
+const jonasArray = [
+    'Jonas',
+    'Schmedtmann',
+    2037-1991,
+    'teacher',
+    ['Michael', 'Peter', 'Steven']
+];
+
+for (let i= jonasArray.length - 1; i >= 0; i--) {
+    console.log(i , jonasArray[i]);
 }

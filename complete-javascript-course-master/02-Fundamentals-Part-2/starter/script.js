@@ -313,7 +313,7 @@ for(let i= 0; i < jonasArray.length; i++)
 
     console.log(jonasArray[i],typeof jonasArray[i]);
 }
-*/
+
 
 const jonasArray = [
     'Jonas',
@@ -326,3 +326,20 @@ const jonasArray = [
 for (let i= jonasArray.length - 1; i >= 0; i--) {
     console.log(i , jonasArray[i]);
 }
+
+
+
+let dice = Math.trunc(Math.random() *6) + 1;
+*/
+
+let f ;
+const g = function() 
+{
+    const a = 23;
+    f = function(){
+        console.log(a* 2);
+    }
+}
+
+g(); f();
+ 

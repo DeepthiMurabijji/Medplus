@@ -93,7 +93,7 @@ def test_package_sub_packages():
     assert False == ("subpackage" in locals())
     assert False == ("package1.subpackage" in locals())
 
-    from package1 import subpackage
+    from basics.package1 import subpackage
 
     assert False == ("package1" in locals())
     assert True == ("subpackage" in locals())

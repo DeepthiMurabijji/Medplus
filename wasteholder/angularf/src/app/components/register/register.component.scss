@@ -1,4 +1,4 @@
-.card-registration .select-input.form-control[readonly]:not([disabled]) {
+.card-registration .select-input.form-control {
     font-size: 1rem;
     line-height: 2.15;
     padding-left: .75em;
@@ -9,5 +9,17 @@
     }
 
 .container{
-    width: 50%;
+    width: 40%;
+}
+
+select{
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+}
+
+body{
+  background-image: url("https://www.qque.com/static-templates/templates/azds_multi-step-registration/assets/img/backgrounds/1@2x.jpg");
+  
 }

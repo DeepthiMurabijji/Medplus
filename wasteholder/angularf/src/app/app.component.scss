@@ -1,5 +1,7 @@
 .navbar{
     padding-left: 0.5rem;
+    opacity: 0;
+    
 }
 
 
@@ -8,4 +10,11 @@
     padding: 0;
     min-width: 100%;
     
+}
+.navbar-dark .navbar-nav .nav-link{
+    color: black;
+}
+
+.navbar-dark .navbar-brand{
+    color: black;
 }

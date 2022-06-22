@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~bootstrap/scss/bootstrap";
+
+html{
+    min-height: 700px;
+    margin: 0;
+    --bs-body-line-height: 2.5 !important;
+}
+

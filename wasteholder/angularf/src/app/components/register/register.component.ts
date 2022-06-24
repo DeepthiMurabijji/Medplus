@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
   // // @ViewChild('emailId') emailId: ElementRef;
   // // @ViewChild('password') password: ElementRef;
   // // @ViewChild('repeatPassword') repeatPassword: ElementRef;
-  @ViewChild('areas') areas: ElementRef;
+  // @ViewChild('areas') areas: ElementRef;
 
   // onRegister() {
 

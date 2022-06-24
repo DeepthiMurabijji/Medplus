@@ -5,6 +5,8 @@ from . import views
 
 urlpatterns = [
     path('apiRegister', views.apiRegister),
+    path('apiLogin', views.apiLogin),
+    
     path('', views.home, name="home"),
     path('loginn/', views.loginn, name="loginn"),
     path('login_req/',views.login_req, name="login-req"),

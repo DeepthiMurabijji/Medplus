@@ -24,4 +24,7 @@ export class TrashService {
     return this.http.post<any>(this.APIUrl + 'apiRegister', data)
   }
 
+  Loginaccess(data: any): Observable<any> {
+    return this.http.post<any>(this.APIUrl + 'apiLogin', data)
+  }
 }

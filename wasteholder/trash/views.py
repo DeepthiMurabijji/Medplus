@@ -20,7 +20,8 @@ from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from .serializers import *
 from rest_framework.decorators import api_view
-
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
@@ -70,7 +71,7 @@ def create_csv_file(request):
         write.writerow(i)
     response['Content-Disposition'] ='attachment; filename= "work.csv"'
     return response
-
+# TODO:  FOR  REST API DJANGO 
 @csrf_exempt
 @api_view(['GET', 'POST'])
 def apiRegister(request):
@@ -111,6 +112,23 @@ def apiRegister(request):
         #print(areasSerial.data)
 
         return JsonResponse(areasSerial.data, safe = False)
+
+
+@csrf_exempt
+@api_view(['POST' , 'GET'])
+def apiLogin(request):
+    if request.method == 'POST':
+        loginData = JSONParser().parse(request)
+        username = loginData.get('username')
+        password = loginData.get('password')
+        authuser = authenticate(username = username, password = password)
+        user = User.objects.get(username = username)
+        collector = Collector.objects.get(user = user)
+        houses = Houses.objects.filter(area = collector.area)
+        if authuser is not None:
+            if collector.is_real == True:
+                login(request, authuser)
+
 
 
 
@@ -247,7 +265,7 @@ def loginn(request):
 #             return redirect('login-output')
 
 #     return render(request, 'login.html')
-@csrf_exempt
+
 def login_req(request):
     if request.method == 'POST':
     #    print ("session 2 ")

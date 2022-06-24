@@ -1,5 +1,6 @@
 from datetime import datetime
 from email import header
+from gc import collect
 from django.db.models import Q
 from django.utils.functional import SimpleLazyObject
 from django.http import HttpResponse
@@ -7,12 +8,19 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from numpy import true_divide
+from pyparsing import col
 from trash.models import *
 from django.contrib import messages 
 from django.urls import reverse
 from django.template.loader import get_template
 import csv
 from fileinput import filename
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
+from django.http.response import JsonResponse
+from .serializers import *
+from rest_framework.decorators import api_view
+
 
 # Create your views here.
 
@@ -63,11 +71,64 @@ def create_csv_file(request):
     response['Content-Disposition'] ='attachment; filename= "work.csv"'
     return response
 
+@csrf_exempt
+@api_view(['GET', 'POST'])
+def apiRegister(request):
+
+
+    if request.method == 'POST':
+        userData = JSONParser().parse(request)
+        
+
+        username = userData.get('username')
+        print("hi",username)
+        email = userData.get('email')
+        print(email)
+        password = userData.get('password')
+        print(password)
+        areas = userData.get('areas')
+        print(areas )
+    
+        # user = User.objects.get(username = username)
+        user = User.objects.create_user(username = username, email = email)
+        areaObject = Areas.objects.get(area_name = areas)
+
+        collector = Collector()
+
+        user.set_password(password)
+        user.save()
+        collector.area = areaObject
+        collector.user = user
+        collector.save()
+
+        return JsonResponse("Collector Saved!", safe=False)
+
+    elif request.method == "GET":
+
+        areas = Areas.objects.all()
+        areasSerial = AreaSerializer(areas, many = True)
+
+        #print(areasSerial.data)
+
+        return JsonResponse(areasSerial.data, safe = False)
+
+
+
+# @csrf_exempt
 def register_save(request):
 
     areas = Areas.objects.all()
 
     if request.method == 'POST':
+
+#         #region........connect to frontend 
+#         collector_data = JSONParser.parse(request)
+#         collector_serializer = Collectorserializer(data= collector_data)
+#         if collector_serializer.is_valid():
+#             collector_serializer.save()
+#             return JsonResponse("Successfully registered" , safe=False)
+#         return JsonResponse("Failed to register")
+#         #region
 
         username = request.POST.get('username')
         email = request.POST.get('email')
@@ -118,13 +179,31 @@ def register_save(request):
             areas = Areas.objects.all()
 
             context = {
-                 'areas': areas,
-                 'message': 'password does not match',
+                    'areas': areas,
+                    'message': 'password does not match',
             }
             return render(request, 'register.html',context) 
         return render(request, 'waiting.html')
-    else:
-        return render(request, 'register.html')
+    # elif request.method == 'GET':
+    #     collector = Collector.objects.all()
+    #     collector_serializer = Collectorserializer(collector, many =True)
+    #     return JsonResponse(collector_serializer.data, safe=False)
+    # elif request.method == 'PUT':
+    #     collector_data = JSONParser.parse(request)
+    #     collector = Collector.objects.get(Username=collector_data['username'])
+    #     collector_serializer = Collectorserializer(collector, data=collector_data)
+    #     if collector_serializer.is_valid():
+    #         collector_serializer.save()
+    #         return JsonResponse("updated Successfully" , safe=False)
+    #     return JsonResponse("Couldn't update" , safe=False)
+    # elif request.method == 'DELETE':
+    #     collector = Collector.objects.get(username = User.username)
+    #     collector.delete()
+    #     return JsonResponse("deleted Successfully" , safe=False)
+    
+
+
+
 
 registerKey = True
 
@@ -168,7 +247,7 @@ def loginn(request):
 #             return redirect('login-output')
 
 #     return render(request, 'login.html')
-
+@csrf_exempt
 def login_req(request):
     if request.method == 'POST':
     #    print ("session 2 ")

@@ -4,6 +4,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
+    path('apiRegister', views.apiRegister),
     path('', views.home, name="home"),
     path('loginn/', views.loginn, name="loginn"),
     path('login_req/',views.login_req, name="login-req"),

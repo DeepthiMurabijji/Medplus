@@ -26,13 +26,13 @@ from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 
 global registerKey
-registerKey = True
+registerKey = False
 
 global adminKey
-adminKey = True
+adminKey = False
 
 global memberkey 
-memeberkey = True
+memeberkey = False
 
 def home(request):
     context={}
@@ -123,6 +123,12 @@ def apiLogin(request):
         username = loginData.get('username')
         password = loginData.get('password')
         print("hello" ,username, password)
+        user = User.objects.get(username = username)
+        up = User.objects.get(password = password)
+        if(username != user):
+            print("user not found")
+        elif(password != up):
+            print("Incorrect password")
         authuser = authenticate(username = username, password = password)
         user = User.objects.get(username = username)
         collector = Collector.objects.get(user = user)
@@ -130,9 +136,16 @@ def apiLogin(request):
         if authuser is not None:
             if collector.is_real == True:
                 login(request, authuser)
-                print("logged in")
-                return JsonResponse("success",safe=False)
-            return JsonResponse("error",safe=False)
+                
+                if collector.is_admin == True:
+                    
+                    return JsonResponse("success",safe=False)
+                elif collector.is_real == True:
+                    
+                    return JsonResponse("success",safe=False)
+                else :
+                    return JsonResponse("Your is not Activated", safe=False)
+            return JsonResponse("Your is not Activated",safe=False)
         return JsonResponse("error",safe=False)
 
 

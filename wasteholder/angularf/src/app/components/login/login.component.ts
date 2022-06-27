@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.trash.Loginaccess(this.login).subscribe(
       res => {
         console.log('successfully logged in');
-        this.router.navigate(['/home']);
+        this.router.navigate(['/admin']);
       },
       
     )

@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
 import { TrashService } from './services/trash.service';
 import { AdminComponent } from './components/admin/admin.component';
+import { MemberComponent } from './components/member/member.component';
 
 
 
@@ -20,7 +21,8 @@ import { AdminComponent } from './components/admin/admin.component';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    AdminComponent
+    AdminComponent,
+    MemberComponent
   ],
   imports: [
     BrowserModule,

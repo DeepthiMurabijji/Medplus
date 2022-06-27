@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
+const APIUrl1 = "http://127.0.0.1:8001/apiLogin";
 @Injectable({
   providedIn: 'root'
 })
 export class TrashService {
 
   readonly APIUrl = "http://127.0.0.1:8000/";
+  
 
   constructor(private http: HttpClient) { }
 
@@ -25,6 +26,7 @@ export class TrashService {
   }
 
   Loginaccess(data: any): Observable<any> {
-    return this.http.post<any>(this.APIUrl + 'apiLogin', data)
+    console.log("enytetr",this.APIUrl + 'apiLogin', data);
+    return this.http.post(this.APIUrl + 'apiLogin', data)
   }
 }

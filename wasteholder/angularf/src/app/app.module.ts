@@ -10,6 +10,7 @@ import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
 import { TrashService } from './services/trash.service';
+import { AdminComponent } from './components/admin/admin.component';
 
 
 
@@ -18,7 +19,8 @@ import { TrashService } from './services/trash.service';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

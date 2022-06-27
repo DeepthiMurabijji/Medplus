@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TrashService } from 'src/app/services/trash.service';
+import { Router }  from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { TrashService } from 'src/app/services/trash.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private trash: TrashService) { }
+  constructor(private trash: TrashService, private router: Router ) { }
 
   login;
 
@@ -27,7 +28,8 @@ export class LoginComponent implements OnInit {
 
     this.trash.Loginaccess(this.login).subscribe(
       res => {
-        console.log('successfully logged in')
+        console.log('successfully logged in');
+        this.router.navigate(['/home']);
       },
       
     )

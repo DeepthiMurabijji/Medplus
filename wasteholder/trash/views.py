@@ -73,7 +73,7 @@ def create_csv_file(request):
     return response
 # TODO:  FOR  REST API DJANGO 
 @csrf_exempt
-@api_view(['GET', 'POST'])
+# @api_view(['GET', 'POST'])
 def apiRegister(request):
 
 
@@ -82,13 +82,13 @@ def apiRegister(request):
         
 
         username = userData.get('username')
-        print("hi",username)
+        #print("hi",username)
         email = userData.get('email')
-        print(email)
+        #print(email)
         password = userData.get('password')
-        print(password)
+        #print(password)
         areas = userData.get('areas')
-        print(areas )
+        #print(areas )
     
         # user = User.objects.get(username = username)
         user = User.objects.create_user(username = username, email = email)
@@ -115,12 +115,14 @@ def apiRegister(request):
 
 
 @csrf_exempt
-@api_view(['POST' , 'GET'])
+# @api_view(['POST' , 'GET'])
 def apiLogin(request):
+    print("request" ,request.method)
     if request.method == 'POST':
         loginData = JSONParser().parse(request)
         username = loginData.get('username')
         password = loginData.get('password')
+        print("hello" ,username, password)
         authuser = authenticate(username = username, password = password)
         user = User.objects.get(username = username)
         collector = Collector.objects.get(user = user)
@@ -128,6 +130,10 @@ def apiLogin(request):
         if authuser is not None:
             if collector.is_real == True:
                 login(request, authuser)
+                print("logged in")
+                return JsonResponse("success",safe=False)
+            return JsonResponse("error",safe=False)
+        return JsonResponse("error",safe=False)
 
 
 

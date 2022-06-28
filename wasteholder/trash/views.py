@@ -1,9 +1,11 @@
+from asyncio import exceptions
 from datetime import datetime
+from dbm import error
 from email import header
 from gc import collect
 from django.db.models import Q
 from django.utils.functional import SimpleLazyObject
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -73,7 +75,7 @@ def create_csv_file(request):
     return response
 # TODO:  FOR  REST API DJANGO 
 @csrf_exempt
-# @api_view(['GET', 'POST'])
+@api_view(['GET', 'POST'])
 def apiRegister(request):
 
 
@@ -114,26 +116,32 @@ def apiRegister(request):
         return JsonResponse(areasSerial.data, safe = False)
 
 
-@csrf_exempt
-# @api_view(['POST' , 'GET'])
+@api_view(['POST' , 'GET'])
 def apiLogin(request):
     print("request" ,request.method)
     if request.method == 'POST':
         loginData = JSONParser().parse(request)
-        username = loginData.get('username')
-        password = loginData.get('password')
-        print("hello" ,username, password)
-        user = User.objects.get(username = username)
-        up = User.objects.get(password = password)
-        if(username != user):
-            print("user not found")
-        elif(password != up):
-            print("Incorrect password")
-        authuser = authenticate(username = username, password = password)
-        user = User.objects.get(username = username)
+        loginSerial =  Collectorserializer(loginData)
+        user_name = loginData['username']
+        password = loginData['password']
+        print("hello" ,user_name, password)
+        try:
+            user = User.objects.get(username = user_name)
+            print(user)
+        except User.DoesNotExist:
+            return HttpResponseBadRequest("user not found")
+
+
+        authuser = authenticate(username = user_name, password = password)
+        print("Authentication Token",authuser)
         collector = Collector.objects.get(user = user)
         houses = Houses.objects.filter(area = collector.area)
-        if authuser is not None:
+
+        # if authuser is None:
+
+        #     raise exceptions('Try again')
+
+        if authuser != None:
             if collector.is_real == True:
                 login(request, authuser)
                 
@@ -146,7 +154,8 @@ def apiLogin(request):
                 else :
                     return JsonResponse("Your is not Activated", safe=False)
             return JsonResponse("Your is not Activated",safe=False)
-        return JsonResponse("error",safe=False)
+        
+        return JsonResponse(error,safe=False)
 
 
 

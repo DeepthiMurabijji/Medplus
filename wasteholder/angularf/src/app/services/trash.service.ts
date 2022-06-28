@@ -27,6 +27,6 @@ export class TrashService {
 
   Loginaccess(data: any): Observable<any> {
     console.log("enytetr",this.APIUrl + 'apiLogin', data);
-    return this.http.post(this.APIUrl + 'apiLogin', data)
+    return this.http.post<any>(this.APIUrl + 'apiLogin', data)
   }
 }

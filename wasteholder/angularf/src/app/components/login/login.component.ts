@@ -26,11 +26,18 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
 
-    this.trash.Loginaccess(this.login).subscribe(
-      res => {
+    this.trash.Loginaccess(this.login).subscribe({
+
+      next: (res) => {
         console.log('successfully logged in');
         this.router.navigate(['/admin']);
-      },
+      }, error: (res) => {
+
+        console.log(' Bad requests')
+
+      }
+      
+    }
       
     )
   }

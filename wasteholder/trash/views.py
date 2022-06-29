@@ -22,6 +22,8 @@ from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from .serializers import *
 from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
@@ -118,23 +120,28 @@ def apiRegister(request):
 
 @api_view(['POST' , 'GET'])
 def apiLogin(request):
-    print("request" ,request.method)
+    # print("request" ,request.method)
     if request.method == 'POST':
         loginData = JSONParser().parse(request)
-        loginSerial =  Collectorserializer(loginData)
+        #print(loginData)
         user_name = loginData['username']
         password = loginData['password']
-        print("hello" ,user_name, password)
+        # print("hello" ,user_name, password)
+
+
         try:
             user = User.objects.get(username = user_name)
-            print(user)
+            collector = Collector.objects.get(user = user)
+            loginSerial =  Collectorserializer(collector)
+            # print("----serializers----")
+            # print(loginSerial.data)
         except User.DoesNotExist:
-            return HttpResponseBadRequest("user not found")
+            return JsonResponse({"Msg": "User does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
 
         authuser = authenticate(username = user_name, password = password)
         print("Authentication Token",authuser)
-        collector = Collector.objects.get(user = user)
+        # collector = Collector.objects.get(user = user)
         houses = Houses.objects.filter(area = collector.area)
 
         # if authuser is None:
@@ -144,18 +151,10 @@ def apiLogin(request):
         if authuser != None:
             if collector.is_real == True:
                 login(request, authuser)
-                
-                if collector.is_admin == True:
-                    
-                    return JsonResponse("success",safe=False)
-                elif collector.is_real == True:
-                    
-                    return JsonResponse("success",safe=False)
-                else :
-                    return JsonResponse("Your is not Activated", safe=False)
-            return JsonResponse("Your is not Activated",safe=False)
-        
-        return JsonResponse(error,safe=False)
+                return JsonResponse(loginSerial.data, safe=False)
+            else :
+                return JsonResponse({"Msg":'Your is not Activated'},status=status.HTTP_401_UNAUTHORIZED)
+        return JsonResponse({"Msg": "Wrong password"}, status=status.HTTP_404_NOT_FOUND)
 
 
 

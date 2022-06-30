@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         
       }, error: (res) => {
 
-        console.log(' Bad requests')
+        console.log('Bad requests',res)
 
       }
       

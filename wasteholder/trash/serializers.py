@@ -10,11 +10,7 @@ class Userserializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
-class Collectorserializer(serializers.ModelSerializer):
-    user = Userserializer(read_only=True)
-    class Meta:
-        model = Collector
-        fields = ('__all__')
+
 
 class AreaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,3 +22,9 @@ class Houseserializer(serializers.ModelSerializer):
         model = Houses
         fields = '__all__'
         
+class Collectorserializer(serializers.ModelSerializer):
+    user = Userserializer(read_only=True)
+    area = AreaSerializer(read_only=True)
+    class Meta:
+        model = Collector
+        fields = ('__all__')

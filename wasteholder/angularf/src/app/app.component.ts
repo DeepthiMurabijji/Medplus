@@ -23,7 +23,7 @@ export class AppComponent implements OnInit{
   role ()
   {
     this.id = JSON.parse(localStorage.getItem('user'));
-    console.log(this.id);
+    // console.log(this.id);
     this.username = this.id.user.username;
     if (this.id.is_admin){
       this.router.navigate(['/admin']);

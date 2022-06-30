@@ -50,7 +50,7 @@ export class AuthService {
         complete: () => {
         }
       })
-      console.log(name);
+      // console.log(name);
       return name;
     }
 

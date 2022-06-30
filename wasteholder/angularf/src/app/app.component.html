@@ -6,7 +6,15 @@
         <a routerLink="home" class="nav-link">HOME</a>
       </li>
       <li class="nav-item">
-        <a routerLink="login" class="nav-link">LOGIN</a>
+        <a routerLink="login" class="nav-link" *ngIf = "!auth.loggedIn()">LOGIN</a>
+      </li>
+      <li class="nav-item">
+        <a  class="nav-link" *ngIf = "auth.loggedIn()">{{auth.username()}}</a>
+      </li>
+    </div>
+    <div class="navbar-nav ml-auto" >
+      <li class="nav-item">
+        <a routerLink="login" class="nav-link" *ngIf = "auth.loggedIn()" (click) = 'logout()'>LOGOUT</a>
       </li>
     </div>
   </nav>

@@ -9,7 +9,7 @@
         <a routerLink="login" class="nav-link" *ngIf = "!auth.loggedIn()">LOGIN</a>
       </li>
       <li class="nav-item">
-        <a  class="nav-link" *ngIf = "auth.loggedIn()">{{auth.username()}}</a>
+        <a routerLink=" " class="nav-link" *ngIf = "auth.loggedIn()" (click)="role()">{{auth.username()}}</a>
       </li>
     </div>
     <div class="navbar-nav ml-auto" >

@@ -3,6 +3,10 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~bootstrap/scss/bootstrap";
 
+// Functions first
+@import "~bootstrap/scss/functions";
+
+
 html{
     min-height: 700px;
     margin: 0;

@@ -12,6 +12,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { TrashService } from './services/trash.service';
 import { AdminComponent } from './components/admin/admin.component';
 import { MemberComponent } from './components/member/member.component';
+import { SidebarComponent } from './components/admin/sidebar/sidebar.component';
+import { PermisionsComponent } from './components/admin/permisions/permisions.component';
+import { ArealistComponent } from './components/admin/arealist/arealist.component';
+import { ArearegisterComponent } from './components/admin/arearegister/arearegister.component';
+import { ProfileComponent } from './components/admin/profile/profile.component';
 
 
 
@@ -22,7 +27,12 @@ import { MemberComponent } from './components/member/member.component';
     LoginComponent,
     RegisterComponent,
     AdminComponent,
-    MemberComponent
+    MemberComponent,
+    SidebarComponent,
+    PermisionsComponent,
+    ArealistComponent,
+    ArearegisterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,32 @@
-
-
 <app-sidebar></app-sidebar>
 
 <div class="container">
-    
-    <p>arealist works!</p>
+
+    <div class="area">
+        <table>
+            <thead>
+                <th>Area ID</th>
+                <th>Area Name</th>
+                <th>House Names</th>
+                <th>Address</th>
+                <th>Garbage collection status</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ar of arealist">
+                    <!-- <td [rowspan]="ar==="area"?"area.rowspan":1></td> -->
+                    <td rowspan=" this.housenumber[area.area_name] ">{{ar.id}}</td>
+                    <td rowspan=" this.housenumber[area.area_name] ">{{ar.area_name}}</td>
+
+                    <div *ngFor="let house of houselist">
+                        <td *ngIf="ar.id == house.area">{{house.house_name}}</td>
+                        <td *ngIf="ar.id == house.area">{{house.house_address}}</td>
+                        <td *ngIf="ar.id == house.area">{{house.is_completed}}</td>
+                    </div>
+
+
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

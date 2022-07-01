@@ -3,6 +3,7 @@ from datetime import datetime
 from dbm import error
 from email import header
 from gc import collect
+import re
 from django.db.models import Q
 from django.utils.functional import SimpleLazyObject
 from django.http import HttpResponse, HttpResponseBadRequest
@@ -117,7 +118,7 @@ def apiRegister(request):
 
         return JsonResponse(areasSerial.data, safe = False)
 
-
+@csrf_exempt
 @api_view(['POST' , 'GET'])
 def apiLogin(request):
     # print("request" ,request.method)
@@ -155,6 +156,73 @@ def apiLogin(request):
             else :
                 return JsonResponse({"Msg":'Your is not Activated'},status=status.HTTP_401_UNAUTHORIZED)
         return JsonResponse({"Msg": "Wrong password"}, status=status.HTTP_404_NOT_FOUND)
+
+@csrf_exempt
+@api_view(['POST' , 'GET' ])
+def apiArealist(request):
+    if  request.method == 'GET':
+        print(".........Please enter...........")
+        areas = Areas.objects.all()
+        houses = Houses.objects.all()
+        houseserial = Houseserializer(houses, many = True)
+        areaserial = AreaSerializer(areas , many = True)
+
+        returnDict = {}
+
+        for area in areas:
+            
+            x = Areas.objects.get(area_name = area)
+            housesCount = Houses.objects.filter(area = x).count()
+
+            returnDict[x.area_name] = housesCount + 1       
+
+        print(returnDict)
+
+        #print('houses:',houseserial.data)
+
+    print(type(returnDict))
+
+    response = Response()
+
+    response.data = {
+        'houses': houseserial.data, 'houseCount': returnDict ,'areas': areaserial.data
+    }
+
+    return response
+
+
+@csrf_exempt
+@api_view(['POST', 'GET'])
+def apiarearegistration(request):
+    if request.method == 'POST':
+        areaData = JSONParser().parse(request)
+        areaname = areaData['areaname']
+        housename = areaData['housename']
+        houseaddress = areaData['address']
+        print("!!!!", areaData)
+        house = Houses()
+        if (Areas.objects.filter(area_name=areaname).exists()):
+            
+            house.area = Areas.objects.get(area_name=areaname)
+            house.house_name = housename
+            house.house_address = houseaddress
+            house.save()
+            print("saved house")
+        else:
+        
+            area = Areas()
+            area.area_name = areaname
+            area.save()
+            
+            house.area = area
+            house.house_name = housename
+            house.house_address = houseaddress
+            house.save()
+            print("registred")
+    elif request.method == 'GET':
+        areas = Areas.objects.all()
+        areasSerial = AreaSerializer(areas, many = True)
+        return JsonResponse(areasSerial.data, safe = False)
 
 
 
@@ -349,7 +417,7 @@ def login_req(request):
         return render(request, 'login.html', context)
 
 
-@login_required(login_url='login-req')
+# @login_required(login_url='login-req')
 def login_output(request):
     user = User.objects.all()
     if request.user in user:
@@ -466,7 +534,7 @@ def login_output(request):
 #         messages.success(request,('There was a problem login'))
 #         return render(request, 'login.html', {'registerKey': registerKey})
 
-@login_required(login_url='login-output')
+# @login_required(login_url='login-output')
 def admin_panel(request):
     collector = Collector.objects.get(user = request.user)
     houses = Houses.objects.filter(area = collector.area)
@@ -479,7 +547,7 @@ def admin_panel(request):
     }
     return render(request, 'admin-panel.html', context)
 
-@login_required(login_url='login-output')
+# @login_required(login_url='login-output')
 def admin_profile(request):
     user = User.objects.get(username=request.user.username)
     profile = Collector.objects.get(user=user)
@@ -504,7 +572,7 @@ def reset(request):
         print("Status changed to false")
     return redirect('viewarea')
 
-@login_required(login_url='login-output')
+# @login_required(login_url='login-output')
 def member_job_status(request):
     global findKey
     findKey = True
@@ -554,7 +622,7 @@ def member_job_status(request):
                 }
         return render(request, 'member-panel.html', context)
 
-@login_required(login_url='login-output')
+# @login_required(login_url='login-output')
 def admin_permissions(request):
 
     #collector = Collector.objects.prefetch_related('area', 'user').all()
@@ -598,7 +666,7 @@ def admin_permissions(request):
 
     return render(request, 'admin-permissions.html', context)
 
-@login_required(login_url='login-output')
+# @login_required(login_url='login-output')
 def admin_permissions_save(request, username):
 
     if request.method == 'POST':
@@ -618,7 +686,7 @@ def admin_permissions_save(request, username):
 
     return redirect('admin-permissions')
 
-@login_required(login_url='login-output')
+# @login_required(login_url='login-output')
 def collector_authentic_permissions(request, username):
 
     if request.method == 'POST':
@@ -635,7 +703,7 @@ def collector_authentic_permissions(request, username):
 
     return redirect('admin-permissions')
 
-@login_required(login_url='login-output')
+# @login_required(login_url='login-output')
 def admin_area(request):
 
     adminKey = True
@@ -679,7 +747,7 @@ def admin_area(request):
 
         return render(request, 'adminarea.html', context)
 
-@login_required(login_url='login-output')
+# @login_required(login_url='login-output')
 def viewarea(request):
     adminKey = True
 

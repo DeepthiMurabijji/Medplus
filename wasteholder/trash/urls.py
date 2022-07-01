@@ -6,6 +6,11 @@ from . import views
 urlpatterns = [
     path('apiRegister', views.apiRegister),
     path('apiLogin', views.apiLogin),
+    path('apiarealist', views.apiArealist),
+    path('apiarearegistration', views.apiarearegistration),
+
+
+
     
     path('', views.home, name="home"),
     path('loginn/', views.loginn, name="loginn"),

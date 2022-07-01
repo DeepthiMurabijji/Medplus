@@ -1,5 +1,22 @@
-@media (min-width: 1025px) {
-    .h-custom {
-    height: 100vh !important;
-    }
-}
+// @media (min-width: 1025px) {
+//     .h-custom {
+//     height: 100vh !important;
+//     }
+// }
+
+// .area{
+//     margin: auto;
+//     padding: 5%;
+//     width: 100%;
+// }
+
+
+// .table-dark, .table-dark>td, .table-dark>th {
+//      background-color: black;
+// }
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 6px;
+} 

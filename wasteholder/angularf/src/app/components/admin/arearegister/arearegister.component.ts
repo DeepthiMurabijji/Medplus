@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router ,  ActivatedRoute} from '@angular/router';
 import { TrashService } from 'src/app/services/trash.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-arearegister',
@@ -10,7 +12,10 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ArearegisterComponent implements OnInit {
 
-  constructor(public trash: TrashService, public router: Router, public auth: AuthService) { }
+  form: FormGroup;
+
+  constructor(public trash: TrashService, public router: Router, public auth: AuthService, private formBuilder: FormBuilder,
+    private route: ActivatedRoute,) { }
 
 
   areasData: { area_name: string }[];

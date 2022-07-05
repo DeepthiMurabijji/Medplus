@@ -1,3 +1,4 @@
+
 from asyncio import exceptions
 from datetime import datetime
 from dbm import error
@@ -27,6 +28,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+import json
 
 # Create your views here.
 
@@ -176,11 +178,11 @@ def apiArealist(request):
 
             returnDict[x.area_name] = housesCount + 1       
 
-        print(returnDict)
+        #print(returnDict)
 
         #print('houses:',houseserial.data)
 
-    print(type(returnDict))
+    #print(type(returnDict))
 
     response = Response()
 
@@ -202,14 +204,20 @@ def apiarearegistration(request):
         print("!!!!", areaData)
         house = Houses()
         if (Areas.objects.filter(area_name=areaname).exists()):
+            print("area name already exists", areaname)
+            if(Houses.objects.filter(house_name=housename).exists()):
+                print("house name already exists", housename)
+                return JsonResponse({'msg' : 'house name already exists'} , safe = False)
+            else:
+                house.area = Areas.objects.get(area_name=areaname)
+                house.house_name = housename
+                house.house_address = houseaddress
+                house.save()
+                print("saved house")
+                return JsonResponse({'msg' : 'saved house'} , safe = False)
+        elif(Areas.objects.filter(area_name=areaname).exists() == False):
             
-            house.area = Areas.objects.get(area_name=areaname)
-            house.house_name = housename
-            house.house_address = houseaddress
-            house.save()
-            print("saved house")
-        else:
-        
+            print("new Area name", areaname)
             area = Areas()
             area.area_name = areaname
             area.save()
@@ -219,11 +227,54 @@ def apiarearegistration(request):
             house.house_address = houseaddress
             house.save()
             print("registred")
-    elif request.method == 'GET':
-        areas = Areas.objects.all()
-        areasSerial = AreaSerializer(areas, many = True)
-        return JsonResponse(areasSerial.data, safe = False)
+        else:
+            return JsonResponse({'Msg:': "string is empty"} , status=status.HTTP_404_NOT_FOUND)
+    else:
+        return JsonResponse("oops errors", safe = False)
+    # elif request.method == 'GET':
+    #     areas = Areas.objects.all()
+    #     areasSerial = AreaSerializer(areas, many = True)
+    #     return JsonResponse(areasSerial.data, safe = False)
 
+@csrf_exempt
+@api_view(['POST','GET'])
+def apiAdministration(request):
+    if request.method == 'POST':
+        pass
+    elif request.method == 'GET':
+        print("hi")
+        collectors = Collector.objects.all()
+        collector_serializer = Collectorserializer(collectors, many = True)
+        home = Houses.objects.all()
+        house_serializer = Houseserializer(home, many = True)
+        areas = Areas.objects.all()
+        area_serializer = AreaSerializer(areas, many = True)
+        mainview = []
+        collectorhouses ={}
+        for collector in collectors:
+            houses = Houses.objects.filter(area = collector.area)
+            
+            
+            hoselist = []
+            hoseadd = []
+            for house in houses:
+                hoselist.append(house.house_name)
+                hoseadd.append(house.house_address)
+            collectorhouses[collector.user.username] = hoselist
+            # mainview.append(collectorhouses)
+        # print(mainview)  
+     
+       
+        response = Response()
+
+    response.data = {
+        'mainview': collectorhouses, 'collector_serializer':collector_serializer.data, 'home': house_serializer.data
+    }
+
+    return response       
+       
+         
+    return JsonResponse(collectorhouses, safe = False)
 
 
 

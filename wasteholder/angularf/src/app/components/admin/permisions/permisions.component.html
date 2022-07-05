@@ -3,4 +3,41 @@
 <div class="container">
     
     <p>permisions works!</p>
+    <table>
+        <thead>
+            <th>User ID</th>
+            <th>User Name</th>
+            <th>Job Title</th>
+            <th>Area Name</th>
+            <th>House Names</th>
+            <th>Completed Houses</th>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let collector of collectors">
+                <td>{{collector.user.id}}</td>
+                <td>{{collector.user.username}}</td>
+                <td>
+                    <span *ngIf="collector.is_real === true">
+                        <span>{{collector.is_admin === true ? "Admin" : "Collector"}} </span>
+                    </span>
+                    <span>{{collector.is_real === true ? "" : "Not Authenticated"}} </span>
+                </td>
+                <td>{{collector.area.area_name}}</td>
+                <td>
+
+                    <span *ngFor="let house of houselist">
+                        <span *ngIf="collector.area.id === house.area">
+                            {{house.house_name}}<br>
+                        </span>
+                    </span>
+                </td>
+                <td></td>
+                
+
+            </tr>
+        </tbody>
+    </table>
+   
+
 </div>

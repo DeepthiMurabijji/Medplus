@@ -35,6 +35,12 @@ export class TrashService {
   }
 
   AreaRegistrations(data: any): Observable<any[]> {
+    console.log("enytetr", data);
     return this.http.post<any>(this.APIUrl + 'apiarearegistration',data)
   }
+
+  Administration(): Observable<any[]> {
+    return this.http.get<any[]>(this.APIUrl + 'apiAdministration')
+  }
+
 }

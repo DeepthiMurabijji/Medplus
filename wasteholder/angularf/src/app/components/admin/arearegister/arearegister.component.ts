@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router ,  ActivatedRoute} from '@angular/router';
 import { TrashService } from 'src/app/services/trash.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl} from '@angular/forms';
 
 
 @Component({
@@ -20,6 +20,7 @@ export class ArearegisterComponent implements OnInit {
 
   areasData: { area_name: string }[];
   arearegister;
+ 
 
   ngOnInit(): void {
 
@@ -40,11 +41,20 @@ export class ArearegisterComponent implements OnInit {
 
   }
 
+  areaform = new FormGroup({
+    areaname : new FormControl(''),
+    housename: new FormControl(''),
+    address:new FormControl(''),
+  });
+
   onRegister(){
 
-    this.trash.AreaRegistrations(this.arearegister).subscribe({
+    console.log(this.areaform.value);
+
+    this.trash.AreaRegistrations(this.areaform.value).subscribe({
         next: (reg) => {
-          alert("User" + this.arearegister.username + "registered successfully")
+          console.log(reg);
+          alert("registered successfully")
         }, error :(reg) =>{
             console.log('error',reg)
           }

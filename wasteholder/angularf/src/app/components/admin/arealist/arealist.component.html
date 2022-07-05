@@ -1,10 +1,10 @@
 <app-sidebar></app-sidebar>
 
 <div class="container">
-
+    <h2><b>Area Analysis</b></h2>
     <div class="area">
-        <table>
-            <thead>
+        <table class="table">
+            <thead class="table-dark">
                 <th>Area ID</th>
                 <th>Area Name</th>
                 <th>House Names</th>
@@ -17,11 +17,29 @@
                     <td rowspan=" this.housenumber[area.area_name] ">{{ar.id}}</td>
                     <td rowspan=" this.housenumber[area.area_name] ">{{ar.area_name}}</td>
 
-                    <div *ngFor="let house of houselist">
+                    <!-- <div *ngFor="let house of houselist">
                         <td *ngIf="ar.id == house.area">{{house.house_name}}</td>
                         <td *ngIf="ar.id == house.area">{{house.house_address}}</td>
                         <td *ngIf="ar.id == house.area">{{house.is_completed}}</td>
-                    </div>
+                    </div> -->
+
+                    <td>
+                        <span *ngFor="let house of houselist">
+                            <span *ngIf="ar.id == house.area">{{house.house_name}}<br></span>
+                        </span>
+                    </td>
+
+                    <td>
+                        <span *ngFor="let house of houselist">
+                            <span *ngIf="ar.id == house.area">{{house.house_address}}<br></span>
+                        </span>
+                    </td>
+
+                    <td>
+                        <span *ngFor="let house of houselist">
+                            <span *ngIf="ar.id == house.area">{{house.is_completed}}<br></span>
+                        </span>
+                    </td>
 
 
 

@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'arealist', component:ArealistComponent},
   { path: 'arearegister', component: ArearegisterComponent},
   { path: 'profile', component: ProfileComponent},
-  { path: 'edit', component: EditComponent}
+  { path: 'edit/:id', component: EditComponent}
 
 ];
 

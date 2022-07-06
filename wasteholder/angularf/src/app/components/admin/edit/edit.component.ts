@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TrashService } from 'src/app/services/trash.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,7 +15,8 @@ export class EditComponent implements OnInit {
   id: any;
   person: any;
   role : string;
-  LightNeeded : boolean;
+  toggle;
+  LightNeeded;
   constructor(public trash: TrashService, public router: Router, public auth: AuthService, private activatedRoute: ActivatedRoute) {
 
     //  this.activatedRoute.queryParams.subscribe(params => {
@@ -24,20 +25,20 @@ export class EditComponent implements OnInit {
     //   console.log(`dwd${id}`);
     //   }); 
    }
-   changeBootstrapSwitchValues() {
-    let self = this;
-        $('.light-needed').on('switchChange.bootstrapSwitch', function (event:any, state:any) {
-            if (state) {  
-                console.log('true');
-                //this.LightNeeded= true;
-                self.LightNeeded= true;
-            } else {  
-                console.log('false');
-                //this.LightNeeded= false;
-                self.LightNeeded= false;
-            };
-        });
-    }
+  //  changeBootstrapSwitchValues() {
+  //   let self = this;
+  //       $('.light-needed').on('switchChange.bootstrapSwitch', function (event:any, state:any) {
+  //           if (state) {  
+  //               console.log('true');
+  //               //this.LightNeeded= true;
+  //               self.LightNeeded= true;
+  //           } else {  
+  //               console.log('false');
+  //               //this.LightNeeded= false;
+  //               self.LightNeeded= false;
+  //           };
+  //       });
+  //   }
   ngOnInit(): void {
 
     console.log(this.activatedRoute.snapshot.params);
@@ -65,23 +66,27 @@ export class EditComponent implements OnInit {
       }
     });
 
-      ($('.bootstrap-switch')as any).bootstrapSwitch({
-        onText: "Yes",
-        offText: "No"
-    });
-    this.changeBootstrapSwitchValues();
+    if(this.toggle === 'Yes')
+    {
+      console.log("toggle",true);
     }
+    else
+    {
+      console.log("toggle",false);
+    }
+    
 
-  onpermit() {
-    if(state)
-    {
-      console.log(true);
-    }
-    else 
-    {
-      console.log("false");
-    }
+    //   ($('.bootstrap-switch')as any).bootstrapSwitch({
+    //     onText: "Yes",
+    //     offText: "No"
+    // });
+    // this.changeBootstrapSwitchValues();
   }
+
+  @Input() onText = 'Yes';
+  @Input() offText = 'No';
+  
+  
 
 }
 

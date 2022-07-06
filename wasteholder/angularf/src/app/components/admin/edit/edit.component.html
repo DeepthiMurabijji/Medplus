@@ -10,7 +10,7 @@
                     <!-- <h5>Toggle ON to give {{person.user.username}} Administrative Access: </h5> -->
                     <div class="form-check form-switch form-check-reverse">
                         <label class="form-check-label" for="flexSwitchCheckReverse">Toggle ON to give {{person.user.username}} Administrative Access:</label>
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse" name="LightNeeded" (click)="onpermit()" [(ngModel)]="LightNeeded">
                         
                     </div>
                     

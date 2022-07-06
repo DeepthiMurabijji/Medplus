@@ -61,6 +61,59 @@ TODO: Import these links before use icons in html  -->
     </style>
 </head>
 <body>
+
+  <!-- Default switch -->
+<div class="form-check form-switch">
+  <input
+    mdbCheckbox
+    class="form-check-input"
+    type="checkbox"
+    id="flexSwitchCheckDefault"
+  />
+  <label class="form-check-label" for="flexSwitchCheckDefault"
+    >Default switch checkbox input</label
+  >
+</div>
+<!-- Checked switch -->
+<div class="form-check form-switch">
+  <input
+    mdbCheckbox
+    class="form-check-input"
+    type="checkbox"
+    id="flexSwitchCheckChecked"
+    [checked]="true"
+  />
+  <label class="form-check-label" for="flexSwitchCheckChecked"
+    >Checked switch checkbox input</label
+  >
+</div>
+<!-- Default disabled switch -->
+<div class="form-check form-switch">
+  <input
+    mdbCheckbox
+    class="form-check-input"
+    type="checkbox"
+    id="flexSwitchCheckDisabled"
+    [disabled]="true"
+  />
+  <label class="form-check-label" for="flexSwitchCheckDisabled"
+    >Disabled switch checkbox input</label
+  >
+</div>
+<!-- Checked disabled switch -->
+<div class="form-check form-switch">
+  <input
+    mdbCheckbox
+    class="form-check-input"
+    type="checkbox"
+    id="flexSwitchCheckCheckedDisabled"
+    [checked]="true"
+    [disabled]="true"
+  />
+  <label class="form-check-label" for="flexSwitchCheckCheckedDisabled"
+    >Disabled checked switch checkbox input</label
+  >
+</div>
     <!-- <table>
         <tr>
             <td rowspan="4">image</td>
@@ -76,7 +129,7 @@ TODO: Import these links before use icons in html  -->
         </tr>
     </table> -->
 
-    <table class="table align-middle mb-0 bg-white">
+    <!-- <table class="table align-middle mb-0 bg-white">
         <thead class="bg-light">
           <tr>
             <th>Name</th>
@@ -267,6 +320,6 @@ TODO: Import these links before use icons in html  -->
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
 </body>
 </html>

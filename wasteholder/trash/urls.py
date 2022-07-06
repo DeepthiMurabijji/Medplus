@@ -9,6 +9,7 @@ urlpatterns = [
     path('apiarealist', views.apiArealist),
     path('apiarearegistration', views.apiarearegistration),
     path('apiAdministration',views.apiAdministration),
+    path('apiEditing/', views.apiEditing),
 
 
 

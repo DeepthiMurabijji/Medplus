@@ -10,6 +10,7 @@
             <th>Job Title</th>
             <th>Area Name</th>
             <th>House Names</th>
+            <th>Completed Houses</th>
             <th>Edit</th>
         </thead>
 
@@ -33,7 +34,12 @@
                     </span>
                 </td>
                 <td>
-                    <a routerLink="/edit">Edit</a>
+                    <span *ngFor="let house of houselist">
+                        <span>{{house.collector === collector.id ? house.house_name : ""}} </span>
+                    </span>
+                </td>
+                <td>
+                    <a routerLink="/edit/{{collector.user.id}}">Edit</a>
                     
                 </td>
                 

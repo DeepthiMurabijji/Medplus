@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 const APIUrl1 = "http://127.0.0.1:8001/apiLogin";
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,9 @@ export class TrashService {
   readonly APIUrl = "http://127.0.0.1:8000/";
   
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+  }
 
   // getCollectorList(): Observable<any[]> {
   //   return this.http.get<any[]>(this.APIUrl + 'collector/');
@@ -41,6 +43,16 @@ export class TrashService {
 
   Administration(): Observable<any[]> {
     return this.http.get<any[]>(this.APIUrl + 'apiAdministration')
+  }
+
+  getuserInfo(id:any): Observable<any[]> {
+    let params = new HttpParams().set('id',id);
+    console.log(id);
+    return this.http.get<any[]>(this.APIUrl + 'apiEditing/',{params:params})
+  }
+
+  Editing(data: any): Observable<any[]> {
+    return this.http.post<any>(this.APIUrl + 'apiEditing', data)
   }
 
 }

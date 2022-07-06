@@ -276,6 +276,23 @@ def apiAdministration(request):
          
     return JsonResponse(collectorhouses, safe = False)
 
+@csrf_exempt
+@api_view(['POST' , 'GET'])
+def apiEditing(request):
+    if request.method == 'POST':
+        pass
+    elif request.method == 'GET':
+        id = request.GET.get('id')
+        #print( "id",id)
+        user = User.objects.get(id = id)
+        # collector = list(Collector.objects.filter(user_id = user).values())
+        # print(collector[0])
+        # collector = collector[0]
+        collector = Collector.objects.filter(user_id = user)
+        #print(collector)
+        collectorserial = Collectorserializer(collector , many = True)
+        #print(collectorserial.data)
+    return JsonResponse(collectorserial.data[0] , safe=False)
 
 
 # @csrf_exempt

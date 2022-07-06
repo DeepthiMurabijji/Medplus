@@ -42,10 +42,10 @@ export class PermisionsComponent implements OnInit {
         // }
 
 
-        for (let col of this.collectors)
-        {
-          console.log(col.user.username, col.is_real);
-        }
+        // for (let col of this.collectors)
+        // {
+        //   console.log(col.user.username, col.is_real);
+        // }
       }
     })
 

@@ -10,6 +10,7 @@ import { PermisionsComponent } from './components/admin/permisions/permisions.co
 import { ArealistComponent } from './components/admin/arealist/arealist.component';
 import { ArearegisterComponent } from './components/admin/arearegister/arearegister.component';
 import { ProfileComponent } from './components/admin/profile/profile.component';
+import { EditComponent } from './components/admin/edit/edit.component';
 
 
 
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'permissions', component:PermisionsComponent},
   { path: 'arealist', component:ArealistComponent},
   { path: 'arearegister', component: ArearegisterComponent},
-  { path: 'profile', component: ProfileComponent}
+  { path: 'profile', component: ProfileComponent},
+  { path: 'edit', component: EditComponent}
 
 ];
 

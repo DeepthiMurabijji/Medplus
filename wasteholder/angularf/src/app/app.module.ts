@@ -17,6 +17,7 @@ import { PermisionsComponent } from './components/admin/permisions/permisions.co
 import { ArealistComponent } from './components/admin/arealist/arealist.component';
 import { ArearegisterComponent } from './components/admin/arearegister/arearegister.component';
 import { ProfileComponent } from './components/admin/profile/profile.component';
+import { EditComponent } from './components/admin/edit/edit.component';
 
 
 
@@ -32,7 +33,8 @@ import { ProfileComponent } from './components/admin/profile/profile.component';
     PermisionsComponent,
     ArealistComponent,
     ArearegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

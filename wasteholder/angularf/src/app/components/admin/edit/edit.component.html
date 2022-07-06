@@ -1,1 +1,58 @@
-<p>edit works!</p>
+<app-sidebar></app-sidebar>
+
+
+<div class="container">
+
+    <section class="section about-section gray-bg" id="about">
+        <div class="container">
+            <div class="row align-items-center flex-row-reverse">
+                <div class="col-lg-6">
+                    <!-- <h5>Toggle ON to give {{person.user.username}} Administrative Access: </h5> -->
+                    <div class="form-check form-switch form-check-reverse">
+                        <label class="form-check-label" for="flexSwitchCheckReverse">Toggle ON to give {{person.user.username}} Administrative Access:</label>
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">
+                        
+                    </div>
+                    
+                    <!-- <h5>Switch ON so,that {{person.user.username}} can be Collector: </h5> -->
+                    <div class="form-check form-switch form-check-reverse">
+                        <label class="form-check-label" for="flexSwitchCheckReverse">Switch ON so,that {{person.user.username}} can be Collector:</label>
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">
+                        
+                    </div>
+                </div>
+            
+                <div class="col-lg-6">
+                    <div class="about-text go-to">
+                        <h3 class="dark-color">{{person.user.username}}</h3>
+                        <!-- <h6 class="theme-color lead"></h6> -->
+
+                        <div class="row about-list">
+                            
+                            <div class="col-md-6">
+                                <div class="media">
+                                    <label>E-mail</label>
+                                    <p>{{person.user.email}}</p>
+                                </div>
+                                <div class="media">
+                                    <label>Phone</label>
+                                    <p>820-885-3321</p>
+                                </div>
+                                <div class="media">
+                                    <label>Job Title</label>
+                                    <p>{{role}}</p>
+                                </div>
+                                <div class="media">
+                                    <label>Area Allocated</label>
+                                    <p>{{person.area.area_name}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+          
+        </div>
+    </section>
+
+</div>

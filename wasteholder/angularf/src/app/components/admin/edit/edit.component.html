@@ -9,15 +9,15 @@
                 <div class="col-lg-6">
                     <!-- <h5>Toggle ON to give {{person.user.username}} Administrative Access: </h5> -->
                     <div class="form-check form-switch form-check-reverse">
-                        <label class="form-check-label" for="flexSwitchCheckReverse">Toggle ON to give {{person.user.username}} Administrative Access:</label>
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse"  [(ngModel)]="toggle">
+                        <label class="form-check-label" for="flexSwitchCheckReverse">Grant Admin Access:</label>
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse"  (change)="changeCollectorRole()" [(ngModel)]="toggleAdmin">
                         
                     </div>
                     
                     <!-- <h5>Switch ON so,that {{person.user.username}} can be Collector: </h5> -->
                     <div class="form-check form-switch form-check-reverse">
-                        <label class="form-check-label" for="flexSwitchCheckReverse">Switch ON so,that {{person.user.username}} can be Collector:</label>
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">
+                        <label class="form-check-label" for="flexSwitchCheckReverse">Currently Working:</label>
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse"  (change)="changeCollectorRole()" [(ngModel)]="toggleCollector">
                         
                     </div>
                 </div>

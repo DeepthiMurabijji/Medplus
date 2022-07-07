@@ -1,1 +1,42 @@
-<p>member works!</p>
+<table class="table table-hover">
+    <tr>
+        <th>User ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Area</th>
+        <th>Houses</th>
+    </tr>
+    <tr>
+        <td>{{usr.user.id}}</td>
+        <td>{{usr.user.username}}</td>
+        <td>{{usr.user.email}}</td>
+        <td>{{usr.area.area_name}}</td>
+
+        <td>
+            <form >
+                <div class="houses">
+                    <span *ngFor="let house of houses">
+                        <div class="form-check" >
+                            
+                            <!-- <input class="form-check-input" name = "houses" type="checkbox" value="" id="flexCheckDefault" required  disabled checked>
+                            <label class="form-check-label" for="flexCheckDefault">
+                                
+                            </label> -->
+                            
+                            <input class="form-check-input" name = "houses" type="checkbox" value="{{house.house_name}}" id="flexCheckDefault" required>
+                            <label class="form-check-label" for="flexCheckDefault">
+                                {{house.house_name}}
+                            </label>
+                            
+                        </div>
+                    </span>
+                </div>
+                <input type="submit"  name = "job" value="Completed">
+            </form>
+            
+        
+        </td>
+        
+    </tr>
+           
+</table>

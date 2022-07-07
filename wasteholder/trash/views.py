@@ -4,7 +4,6 @@ from datetime import datetime
 from dbm import error
 from email import header
 from gc import collect
-import re
 from django.db.models import Q
 from django.utils.functional import SimpleLazyObject
 from django.http import HttpResponse, HttpResponseBadRequest
@@ -279,9 +278,8 @@ def apiAdministration(request):
 @csrf_exempt
 @api_view(['POST' , 'GET'])
 def apiEditing(request):
-    if request.method == 'POST':
-        pass
-    elif request.method == 'GET':
+    
+    if request.method == 'GET':
         id = request.GET.get('id')
         #print( "id",id)
         user = User.objects.get(id = id)
@@ -289,11 +287,42 @@ def apiEditing(request):
         # print(collector[0])
         # collector = collector[0]
         collector = Collector.objects.filter(user_id = user)
-        #print(collector)
+        # print(collector)
         collectorserial = Collectorserializer(collector , many = True)
-        #print(collectorserial.data)
-    return JsonResponse(collectorserial.data[0] , safe=False)
+        # print(collectorserial.data)
+        return JsonResponse(collectorserial.data[0] , safe=False)
+    elif request.method == 'POST':
+        user_data = JSONParser().parse(request)
+        print(user_data)
+        # user = User.objects.get(id = user_data.get('user'))
+        collector = Collector.objects.filter(id = user_data.get('id'))
+        # data = Collector.objects.filter(user_id = user_data.get('user')['id']).update()
+        collector.update(is_admin=user_data['is_admin'],is_real = user_data['is_real'])
+        # print('data', collector.is_admin, type(collector))
+        return JsonResponse( user_data,safe=False)
 
+
+@csrf_exempt
+@api_view(['POST' , 'GET'])
+def apiMember(request):
+    if request.method == 'POST':
+        pass
+    elif request.method == 'GET':
+        usr =  request.GET.get('member')
+        print(usr)
+        user = User.objects.get(username = usr)
+        collector = Collector.objects.get(user = user)
+        collectorserial = Collectorserializer(collector)
+        # print('collector', collectorserial)
+        area = Areas.objects.get(id = collector.area_id)
+        print(area)
+        home = Houses.objects.filter(area_id = area.id)
+        print('home', home)
+        homeserial = Houseserializer(home, many = True)
+        #print(homeserial.data)
+        return JsonResponse(homeserial.data , safe = False)
+       
+        
 
 # @csrf_exempt
 def register_save(request):
@@ -645,12 +674,15 @@ def member_job_status(request):
     global findKey
     findKey = True
 
-    if request.method == 'POST':
+    if request.method == 'GET':
 
-        username = request.user.username
+        # username = request.user.username
 
         houses_checked = request.POST.getlist('houses')
-        collector = Collector.objects.get(user=request.user)
+        user = User.objects.get(username='soya')
+        print(user)
+        collector = Collector.objects.get(user = user)
+        print(collector)
         houses = Houses.objects.filter(area=collector.area)
         print("list of checked houses: ",houses_checked,"Q:->",houses,"Name:",collector,"time :",datetime.now(),len(houses))
         for i in range(len(houses)):

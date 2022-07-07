@@ -35,21 +35,21 @@ export class PermisionsComponent implements OnInit {
         // console.log(details); 
         this.collectors= details.collector_serializer;
         this.houselist = details.home;
-        console.log("user", this.collectors); 
-        console.log("houses:", this.houselist);   
+        // console.log("user", this.collectors); 
+        // console.log("houses:", this.houselist);   
 
         
-        for (let col of this.collectors)
-        {
-          for (let house of this.houselist)
-          {
-            if(col.id === house.collector)
-            {
-              console.log("Name: ",col.user.username);
-              console.log("houes: ",house.house_name);
-            }
-          }
-        }
+        // for (let col of this.collectors)
+        // {
+        //   for (let house of this.houselist)
+        //   {
+        //     if(col.id === house.collector)
+        //     {
+        //       console.log("Name: ",col.user.username);
+        //       console.log("houes: ",house.house_name);
+        //     }
+        //   }
+        // }
 
 
         // for (let col of this.collectors)

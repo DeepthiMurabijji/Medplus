@@ -28,7 +28,7 @@ export class TrashService {
   }
 
   Loginaccess(data: any): Observable<any> {
-    console.log("enytetr",this.APIUrl + 'apiLogin', data);
+    // console.log("enytetr",this.APIUrl + 'apiLogin', data);
     return this.http.post<any>(this.APIUrl + 'apiLogin', data)
   }
 
@@ -37,7 +37,7 @@ export class TrashService {
   }
 
   AreaRegistrations(data: any): Observable<any[]> {
-    console.log("enytetr", data);
+    // console.log("enytetr", data);
     return this.http.post<any>(this.APIUrl + 'apiarearegistration',data)
   }
 
@@ -47,12 +47,17 @@ export class TrashService {
 
   getuserInfo(id:any): Observable<any[]> {
     let params = new HttpParams().set('id',id);
-    console.log(id);
+    // console.log(id);
     return this.http.get<any[]>(this.APIUrl + 'apiEditing/',{params:params})
   }
 
-  Editing(data: any): Observable<any[]> {
-    return this.http.post<any>(this.APIUrl + 'apiEditing', data)
+  EditingRole(data: any): Observable<any[]> {
+    return this.http.post<any>(this.APIUrl + 'apiEditing/', data)
+  }
+
+  getMemberInfo(member:any): Observable<any[]> {
+    let params = new HttpParams().set('member',member);
+    return this.http.get<any[]>(this.APIUrl + 'apiMember',{params:params})
   }
 
 }

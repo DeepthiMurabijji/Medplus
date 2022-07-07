@@ -309,15 +309,15 @@ def apiMember(request):
         pass
     elif request.method == 'GET':
         usr =  request.GET.get('member')
-        print(usr)
+        # print(usr)
         user = User.objects.get(username = usr)
         collector = Collector.objects.get(user = user)
         collectorserial = Collectorserializer(collector)
         # print('collector', collectorserial)
         area = Areas.objects.get(id = collector.area_id)
-        print(area)
+        # print(area)
         home = Houses.objects.filter(area_id = area.id)
-        print('home', home)
+        # print('home', home)
         homeserial = Houseserializer(home, many = True)
         #print(homeserial.data)
         return JsonResponse(homeserial.data , safe = False)

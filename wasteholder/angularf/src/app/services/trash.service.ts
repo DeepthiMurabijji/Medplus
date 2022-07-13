@@ -60,4 +60,8 @@ export class TrashService {
     return this.http.get<any[]>(this.APIUrl + 'apiMember',{params:params})
   }
 
+  postMemberHouses(houses :any): Observable<any[]> {
+    return this.http.post<any>(this.APIUrl + 'apiMember',houses)
+  }
+
 }

@@ -38,6 +38,14 @@ export class MemberComponent implements OnInit {
     housesChecked : new FormControl(''),
   })
 
-  onUpdate(): void {
+  onUpdate() {
+    this.trash.postMemberHouses(this.memberform.value).subscribe({
+      next: (housename) => {
+        console.log(housename);
+        alert("registered successfully")
+      }, error :(err) =>{
+          console.log('error',err)
+        }
+  })
   }
 }

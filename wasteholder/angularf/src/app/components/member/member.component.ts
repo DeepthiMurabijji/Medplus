@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TrashService } from 'src/app/services/trash.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { FormBuilder, FormGroup, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-member',
@@ -13,6 +14,7 @@ export class MemberComponent implements OnInit {
   usr :any;
   member : any;
   houses :any;
+  form: FormGroup;
   constructor(public trash: TrashService, public router: Router, 
     public auth: AuthService, private activatedRoute: ActivatedRoute) { }
 
@@ -28,6 +30,22 @@ export class MemberComponent implements OnInit {
         this.houses = result;
       }
     })
+
+    
   }
 
+  memberform = new FormGroup({
+    housesChecked : new FormControl(''),
+  })
+
+  onUpdate() {
+    this.trash.postMemberHouses(this.memberform.value).subscribe({
+      next: (housename) => {
+        console.log(housename);
+        alert("registered successfully")
+      }, error :(err) =>{
+          console.log('error',err)
+        }
+  })
+  }
 }

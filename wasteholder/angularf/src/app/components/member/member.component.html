@@ -13,7 +13,7 @@
         <td>{{usr.area.area_name}}</td>
 
         <td>
-            <form >
+            <form [formGroup]="memberform" (ngSubmit)="onUpdate()">
                 <div class="houses">
                     <span *ngFor="let house of houses">
                         <div class="form-check" >
@@ -23,7 +23,7 @@
                                 
                             </label> -->
                             
-                            <input class="form-check-input" name = "houses" type="checkbox" value="{{house.house_name}}" id="flexCheckDefault" required>
+                            <input class="form-check-input" name = "houses" type="checkbox" value="{{house.house_name}}" formControlName = "housesChecked" id="flexCheckDefault" required>
                             <label class="form-check-label" for="flexCheckDefault">
                                 {{house.house_name}}
                             </label>

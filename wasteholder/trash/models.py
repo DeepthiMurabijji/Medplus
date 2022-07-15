@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+import datetime
 
 # Create your models here.
 
@@ -47,5 +49,12 @@ class Houses(models.Model):
     def __str__(self) -> str:
         return self.house_name
 
+class ActivityLog(models.Model):
+    collector = models.ForeignKey(Collector,on_delete=models.DO_NOTHING, default=None, null=True, blank=True)
+    houses = models.ForeignKey(Houses, on_delete=models.DO_NOTHING, default=None, null=True, blank=True)
+    print("I think this is right and i am in models",datetime.datetime.now()
+    ,"and the date here is ",datetime.datetime.now().date()) 
+    date =  models.DateField(default=datetime.datetime.now().date(), db_column='Date')
+    time = models.CharField(default="Pending", max_length=20, db_column='Time')
 
 # Here we connect Collector with User using ONeToOneField

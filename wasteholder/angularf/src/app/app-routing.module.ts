@@ -11,7 +11,7 @@ import { ArealistComponent } from './components/admin/arealist/arealist.componen
 import { ArearegisterComponent } from './components/admin/arearegister/arearegister.component';
 import { ProfileComponent } from './components/admin/profile/profile.component';
 import { EditComponent } from './components/admin/edit/edit.component';
-
+import { HistoryComponent } from './components/admin/history/history.component';
 
 
 
@@ -26,7 +26,8 @@ const routes: Routes = [
   { path: 'arealist', component:ArealistComponent},
   { path: 'arearegister', component: ArearegisterComponent},
   { path: 'profile', component: ProfileComponent},
-  { path: 'edit/:id', component: EditComponent}
+  { path: 'edit/:id', component: EditComponent},
+  { path: 'history', component: HistoryComponent},
 
 ];
 

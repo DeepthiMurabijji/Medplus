@@ -13,24 +13,28 @@
         <td>{{usr.area.area_name}}</td>
 
         <td>
-            <form [formGroup]="memberform" (ngSubmit)="onUpdate()">
+            <form [formGroup]="form" (ngSubmit)="onUpdate()" novalidate>
                 <div class="houses">
                     <span *ngFor="let house of houses">
-                        <div class="form-check" >
-                            
-                            <!-- <input class="form-check-input" name = "houses" type="checkbox" value="" id="flexCheckDefault" required  disabled checked>
-                            <label class="form-check-label" for="flexCheckDefault">
-                                
-                            </label> -->
-                            
-                            <input class="form-check-input" name = "houses" type="checkbox" value="{{house.house_name}}" formControlName = "housesChecked" id="flexCheckDefault" required>
+                        <div class="form-check" *ngIf=" house.is_completed === 'Not Completed' ">
+                            <input class="form-check-input" name = "houses" type="checkbox" value="{{house.house_name}}" (change)="onCheckboxChange($event)" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
                                 {{house.house_name}}
-                            </label>
-                            
+
+                            </label>                            
                         </div>
+
+                            <div class="form-check" *ngIf=" house.is_completed === 'Completed' ">
+                                <input class="form-check-input" name = "houses" type="checkbox" value="{{house.house_name}}" id="flexCheckDefault" required  disabled checked>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    {{house.house_name}}
+                                </label><br>
+                            </div>
                     </span>
                 </div>
+                <!-- <p class="error" *ngIf="this.form.controls['checkArray'].errors?.['required']">
+                    Checkbox is required, select atleast one value.
+                </p> -->
                 <input type="submit"  name = "job" value="Completed">
             </form>
             
@@ -40,3 +44,6 @@
     </tr>
            
 </table>
+
+
+

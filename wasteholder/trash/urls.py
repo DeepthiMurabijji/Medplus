@@ -11,6 +11,7 @@ urlpatterns = [
     path('apiAdministration',views.apiAdministration),
     path('apiEditing/', views.apiEditing),
     path('apiMember', views.apiMember),
+    path('apiResetButton', views.apiResetButton),
 
 
 

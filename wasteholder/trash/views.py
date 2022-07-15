@@ -1,6 +1,6 @@
 
-from asyncio import exceptions
-from datetime import datetime
+
+from datetime import datetime as dt
 from dbm import error
 from email import header
 from gc import collect
@@ -28,6 +28,10 @@ from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 import json
+from django.utils import timezone
+import datetime
+
+
 
 # Create your views here.
 
@@ -162,7 +166,7 @@ def apiLogin(request):
 @api_view(['POST' , 'GET' ])
 def apiArealist(request):
     if  request.method == 'GET':
-        print(".........Please enter...........")
+        # print(".........Please enter...........")
         areas = Areas.objects.all()
         houses = Houses.objects.all()
         houseserial = Houseserializer(houses, many = True)
@@ -262,7 +266,10 @@ def apiAdministration(request):
             collectorhouses[collector.user.username] = hoselist
             # mainview.append(collectorhouses)
         # print(mainview)  
-     
+        print(timezone.now())  # The UTC time   2022-07-15 06:57:05.430490+00:00
+        print(timezone.localtime())  # timezone specified time,if timezone is UTC, it is same as above  2022-07-15 12:27:05.430538+05:30
+        print("I think this is right",datetime.datetime.now())  #2022-07-15 12:27:05.430584
+        print(datetime.datetime.now().date())
        
         response = Response()
 
@@ -306,7 +313,25 @@ def apiEditing(request):
 @api_view(['POST' , 'GET'])
 def apiMember(request):
     if request.method == 'POST':
-        pass
+        usr =  request.GET.get('member')
+        # print("user name: ", usr)
+        checkedHouses = JSONParser().parse(request)
+        # print("Houses checked: ",checkedHouses)
+        user = User.objects.get(username = usr)
+        collector = Collector.objects.get(user = user)
+        housesTable = Houses.objects.filter(area = collector.area)
+        for house in housesTable:
+            for item in checkedHouses:
+                if(house.house_name == item):
+                    #print("Houses checked", house.house_name, item)
+                    house.is_completed = 'Completed'
+                    house.collector = collector 
+                    house.save()
+                    activity_log = ActivityLog.objects.create(
+                        collector = collector, houses = house, time = str(dt.now())[11:19]
+                        )
+                    activity_log.save()
+        return JsonResponse("Members Houses Checked" , safe=False)
     elif request.method == 'GET':
         usr =  request.GET.get('member')
         # print(usr)
@@ -320,8 +345,29 @@ def apiMember(request):
         # print('home', home)
         homeserial = Houseserializer(home, many = True)
         #print(homeserial.data)
+        # datetime.now()
+        # now = datetime.now()
+        # print("date.today() is",date.today())
+        # print("The time Zone Time is :",now)
+        # print("The Date is :",str(now)[:10])
+        # print("The Time is :",str(now)[11:19])
         return JsonResponse(homeserial.data , safe = False)
-       
+
+@csrf_exempt
+@api_view(['POST', 'GET'])
+def apiResetButton(request):
+    houses_chk = Houses.objects.all()
+    collectors =Collector.objects.all()
+    for i in collectors:
+        i.area_status = False
+        i.save()
+    for i in houses_chk:
+        print(i.is_completed,type(i.is_completed))
+        i.is_completed = 'Not Completed'
+        i.collector = None
+        i.save()
+        print("Status changed to false")
+    return JsonResponse("Successfully Reset" , safe = False)  
         
 
 # @csrf_exempt
@@ -430,34 +476,6 @@ def loginn(request):
 
     return render(request, 'login.html', context)
 
-# def login_req(request):
-#     print("Here1",request.method)
-#     if request.method == 'POST':
-
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-
-#         try:
-#             user = User.objects.get(username=username)
-#             print(user)
-#         except:
-
-#             messages.success(request,"PLEASE ENTER CORRECT USERNAME")
-           
-#             return render(request, 'login.html',{'message':'PLEASE ENTER CORRECT USERNAME'})
-
-#         userme = User.objects.get(username=username)
-#         #print(userme.password)
-#         authenUser = authenticate(request, username = username, password = password)
-#         #print(authenUser)
-
-#         if authenUser is not None:
-
-#             login(request, authenUser)
-#             return redirect('login-output')
-
-#     return render(request, 'login.html')
-
 def login_req(request):
     if request.method == 'POST':
     #    print ("session 2 ")
@@ -552,85 +570,6 @@ def login_output(request):
     else:
         pass 
 
-# def login_output(request):
-#     global registerKey
-#     registerKey = True
-#     print("1",type(request.user),request.user.username,request.user.is_superuser)
-#     users = User.objects.all()
-#     if request.user in users:
-#         collector_ = Collector.objects.get(user=request.user)
-#         print ("what?" ,collector_)
-#     if request.user in users and collector_.is_admin == False:
-#         registerKey = False
-#         user = User.objects.get(username=request.user.username)
-#         collector = Collector.objects.get(user=user)
-#         house = Houses.objects.filter(area=collector.area) 
-#         context ={
-#                 'adminKey': True,
-#                 'collector': collector,
-#                 'house': house,
-#                 'user':user,
-#                 'registerKey':registerKey,
-#                 }
-#         return render(request, 'member-panel.html', context)
-#     elif request.user in users and collector_.is_admin == True:
-#         return redirect("admin-panel")
-#     elif request.method == 'POST':
-
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-
-#         try:
-#             user = User.objects.get(username=username)
-#             print(user)
-#         except:
-
-#             messages.success(request,"PLEASE ENTER CORRECT USERNAME")
-           
-#             return render(request, 'login.html',{'message':'PLEASE ENTER CORRECT USERNAME'})
-
-#         collector = Collector.objects.get(user=user)
-#         house = Houses.objects.filter(area=collector.area)
-#         print("here is the house",house)
-
-
-#         authenUser = authenticate(username = username, password = password)
-#         print(authenUser)
-
-#         if authenUser is not None:
-
-#             login(request, authenUser)
-#             # return HttpResponse("Correcty")
-           
-
-#             if collector.is_admin == True:
-#                 adminKey = True
-
-#                 context ={
-#                     'adminKey': adminKey,
-#                 }
-#                 # return render(request, 'admin-panel.html',context)
-#                 # print("Collector Here",type(collector),type(collector.user.username))
-#                 return redirect('admin-panel')  
-#             else:
-#                 if collector.is_real == True:
-#                     adminKey = True
-#                     context ={
-#                          'adminKey': adminKey,
-#                          'collector': collector,
-#                          'house': house,
-#                          }
-#                     return render(request, 'member-panel.html', context)
-#                 else:
-#                     return render(request, 'login.html',{'message':'YOUR ACCOUNT IS NOT ACTIVATED !'})
-#         else: 
-#             messages.success(request,("There was a problem login "))
-#             return render(request, 'login.html',{'message':'PLEASE LOGIN WITH A CORRECT PASSWORD'})
-    
-#     else:
-#         messages.success(request,('There was a problem login'))
-#         return render(request, 'login.html', {'registerKey': registerKey})
-
 # @login_required(login_url='login-output')
 def admin_panel(request):
     collector = Collector.objects.get(user = request.user)
@@ -695,15 +634,6 @@ def member_job_status(request):
                 print(houses[i].is_completed, houses[i].collector, houses[i])
                 data.append([collector,houses[i].house_name,datetime.now()])
             print("After for loop",i)
-                    
-                   
-            
-
-            # for i in range(len(houses_chk)): 
-            #     if str(i+1) in houses_checked:
-            #         houses_chk[i].is_completed = job_status
-            #         houses_chk[i].save()
-            #         print("Status of",houses_chk[i].house_name,"is Changed to True")
         context ={
                 'collector': collector,
                 'houses': houses,
@@ -724,12 +654,6 @@ def member_job_status(request):
 
 # @login_required(login_url='login-output')
 def admin_permissions(request):
-
-    #collector = Collector.objects.prefetch_related('area', 'user').all()
-    #collector = Collector.objects.all()
-    #area = Areas.objects.get(area_name = collector.area)
-    #house = Houses.objects.filter(area = area)
-   # print("admin_permissions houses: ",house)
     areas = Areas.objects.all()
     #collectors = Collector.objects.prefetch_related('area', 'user').all()
     collectors = Collector.objects.all()
@@ -744,24 +668,17 @@ def admin_permissions(request):
                 # print("Name:", collector.user.username)
                 # print("houses: ",house.house_name)
                 # print("address: ",house.house_address)
-                   
-       
-
     # print("collectors: ", collectors)
-
     adminKey = True
     findKey = True
 
     context = {
-
         'collectors': collectors,
          'adminKey': adminKey,
          'findKey': findKey,
          'houses': houses,
          'collector_houses' : collector_houses,
          'downloadKey': True,
-         
-
     }
 
     return render(request, 'admin-permissions.html', context)
@@ -871,17 +788,6 @@ def admin_search(request):
     if request.method == 'POST':
 
         findout = request.POST['username']
-        #print("search: ",findout)
-        #user = User.objects.filter(username = findout)
-       # search = Collector.objects.filter(user)
-        print('________________________________________________________')
-       # print("search got: ",search)
-        # print(user)
-         # search = Collector.objects.prefetch_related('user').filter(user=user)
-        # if (User.objects.filter(username__contains = findout)):
-            # user = User.objects.filter(username__contains = findout)
-            # search = Collector.objects.filter(user_id__in = user)
-        # else:
         user = User.objects.filter(username__contains = findout)
         search = list(Collector.objects.filter(user_id__in = user))
         area = Areas.objects.filter(area_name__contains = findout)

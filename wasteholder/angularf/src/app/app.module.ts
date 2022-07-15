@@ -18,6 +18,7 @@ import { ArealistComponent } from './components/admin/arealist/arealist.componen
 import { ArearegisterComponent } from './components/admin/arearegister/arearegister.component';
 import { ProfileComponent } from './components/admin/profile/profile.component';
 import { EditComponent } from './components/admin/edit/edit.component';
+import { HistoryComponent } from './components/admin/history/history.component';
 
 
 
@@ -34,7 +35,8 @@ import { EditComponent } from './components/admin/edit/edit.component';
     ArealistComponent,
     ArearegisterComponent,
     ProfileComponent,
-    EditComponent
+    EditComponent,
+    HistoryComponent,
   ],
   imports: [
     BrowserModule,

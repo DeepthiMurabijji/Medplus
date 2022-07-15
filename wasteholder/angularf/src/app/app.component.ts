@@ -19,6 +19,12 @@ export class AppComponent implements OnInit{
   constructor(public trash:TrashService,public auth:AuthService,private router:Router) { }
 
   ngOnInit(): void {
+    if (this.id.is_admin){
+      this.admin_logged_in = true;
+    }
+    else{
+      this.admin_logged_in = false;
+    }
   }
 
   role ()
@@ -27,11 +33,9 @@ export class AppComponent implements OnInit{
     // console.log(this.id);
     this.username = this.id.user.username;
     if (this.id.is_admin){
-      this.admin_logged_in = true;
       this.router.navigate(['/admin']);
     }
     else{
-      this.admin_logged_in = false;
       this.router.navigate(['/member']);
     }
   }

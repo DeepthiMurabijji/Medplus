@@ -13,6 +13,7 @@ urlpatterns = [
     path('apiMember', views.apiMember),
     path('apiResetButton', views.apiResetButton),
     path('apiHistory' , views.apiHistory),
+    path('apiCsvfile', views.apiCsvfile),
 
 
 

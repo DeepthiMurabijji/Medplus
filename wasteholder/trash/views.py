@@ -1,18 +1,11 @@
 
-
 from datetime import datetime as dt
-from dbm import error
-from email import header
-from gc import collect
-import re
 from django.db.models import Q
 from django.utils.functional import SimpleLazyObject
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from numpy import append, true_divide
-from pyparsing import col
 from trash.models import *
 from django.contrib import messages 
 from django.urls import reverse
@@ -368,10 +361,18 @@ def apiResetButton(request):
         i.collector = None
         i.save()
         print("Status changed to false")
-    return JsonResponse("Successfully Reset" , safe = False)  
+    return JsonResponse("Successfully Reset" , safe = False) 
 
 @csrf_exempt
 @api_view(['POST', 'GET'])
+def apiDeleteAll(request):
+    activities = ActivityLog.objects.all()
+    for activity in activities:
+        activity.delete()
+    return JsonResponse("Successfully cleared History" , safe = False)
+
+@csrf_exempt
+@api_view(['POST', 'GET','DELETE'])
 def apiHistory(request):
     if request.method == 'GET':
         history =[]
@@ -382,6 +383,32 @@ def apiHistory(request):
             history.append(actSerializer.data)
         #print(history)
         return JsonResponse(history, safe = False)
+    elif request.method == 'DELETE':
+        print("Deleting ActivityLog...")
+        # id = JSONParser().parse(request)
+        # print("id => ",id)
+        id = request.GET.get('id')
+        print("id => ",id)
+        activity = ActivityLog.objects.get(id = id)
+        activity.delete()
+        return JsonResponse("Deleted successfully" , safe = False)
+
+
+    
+@csrf_exempt
+@api_view(['POST', 'GET'])
+def apiCsvfile(request):
+    response =HttpResponse(content_type='text/csv')
+    write = csv.writer(response)
+    activity_log_data = ActivityLog.objects.filter(date=datetime.datetime.now().date())
+    write.writerow(["Name", "Email", "Area", "Houses Cleaned", "Date", "Time"])
+    for individual_record in activity_log_data:
+        write.writerow([individual_record.collector.user.username, 
+        individual_record.collector.user.email, individual_record.collector.area.area_name,
+        individual_record.houses.house_name, individual_record.date, individual_record.time])
+    response['Content-Disposition'] ='attachment; filename= "work.csv"'
+    return response
+
 
 
 # @csrf_exempt

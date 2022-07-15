@@ -80,16 +80,16 @@ export class ArealistComponent implements OnInit {
           this.tempareahouses=[];
           this.tempareaaddress=[];
           this.tempareastatus=[];
-          
-
-          
-
-
         }
+      }
+    })
+  }
 
-      
-        
-      
+  onReset() {
+    this.trash.resetService().subscribe({
+      next: (result: any) => {
+        console.log(result);
+        window.location.reload();
       }
     })
   }

@@ -15,13 +15,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onReset() {
-    this.trash.resetService().subscribe({
-      next: (result: any) => {
-        console.log(result);
-        window.location.reload();
-      }
-    })
+  
 
-  }
+  
 }

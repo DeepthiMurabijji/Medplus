@@ -45,6 +45,7 @@ export class AuthService {
         next: (user:any) => {
           if(user){
             name = user.user.username;
+            
           }
         },
         complete: () => {
@@ -54,4 +55,5 @@ export class AuthService {
       return name;
     }
 
+  
 }

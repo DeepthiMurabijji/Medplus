@@ -23,7 +23,7 @@
                 <td>{{i.houses.house_name}}</td>
                 <td>{{i.date}}</td>
                 <td>{{i.time}}</td>
-                <td class="p-3"><img src="https://img.icons8.com/material-sharp/24/E74C3C/trash.png"/></td>
+                <td class="p-3"><img (click)="onDelete(i.id)" src="https://img.icons8.com/material-sharp/24/E74C3C/trash.png"/></td>
             </tr>
         </tbody>
     </table>

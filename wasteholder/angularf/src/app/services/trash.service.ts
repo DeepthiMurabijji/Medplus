@@ -72,4 +72,11 @@ export class TrashService {
   activityLog(): Observable<any[]> {
     return this.http.get<any[]>(this.APIUrl + 'apiHistory')
   }
+
+  deleteActivityLog(id:any): Observable<any> {
+    console.log('deleteActivityLog',id);
+    let params = new HttpParams().set('id',id);
+    return this.http.delete(this.APIUrl + 'apiHistory', {params:params})
+  }
+
 }

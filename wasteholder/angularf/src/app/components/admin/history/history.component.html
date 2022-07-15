@@ -2,6 +2,7 @@
 <app-sidebar></app-sidebar>
 
 <div class="container">
+    <h3>Collector History</h3>
     <table>
         <thead>
             <th>User ID</th>
@@ -11,6 +12,19 @@
             <th>Houses Cleaned</th>
             <th>Date</th>
             <th>Time</th>
+            <th>Delete</th>
         </thead>
+        <tbody>
+            <tr *ngFor="let i of act">
+                <td>{{i.collector.id}}</td>
+                <td>{{i.collector.user.username}}</td>
+                <td>{{i.collector.user.email}}</td>
+                <td>{{i.collector.area.area_name}}</td>
+                <td>{{i.houses.house_name}}</td>
+                <td>{{i.date}}</td>
+                <td>{{i.time}}</td>
+                <td class="p-3"><img src="https://img.icons8.com/material-sharp/24/E74C3C/trash.png"/></td>
+            </tr>
+        </tbody>
     </table>
 </div>

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit{
   username : string;
+  admin_logged_in : boolean = false;
   title = 'angularf';
   id : any;
 
@@ -26,9 +27,11 @@ export class AppComponent implements OnInit{
     // console.log(this.id);
     this.username = this.id.user.username;
     if (this.id.is_admin){
+      this.admin_logged_in = true;
       this.router.navigate(['/admin']);
     }
     else{
+      this.admin_logged_in = false;
       this.router.navigate(['/member']);
     }
   }

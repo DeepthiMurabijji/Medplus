@@ -4,13 +4,14 @@ from datetime import datetime as dt
 from dbm import error
 from email import header
 from gc import collect
+import re
 from django.db.models import Q
 from django.utils.functional import SimpleLazyObject
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from numpy import true_divide
+from numpy import append, true_divide
 from pyparsing import col
 from trash.models import *
 from django.contrib import messages 
@@ -368,7 +369,20 @@ def apiResetButton(request):
         i.save()
         print("Status changed to false")
     return JsonResponse("Successfully Reset" , safe = False)  
-        
+
+@csrf_exempt
+@api_view(['POST', 'GET'])
+def apiHistory(request):
+    if request.method == 'GET':
+        history =[]
+        act = ActivityLog.objects.all()
+        for i in act:
+            actSerializer = ActivityLogSerializer(i)
+            # print(actSerializer.data)
+            history.append(actSerializer.data)
+        #print(history)
+        return JsonResponse(history, safe = False)
+
 
 # @csrf_exempt
 def register_save(request):

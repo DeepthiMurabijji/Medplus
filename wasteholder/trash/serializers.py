@@ -32,3 +32,12 @@ class Houseserializer(serializers.ModelSerializer):
     class Meta:
         model = Houses
         fields = '__all__'
+
+class ActivityLogSerializer(serializers.ModelSerializer):
+    collector = Collectorserializer(read_only=True)
+    houses = Houseserializer(read_only=True)
+    class Meta:
+        model = ActivityLog
+        fields = '__all__'
+
+        

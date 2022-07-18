@@ -2,8 +2,15 @@
 <app-sidebar></app-sidebar>
 
 <div class="container">
-    <h3>Collector History</h3>
-    <table>
+    <div class="historyhead">
+        <div><h3 class="m-3"><b>Collector History</b></h3></div>
+        <div>
+            <button type="button" (click)="onDownload()" class="btn btn-secondary mx-3">Download File</button>
+            <button type="button" (click)="onClearAll()" class="btn btn-danger">Clear all History </button>
+        </div>
+    </div>
+    
+    <table class="table table-hover">
         <thead>
             <th>User ID</th>
             <th>UserName</th>

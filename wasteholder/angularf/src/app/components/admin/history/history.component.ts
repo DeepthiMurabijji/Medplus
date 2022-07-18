@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TrashService } from 'src/app/services/trash.service';
 import { AuthService } from 'src/app/services/auth.service';
+import * as FileSaver from 'file-saver';
+import { ngxCsv } from 'ngx-csv/ngx-csv';
 
 @Component({
   selector: 'app-history',
@@ -20,7 +22,7 @@ export class HistoryComponent implements OnInit {
 
     this.trash.activityLog().subscribe({
       next: (data: any) => {
-        console.log(data);
+        // console.log(data);
         this.act = data;
       }
     })  
@@ -35,6 +37,46 @@ export class HistoryComponent implements OnInit {
         window.location.reload();
       },error : (err : any) =>{
         console.log(err);
+      }
+    })
+  }
+
+  onClearAll() {
+    this.trash.deleteAllHistory().subscribe({
+      next: (data: any ) =>{
+        console.log(data);
+        window.location.reload();
+      },error : (err : any) =>{
+        console.log(err);
+      }
+    });
+  }
+
+  onDownload() {
+    this.trash.downloadHistory().subscribe({
+      next: (data: any ) =>{
+        console.log("Here is your Download History",data);
+        let blob = new Blob([data], {type: "text/csv;charset=utf-8;" });
+        FileSaver.saveAs(blob, "work.csv")
+        // let blob = new Blob([data._body.toString()], {type: 'text/csv' });
+        // FileSaver.saveAs(blob, "work.csv")
+        // var options = { 
+        //   fieldSeparator: ',',
+        //   quoteStrings: '"',
+        //   decimalseparator: '.',
+        //   showLabels: true, 
+        //   showTitle: true,
+        //   title: 'Your title',
+        //   useBom: true,
+        //   noDownload: false,
+        //   // headers: ["First Name", "Last Name", "ID"]
+        // };
+       
+        // new ngxCsv(data, "work", options);
+
+        console.log("DD:",data);
+      },error : (err : any) =>{
+        console.log("So, the error is:", err);
       }
     })
   }

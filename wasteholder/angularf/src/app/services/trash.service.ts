@@ -79,4 +79,13 @@ export class TrashService {
     return this.http.delete(this.APIUrl + 'apiHistory', {params:params})
   }
 
+  deleteAllHistory(): Observable<any[]> {
+    return this.http.delete<any[]>(this.APIUrl + 'apiDeleteAll')
+  }
+
+  downloadHistory(): Observable<any> {  
+    return this.http.get(this.APIUrl + 'apiCsvfile', {responseType: "arraybuffer"})
+  }
+
+
 }

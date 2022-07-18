@@ -14,6 +14,7 @@ urlpatterns = [
     path('apiResetButton', views.apiResetButton),
     path('apiHistory' , views.apiHistory),
     path('apiCsvfile', views.apiCsvfile),
+    path('apiDeleteAll', views.apiDeleteAll),
 
 
 

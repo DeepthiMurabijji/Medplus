@@ -364,7 +364,7 @@ def apiResetButton(request):
     return JsonResponse("Successfully Reset" , safe = False) 
 
 @csrf_exempt
-@api_view(['POST', 'GET'])
+@api_view(['POST', 'GET','DELETE'])
 def apiDeleteAll(request):
     activities = ActivityLog.objects.all()
     for activity in activities:
@@ -406,8 +406,14 @@ def apiCsvfile(request):
         write.writerow([individual_record.collector.user.username, 
         individual_record.collector.user.email, individual_record.collector.area.area_name,
         individual_record.houses.house_name, individual_record.date, individual_record.time])
+    # response = HttpResponse(
+    #     content_type='text/csv',
+    #     headers={'Content-Disposition': 'attachment; filename="work.csv"'},
+    # )
     response['Content-Disposition'] ='attachment; filename= "work.csv"'
+    print("csv file created", activity_log_data, response)
     return response
+    # return JsonResponse(activity_log_data, safe=False)
 
 
 

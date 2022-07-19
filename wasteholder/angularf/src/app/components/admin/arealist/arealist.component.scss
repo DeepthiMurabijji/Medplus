@@ -5,12 +5,12 @@
 // }
 
 h2{
-    font-size: 35px;
+    font-size: 28px;
 }
 
 .area{
     margin: auto;
-    padding: 3%;
+    // padding: 2%;
     width: 100%;
 }
 
@@ -30,6 +30,7 @@ a{
 // } 
 
 .arealist{
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
 }

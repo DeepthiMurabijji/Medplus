@@ -34,8 +34,13 @@
                     </span>
                 </td>
                 <td>
-                    <span *ngFor="let house of houselist">
+                    <!-- <span *ngFor="let house of houselist">
                         <span>{{house.collector === collector.id ? house.house_name : ""}} </span>
+                    </span><br> -->
+                    <span *ngFor="let house of houselist">
+                        <span *ngIf="house.collector === collector.id">
+                            {{house.house_name}}<br>
+                        </span>
                     </span>
                 </td>
                 <td>

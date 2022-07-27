@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
+import { IData } from './data.interface';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +13,8 @@ export class AppComponent {
   data: {name: string, series: { name: string, value: number }[] }[];
   barColor = ['#a9ce97', '#a5b5de'];
   domain = [100, 1000];
+
+
 
   constructor() {
     this.data = [
@@ -37,4 +41,7 @@ export class AppComponent {
       }
     ];
   }
+
+
+
 }

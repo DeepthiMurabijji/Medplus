@@ -420,17 +420,33 @@ def apiCsvfile(request):
 def apiPieChart(request):
     areas = Areas.objects.all()
     houses = Houses.objects.all()
-    
+    i=0 
+    j=0
     Hcount ={}
+    notCompleted = []
+    completed = []
     for area in areas:
             
         x = Areas.objects.get(area_name = area)
         housesCount = Houses.objects.filter(area = x).count()
+        Hcount[x.area_name] = housesCount + 1 
 
-        Hcount[x.area_name] = housesCount + 1       
+        home = Houses.objects.filter(area = x)
+        for h in home:
+            if(h.is_completed == 'Not Completed'):
+                i=i+1
+            elif(h.is_completed == 'Completed'):
+                j=j+1
+        notCompleted.append(i)
+        completed.append(j)
+        i=0
+        j=0
+
+
+           
 
     # print(Hcount)
-    return JsonResponse({'dict':Hcount}, safe=False)
+    return JsonResponse({'dict':Hcount,'completed':completed,'notCompleted': notCompleted}, safe=False)
 
 
 # @csrf_exempt

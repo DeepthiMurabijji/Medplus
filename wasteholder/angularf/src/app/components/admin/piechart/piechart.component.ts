@@ -17,6 +17,8 @@ export class PiechartComponent implements OnInit {
   values : any;
   piedata : any;
   dictionary!:any
+  completed : any;
+  notcompleted : any;
 xValues!:any;
 yValues!:any;
 maxVal!:any;
@@ -26,7 +28,7 @@ maxVal!:any;
 
     this.trash.getPiechartdetails().subscribe({
       next: (data: any) => {  
-        // console.log("piechart data:", data);
+        console.log("piechart data:", data);
         this.piedata = data;
         this.dictionary = this.piedata.dict
         // console.log(this.dictionary)
@@ -34,6 +36,14 @@ maxVal!:any;
         // console.log(this.xValues)
         this.yValues = Object.values(this.dictionary)
         // console.log(this.yValues)
+        this.completed = this.piedata.completed
+        this.notcompleted = this.piedata.notCompleted
+        // console.log(this.notcompleted)
+
+
+
+
+
         // console.log("length:",this.xValues.length)
         // FIXME: Trying out n different colcors 
         // let maxVal = 0xFFFFFF; // 16777215
@@ -56,10 +66,10 @@ maxVal!:any;
         const randColor = () =>  {
           return "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
       }
-      var barColors=[]
+      var pieColors=[]
       for(var i=0;i<this.xValues.length;i++){
         let x= randColor();
-        barColors[i]=x;
+        pieColors[i]=x;
       }
       // console.log("barcolors",barColors);
       const myChart=new Chart("myChart", {
@@ -67,7 +77,8 @@ maxVal!:any;
         data: {
           labels: this.xValues,
           datasets: [{
-            backgroundColor: barColors,
+            label:"Total no.of Houses",
+            backgroundColor: pieColors,
             data: this.yValues
           }]
         },
@@ -82,6 +93,54 @@ maxVal!:any;
         }
       
       })
+
+
+      var barColors = [
+        "#990033",
+      ]
+    
+    const barchart=new Chart("barchart", {
+      type: "bar",
+      data: {
+        labels: this.xValues,
+        
+        datasets: [
+          
+          {
+            label: "Houses Not Completed",
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor:'rgb(255, 99, 132)',
+            borderWidth: 1,
+            data : this.notcompleted
+          },
+          {
+            label:"Houses Completed",
+            backgroundColor: 'rgba(255, 205, 86, 0.2)',
+            borderColor:'rgb(255, 205, 86)',
+            borderWidth: 1,
+            data: this.completed,
+          },
+          {
+            label: "Total no.of Houses",
+            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+            borderColor: 'rgb(153, 102, 255)',
+            borderWidth: 1,
+            data : this.yValues
+          }
+        ]
+      },
+      options: {
+        maintainAspectRatio:false,
+          responsive: true,
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+    
+    }
+    )
       },error : (err) =>{
         console.log('piechart unsuccessfull',err);
       }

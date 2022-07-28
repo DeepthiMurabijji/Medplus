@@ -1,0 +1,21 @@
+class AnalyticsView(APIView):
+    def post(self,request,token):
+        b=[0,0,0]
+        id = decode_access_token(token)
+        print(id)
+        a=request.data
+        for i in range(len(a)):
+          c = a[i]
+          d = bookissued.objects.all()
+          stu=Student.objects.all()
+          book=Book.objects.all()
+          print(d)
+          print(bookissued.objects.all().count())
+          e = len(d)
+          print(e)
+          b[i]=e
+          b[1]=len(stu)
+          b[2]=len(book)
+        print(b)
+
+        return JsonResponse({'b':b})

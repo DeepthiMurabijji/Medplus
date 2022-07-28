@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+// import { ChartsModule } from 'ng2-charts';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +22,7 @@ import { ArearegisterComponent } from './components/admin/arearegister/arearegis
 import { ProfileComponent } from './components/admin/profile/profile.component';
 import { EditComponent } from './components/admin/edit/edit.component';
 import { HistoryComponent } from './components/admin/history/history.component';
+import { PiechartComponent } from './components/admin/piechart/piechart.component';
 
 
 
@@ -39,6 +41,7 @@ import { HistoryComponent } from './components/admin/history/history.component';
     ProfileComponent,
     EditComponent,
     HistoryComponent,
+    PiechartComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { HistoryComponent } from './components/admin/history/history.component';
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
+    // ChartsModule
   ],
   providers: [TrashService],
   bootstrap: [AppComponent]

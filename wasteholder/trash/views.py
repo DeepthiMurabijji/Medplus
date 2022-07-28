@@ -175,7 +175,7 @@ def apiArealist(request):
 
             returnDict[x.area_name] = housesCount + 1       
 
-        #print(returnDict)
+        # print(returnDict)
 
         #print('houses:',houseserial.data)
 
@@ -260,10 +260,10 @@ def apiAdministration(request):
             collectorhouses[collector.user.username] = hoselist
             # mainview.append(collectorhouses)
         # print(mainview)  
-        print(timezone.now())  # The UTC time   2022-07-15 06:57:05.430490+00:00
-        print(timezone.localtime())  # timezone specified time,if timezone is UTC, it is same as above  2022-07-15 12:27:05.430538+05:30
-        print("I think this is right",datetime.datetime.now())  #2022-07-15 12:27:05.430584
-        print(datetime.datetime.now().date())
+        # print(timezone.now())  # The UTC time   2022-07-15 06:57:05.430490+00:00
+        # print(timezone.localtime())  # timezone specified time,if timezone is UTC, it is same as above  2022-07-15 12:27:05.430538+05:30
+        # print("I think this is right",datetime.datetime.now())  #2022-07-15 12:27:05.430584
+        # print(datetime.datetime.now().date())
        
         response = Response()
 
@@ -415,6 +415,22 @@ def apiCsvfile(request):
     return response
     # return JsonResponse(activity_log_data, safe=False)
 
+@csrf_exempt
+@api_view(['POST', 'GET'])
+def apiPieChart(request):
+    areas = Areas.objects.all()
+    houses = Houses.objects.all()
+    
+    Hcount ={}
+    for area in areas:
+            
+        x = Areas.objects.get(area_name = area)
+        housesCount = Houses.objects.filter(area = x).count()
+
+        Hcount[x.area_name] = housesCount + 1       
+
+    # print(Hcount)
+    return JsonResponse({'dict':Hcount}, safe=False)
 
 
 # @csrf_exempt

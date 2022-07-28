@@ -12,6 +12,7 @@ import { ArearegisterComponent } from './components/admin/arearegister/arearegis
 import { ProfileComponent } from './components/admin/profile/profile.component';
 import { EditComponent } from './components/admin/edit/edit.component';
 import { HistoryComponent } from './components/admin/history/history.component';
+import { PiechartComponent } from './components/admin/piechart/piechart.component';
 
 
 
@@ -28,7 +29,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'edit/:id', component: EditComponent},
   { path: 'history', component: HistoryComponent},
-
+  { path: 'piechart', component: PiechartComponent},
 ];
 
 @NgModule({

@@ -87,5 +87,8 @@ export class TrashService {
     return this.http.get(this.APIUrl + 'apiCsvfile', {responseType: "arraybuffer"})
   }
 
+  getPiechartdetails(): Observable<any[]> { 
+    return this.http.get<any[]>(this.APIUrl + 'apiPieChart')
+  }
 
 }

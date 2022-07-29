@@ -10,14 +10,14 @@ import { DataService } from './data.service';
 export class AppComponent {
   title = 'D3';
 
-  data: {name: string, series: { name: string, value: number }[] }[];
+  bardata: {name: string, series: { name: string, value: number }[] }[];
   barColor = ['#a9ce97', '#a5b5de'];
   domain = [100, 1000];
 
 
 
   constructor() {
-    this.data = [
+    this.bardata = [
       {
         name: 'Row1',
         series: [
@@ -41,7 +41,28 @@ export class AppComponent {
       }
     ];
   }
+  data: SimpleDataModel[] = [
+    {
+      name: "text1",
+      value: "95"
+    },
+    {
+      name: "text1",
+      value: "4"
+    },
+    {
+      name: "text3",
+      value: "1"
+    }
+  ];
 
 
 
 }
+
+export interface SimpleDataModel {
+  name: string;
+  value: string;
+  color?: string;
+}
+

@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { BarChartVerticalComponent } from './bar-chart-vertical/bar-chart-vertical.component';
 // import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { DataService} from './data.service';
+import { D3piechartComponent } from './d3piechart/d3piechart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BarChartVerticalComponent,
+    D3piechartComponent,
     // PieChartComponent
   ],
   imports: [

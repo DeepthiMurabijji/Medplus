@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Chart, registerables} from 'chart.js'
 import { TrashService } from 'src/app/services/trash.service';
 import { AuthService } from 'src/app/services/auth.service';
+// import * as Chart from 'chart.js';
 
 
 @Component({

@@ -16,11 +16,11 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from .serializers import *
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 import json
 from django.utils import timezone
 import datetime
@@ -119,6 +119,7 @@ def apiRegister(request):
 
 @csrf_exempt
 @api_view(['POST' , 'GET'])
+@permission_classes([AllowAny])
 def apiLogin(request):
     # print("request" ,request.method)
     if request.method == 'POST':
@@ -140,7 +141,7 @@ def apiLogin(request):
 
 
         authuser = authenticate(username = user_name, password = password)
-        print("Authentication Token",authuser)
+        # print("Authentication Token",authuser)
         # collector = Collector.objects.get(user = user)
         houses = Houses.objects.filter(area = collector.area)
 

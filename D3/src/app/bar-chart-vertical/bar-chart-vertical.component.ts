@@ -22,7 +22,7 @@ import {ScaleBand} from 'd3';
 })
 export class BarChartVerticalComponent implements AfterViewInit, OnChanges {
 
-  @Input() data!: { name: string, series: { name: string, value: number }[] }[];
+  @Input() bardata!: { name: string, series: { name: string, value: number }[] }[];
   @Input() height = 300;
   @Input() margin = {top: 10, left: 50, right: 10, bottom: 20};
   @Input() innerPadding = 0.1;
@@ -69,7 +69,7 @@ export class BarChartVerticalComponent implements AfterViewInit, OnChanges {
   }
 
   private isDataValid(): boolean {
-    return this.data && this.data.length > 0;
+    return this.bardata && this.bardata.length > 0;
   }
 
   private getBandScale(domain: string[], range: any, innerPadding = 0, outerPadding = 0) {
@@ -96,8 +96,8 @@ export class BarChartVerticalComponent implements AfterViewInit, OnChanges {
 
       let height = this.height - margin.top - margin.bottom;
       const width = this.svgContainerRef.nativeElement.getBoundingClientRect().width - margin.left - margin.right;
-      const groupNames = this.data.map(item => item.name);
-      const groupLabels = this.data.length > 0 ? this.data[0].series.map(item => item.name) : [];
+      const groupNames = this.bardata.map(item => item.name);
+      const groupLabels = this.bardata.length > 0 ? this.bardata[0].series.map(item => item.name) : [];
 
       const xScale = this.getBandScale(groupNames, [0, width], this.innerPadding, this.outerPadding).round(true);
       const x1Scale = this.getBandScale(groupLabels, [0, xScale.bandwidth()], this.seriesInnerPadding, this.outerPadding).round(true);
@@ -133,7 +133,7 @@ export class BarChartVerticalComponent implements AfterViewInit, OnChanges {
         .attr('class', 'bar-wrap')
         .merge(barWrap);
 
-      let barGroup = barWrap.selectAll<SVGGElement, {name: string, series: {name: string, value: number}}>('g.bar-group').data(this.data);
+      let barGroup = barWrap.selectAll<SVGGElement, {name: string, series: {name: string, value: number}}>('g.bar-group').data(this.bardata);
       barGroup.exit().remove();
       barGroup = barGroup.enter().append('g')
         .attr('class', 'bar-group')

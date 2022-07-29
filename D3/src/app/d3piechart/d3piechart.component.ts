@@ -18,7 +18,7 @@ export class D3piechartComponent implements OnInit {
   public chartId;
   private svg;
   private margin = 25;
-  private width = 750;
+  private width = 2000;
   private height = 450;
 
   // The radius of the pie chart is half the smallest side

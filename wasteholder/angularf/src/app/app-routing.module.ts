@@ -13,6 +13,8 @@ import { ProfileComponent } from './components/admin/profile/profile.component';
 import { EditComponent } from './components/admin/edit/edit.component';
 import { HistoryComponent } from './components/admin/history/history.component';
 import { PiechartComponent } from './components/admin/piechart/piechart.component';
+import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
 
 
 
@@ -21,15 +23,15 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'admin', component: AdminComponent},
-  { path: 'member', component: MemberComponent},
-  { path: 'permissions', component:PermisionsComponent},
-  { path: 'arealist', component:ArealistComponent},
-  { path: 'arearegister', component: ArearegisterComponent},
-  { path: 'profile', component: ProfileComponent},
-  { path: 'edit/:id', component: EditComponent},
-  { path: 'history', component: HistoryComponent},
-  { path: 'piechart', component: PiechartComponent},
+  { path: 'admin', component: AdminComponent,canActivate:[AuthGuard,RoleGuard]},
+  { path: 'member', component: MemberComponent,canActivate:[AuthGuard,RoleGuard]},
+  { path: 'permissions', component:PermisionsComponent,canActivate:[AuthGuard,RoleGuard]},
+  { path: 'arealist', component:ArealistComponent,canActivate:[AuthGuard,RoleGuard]},
+  { path: 'arearegister', component: ArearegisterComponent,canActivate:[AuthGuard,RoleGuard]},
+  { path: 'profile', component: ProfileComponent,canActivate:[AuthGuard,RoleGuard]},
+  { path: 'edit/:id', component: EditComponent,canActivate:[AuthGuard,RoleGuard]},
+  { path: 'history', component: HistoryComponent,canActivate:[AuthGuard,RoleGuard]},
+  { path: 'piechart', component: PiechartComponent,canActivate:[AuthGuard,RoleGuard]},
 ];
 
 @NgModule({

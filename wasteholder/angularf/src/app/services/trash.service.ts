@@ -91,4 +91,8 @@ export class TrashService {
     return this.http.get<any[]>(this.APIUrl + 'apiPieChart')
   }
 
+  fetchToken(Credentials):Observable<any> {
+    return this.http.post(this.APIUrl + 'api/token/',Credentials);
+  }
+
 }

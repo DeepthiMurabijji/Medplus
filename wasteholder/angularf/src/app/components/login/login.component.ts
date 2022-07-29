@@ -26,12 +26,16 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
 
+    this.trash.fetchToken(this.login).subscribe(token => {
+      // console.log(token);
+      localStorage.setItem('token',JSON.stringify(token));
+    })
     this.trash.Loginaccess(this.login).subscribe({
 
       next: (user) => {
         localStorage.setItem('user',JSON.stringify(user));
         console.log('successfully logged in');
-        console.log(user);
+        // console.log(user);
 
         if(user.is_admin){
           this.router.navigate(['/admin']);

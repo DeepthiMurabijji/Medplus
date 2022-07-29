@@ -20,13 +20,13 @@ export class MemberComponent implements OnInit {
 
   ngOnInit(): void {
     this.usr = JSON.parse(localStorage.getItem('user'));
-    console.log("hey this is user", this.usr);
+    // console.log("hey this is user", this.usr);
 
     this.member = this.usr.user.username;
 
     this.trash.getMemberInfo(this.member).subscribe({
       next: (result: any) => {
-        console.log(result);
+        // console.log(result);
         this.houses = result;
       }
     })
@@ -62,13 +62,18 @@ export class MemberComponent implements OnInit {
     if (length < 1) {
       alert('Please select atleast one checkbox');
     }
+    // else if(length ===3)
+    // {
+    //   alert('Cleaning of all houses is done for today');
+    // }
     else{
-      console.log("length: ",this.form.value.checkArray.length )
-      console.log(array);
+      // console.log("length: ",this.form.value.checkArray.length )
+      // console.log(array);
+      alert('Cleaning of all houses is done for today');
     
       this.trash.postMemberHouses(array , this.member).subscribe({
         next: (housename) => {
-          console.log(housename);
+          // console.log(housename);
           alert("changes are saved");
           window.location.reload();
         }, error :(err) =>{

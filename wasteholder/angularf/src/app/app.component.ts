@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,12 +20,11 @@ export class AppComponent implements OnInit{
   constructor(public trash:TrashService,public auth:AuthService,private router:Router) { }
 
   ngOnInit(): void {
-    if (this.id.is_admin){
-      this.admin_logged_in = true;
-    }
-    else{
-      this.admin_logged_in = false;
-    }
+
+    console.log(this.auth.role());
+      
+      
+   
   }
 
   role ()
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit{
       this.router.navigate(['/member']);
     }
   }
-
+  
 
 
   logout(){

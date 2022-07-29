@@ -55,5 +55,27 @@ export class AuthService {
       return name;
     }
 
+    role(): string {
+      let job = '';
+      
+      this.userprofile.subscribe({
+        next: (user:any) => {
+          if(user.is_real){
+            if(user.is_admin){
+              job ='admin'
+            }
+            else {
+              job = 'collector' 
+            }
+          }
+          else {
+            job = 'none'
+          }
+          
+        }
+      })
+      return job;
+    }
+
   
 }

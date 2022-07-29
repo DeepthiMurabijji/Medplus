@@ -12,10 +12,27 @@ import { ngxCsv } from 'ngx-csv/ngx-csv';
 })
 export class HistoryComponent implements OnInit {
   // @Input() admin_logged_in=true;
+  title = 'mdb-angular-ui-kit-free';
+
   Dfile : boolean = false;
   act : any;
   del : any;
 
+  items = ['Action', 'Another action', 'Something else here'];
+  filteredItems = this.items;
+
+  searchItems(event: any) {
+    const value = event.target.value;
+
+    this.filterItems(value);
+  }
+
+  filterItems(value: string) {
+    const filterValue = value.toLowerCase();
+    this.filteredItems = this.items.filter((item: string) =>
+      item.toLowerCase().includes(filterValue)
+    );
+  }
   constructor(public trash: TrashService, public router: Router, public auth: AuthService) { }
 
   ngOnInit(): void {
@@ -80,4 +97,8 @@ export class HistoryComponent implements OnInit {
       }
     })
   }
+
+  
+
+
 }

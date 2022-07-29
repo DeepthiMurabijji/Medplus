@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'admin', component: AdminComponent,canActivate:[AuthGuard,RoleGuard]},
-  { path: 'member', component: MemberComponent,canActivate:[AuthGuard,RoleGuard]},
+  { path: 'member', component: MemberComponent,canActivate:[AuthGuard]},
   { path: 'permissions', component:PermisionsComponent,canActivate:[AuthGuard,RoleGuard]},
   { path: 'arealist', component:ArealistComponent,canActivate:[AuthGuard,RoleGuard]},
   { path: 'arearegister', component: ArearegisterComponent,canActivate:[AuthGuard,RoleGuard]},

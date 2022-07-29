@@ -14,14 +14,9 @@ export class RoleGuard implements CanActivate, CanActivateChild, CanDeactivate<u
       if(this.auth.role() === 'admin'){
         return true;
       }
-      else if(this.auth.role() === 'collector')
-      {
-        this.router.navigate(['member']);
-      }
       else {
-        this.router.navigate(['login']);
+        return false;
       }
-    return true;
   }
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,

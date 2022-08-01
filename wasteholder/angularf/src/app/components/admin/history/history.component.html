@@ -21,15 +21,21 @@
         <input type="text" data-provide="datepicker" class="form-control" id="exampleDatepicker11" />
         <label for="exampleDatepicker11" class="form-label">Select a date</label>
     </div> -->
-    <div class="md-form md-outline input-with-post-icon datepicker" id="customDays">
-        <input placeholder="Select date" type="text" id="Customization" class="form-control">
-        <label for="Customization">Try me...</label>
-        <i class="fas fa-calendar input-prefix" tabindex=0></i>
-    </div>
-    <script type="text/javascript">$('.datepicker').datepicker({
-        weekdaysShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-        showMonthsShort: true
-      })</script>
+    <mat-form-field appearance="fill" class="example-form-field">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="datepicker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+      
+        <mat-datepicker #datepicker>
+          <mat-datepicker-actions>
+            <button mat-button matDatepickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+          </mat-datepicker-actions>
+        </mat-datepicker>
+      
+      </mat-form-field>
+      
     
     <table class="table table-hover">
         <thead>

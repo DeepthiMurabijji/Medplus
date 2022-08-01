@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
-import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
+// import { MdbCheckboxModule } from 'mdb-angular-ui-kit/checkbox';
 import { BrowserModule } from '@angular/platform-browser';
 // import { ChartsModule } from 'ng2-charts';
+import {MatNativeDateModule} from '@angular/material/core'; 
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -52,7 +58,12 @@ import { AuthjwtInterceptor } from './authjwt.interceptor';
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
-    MdbCheckboxModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    BrowserAnimationsModule,
+
+    // MdbCheckboxModule,
     // ChartsModule
   ],
   providers: [TrashService,

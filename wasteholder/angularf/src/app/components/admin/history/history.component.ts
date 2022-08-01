@@ -4,6 +4,7 @@ import { TrashService } from 'src/app/services/trash.service';
 import { AuthService } from 'src/app/services/auth.service';
 import * as FileSaver from 'file-saver';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   selector: 'app-history',

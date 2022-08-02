@@ -6,7 +6,10 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+// import {MaterialExampleModule} from '../material.module';
+// import {DatepickerOverviewExample} from './datepicker-overview-example';
+import { MaterialModule } from './material/material.module';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 
@@ -17,7 +20,7 @@ import { LoginComponent } from './components/login/login.component';
 
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from './components/register/register.component';
 import { TrashService } from './services/trash.service';
 import { AdminComponent } from './components/admin/admin.component';
@@ -57,12 +60,13 @@ import { AuthjwtInterceptor } from './authjwt.interceptor';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    // NgbModule,
+    NgbModule,
     MatNativeDateModule,
     MatFormFieldModule,
     MatDatepickerModule,
     BrowserAnimationsModule,
-
+    MaterialModule,
+    Ng2SearchPipeModule,
     // MdbCheckboxModule,
     // ChartsModule
   ],

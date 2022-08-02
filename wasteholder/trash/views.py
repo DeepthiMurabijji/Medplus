@@ -24,6 +24,8 @@ from rest_framework.permissions import IsAuthenticated,AllowAny
 import json
 from django.utils import timezone
 import datetime
+import pytz 
+from dateutil.parser import isoparse
 
 
 
@@ -442,13 +444,23 @@ def apiPieChart(request):
         completed.append(j)
         i=0
         j=0
-
-
-           
-
     # print(Hcount)
     return JsonResponse({'dict':Hcount,'completed':completed,'notCompleted': notCompleted}, safe=False)
 
+@csrf_exempt
+@api_view(['POST', 'GET'])
+def apiSearchbyDate(request):
+    if request.method == 'POST':
+        receieveddata = JSONParser().parse(request)
+        print(receieveddata)
+        searchdata = isoparse(receieveddata['findout'])
+        # local_timezone = tzlocal.get_localzone()
+        searchdate = searchdata.astimezone(pytz.timezone('Asia/Kolkata')).date()
+        # date = timezone.localtime(searchdata)
+        print("The Date is :",searchdate)
+        history = list(ActivityLog.objects.filter(date__exact = searchdate).values())
+        print("The History is :",history)
+    return JsonResponse(history, safe=False)
 
 # @csrf_exempt
 def register_save(request):

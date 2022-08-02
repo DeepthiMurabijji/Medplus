@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import * as FileSaver from 'file-saver';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 import {MatInputModule} from '@angular/material/input';
+import { FormBuilder, FormGroup, FormControl} from '@angular/forms';
+
 
 @Component({
   selector: 'app-history',
@@ -14,26 +16,14 @@ import {MatInputModule} from '@angular/material/input';
 export class HistoryComponent implements OnInit {
   // @Input() admin_logged_in=true;
   title = 'mdb-angular-ui-kit-free';
-
+  form: FormGroup;
   Dfile : boolean = false;
   act : any;
   del : any;
+  username : string;
+  historyList : any
 
-  items = ['Action', 'Another action', 'Something else here'];
-  filteredItems = this.items;
-
-  searchItems(event: any) {
-    const value = event.target.value;
-
-    this.filterItems(value);
-  }
-
-  filterItems(value: string) {
-    const filterValue = value.toLowerCase();
-    this.filteredItems = this.items.filter((item: string) =>
-      item.toLowerCase().includes(filterValue)
-    );
-  }
+  
   constructor(public trash: TrashService, public router: Router, public auth: AuthService) { }
 
   ngOnInit(): void {
@@ -42,10 +32,27 @@ export class HistoryComponent implements OnInit {
       next: (data: any) => {
         // console.log(data);
         this.act = data;
+    
       }
     })  
   }
+  searchform = new FormGroup({
+    findout : new FormControl(''),
+  });
 
+  onSearch() {
+    console.log(this.searchform.value);
+
+    this.trash.SearchByDate(this.searchform.value).subscribe({
+        next: (reg) => {
+          console.log("serach:",reg);
+
+        }, error :(reg) =>{
+            console.log('error',reg)
+        }
+    })
+
+  }
   onDelete(id: any) {
     this.del = id;
     console.log(this.del);

@@ -62,14 +62,6 @@ export class MemberComponent implements OnInit {
     if (length < 1) {
       alert('Please select atleast one checkbox');
     }
-    // else if(length ===3)
-    // {
-    //   alert('Cleaning of all houses is done for today');
-    // }
-    else{
-      // console.log("length: ",this.form.value.checkArray.length )
-      // console.log(array);
-      alert('Cleaning of all houses is done for today');
     
       this.trash.postMemberHouses(array , this.member).subscribe({
         next: (housename) => {
@@ -82,4 +74,4 @@ export class MemberComponent implements OnInit {
       })
     }
   }
-}
+

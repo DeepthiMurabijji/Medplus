@@ -16,6 +16,7 @@ urlpatterns = [
     path('apiCsvfile', views.apiCsvfile),
     path('apiDeleteAll', views.apiDeleteAll),
     path('apiPieChart', views.apiPieChart),
+    path('apiSearchbyDate', views.apiSearchbyDate),
 
 
 

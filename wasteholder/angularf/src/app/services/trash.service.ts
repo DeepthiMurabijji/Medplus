@@ -95,4 +95,8 @@ export class TrashService {
     return this.http.post(this.APIUrl + 'api/token/',Credentials);
   }
 
+  SearchByDate(date: any): Observable<any[]> {
+    // console.log("date:",date);
+    return this.http.post<any>(this.APIUrl + 'apiSearchbyDate',date)
+  }
 }

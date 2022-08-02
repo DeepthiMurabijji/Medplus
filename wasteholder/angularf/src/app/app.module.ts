@@ -17,7 +17,7 @@ import { LoginComponent } from './components/login/login.component';
 
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from './components/register/register.component';
 import { TrashService } from './services/trash.service';
 import { AdminComponent } from './components/admin/admin.component';
@@ -57,7 +57,7 @@ import { AuthjwtInterceptor } from './authjwt.interceptor';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbModule,
+    // NgbModule,
     MatNativeDateModule,
     MatFormFieldModule,
     MatDatepickerModule,

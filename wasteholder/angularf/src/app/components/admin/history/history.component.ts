@@ -41,7 +41,7 @@ export class HistoryComponent implements OnInit {
   });
 
   onSearch() {
-    console.log(this.searchform.value);
+    // console.log(this.searchform.value);
 
     this.trash.SearchByDate(this.searchform.value).subscribe({
         next: (reg) => {
@@ -58,10 +58,10 @@ export class HistoryComponent implements OnInit {
     console.log(this.del);
     this.trash.deleteActivityLog(this.del).subscribe({
       next: (data: any) => {
-        console.log(data);
+        // console.log(data);
         window.location.reload();
       },error : (err : any) =>{
-        console.log(err);
+        // console.log(err);
       }
     })
   }
